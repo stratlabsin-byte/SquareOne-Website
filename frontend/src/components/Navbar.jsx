@@ -76,14 +76,14 @@ const Navbar = () => {
             data-testid="logo-link"
             className="flex items-center space-x-2"
           >
-            <div className="w-10 h-10 bg-[#0B1F3B] rounded flex items-center justify-center">
+            <div className={`w-10 h-10 rounded flex items-center justify-center ${isScrolled ? 'bg-[#0B1F3B]' : 'bg-white/10 backdrop-blur-sm'}`}>
               <span className="text-[#C9A227] font-bold text-xl font-['Montserrat']">S1</span>
             </div>
             <div className="hidden sm:block">
-              <span className="text-[#0B1F3B] font-bold text-lg font-['Montserrat'] tracking-tight">
+              <span className={`font-bold text-lg font-['Montserrat'] tracking-tight ${logoTextColor}`}>
                 SquareOne
               </span>
-              <span className="text-[#2E2E2E] text-xs block -mt-1">
+              <span className={`text-xs block -mt-1 ${isScrolled ? 'text-[#2E2E2E]' : (isDarkHero ? 'text-gray-300' : 'text-[#2E2E2E]')}`}>
                 Services & Consulting
               </span>
             </div>
@@ -99,8 +99,8 @@ const Navbar = () => {
                       data-testid={`nav-${link.name.toLowerCase().replace(/\s+/g, '-')}`}
                       className={`flex items-center px-4 py-2 text-sm font-medium transition-colors ${
                         isActive(link.path)
-                          ? "text-[#C9A227]"
-                          : "text-[#2E2E2E] hover:text-[#0B1F3B]"
+                          ? activeColor
+                          : `${textColor} hover:text-[#C9A227]`
                       }`}
                     >
                       {link.name}
@@ -127,7 +127,7 @@ const Navbar = () => {
                   data-testid={`nav-${link.name.toLowerCase().replace(/\s+/g, '-')}`}
                   className={`px-4 py-2 text-sm font-medium transition-colors underline-animation ${
                     isActive(link.path)
-                      ? "text-[#C9A227]"
+                      ? activeColor
                       : "text-[#2E2E2E] hover:text-[#0B1F3B]"
                   }`}
                 >
