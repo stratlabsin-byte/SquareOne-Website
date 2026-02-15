@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Mail, Phone, MapPin, Clock, Send, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,10 +11,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { createContact } from "@/services/api";
+import { createContact, getSiteSettings } from "@/services/api";
 import { toast } from "sonner";
 
 const ContactPage = () => {
+  const [siteSettings, setSiteSettings] = useState({});
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -25,6 +26,18 @@ const ContactPage = () => {
   });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const data = await getSiteSettings();
+        setSiteSettings(data);
+      } catch (error) {
+        console.error("Failed to fetch settings:", error);
+      }
+    };
+    fetchSettings();
+  }, []);
 
   const services = [
     "Business Foundation Services",
