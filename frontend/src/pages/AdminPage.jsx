@@ -217,13 +217,33 @@ const AdminPage = () => {
   return (
     <div data-testid="admin-page" className="pt-24 pb-16 bg-[#F8F9FA] min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-[#0B1F3B] font-['Montserrat']">
-            Admin Dashboard
-          </h1>
-          <p className="text-gray-600 mt-2">
-            Manage your website content, jobs, and leads.
-          </p>
+        <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-bold text-[#0B1F3B] font-['Montserrat']">
+              Admin Dashboard
+            </h1>
+            <p className="text-gray-600 mt-2">
+              Manage your website content, jobs, and leads.
+            </p>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 text-gray-600">
+              <div className="w-8 h-8 rounded-full bg-[#0B1F3B] flex items-center justify-center">
+                <User className="w-4 h-4 text-white" />
+              </div>
+              <span className="text-sm font-medium">{user?.name || user?.email}</span>
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleLogout}
+              data-testid="logout-btn"
+              className="border-red-200 text-red-600 hover:bg-red-50 hover:text-red-700"
+            >
+              <LogOut className="w-4 h-4 mr-2" />
+              Logout
+            </Button>
+          </div>
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab}>
