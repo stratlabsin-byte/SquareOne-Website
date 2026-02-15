@@ -307,6 +307,65 @@ async def send_notification_email(subject: str, html_content: str):
 async def root():
     return {"message": "SquareOne Services API"}
 
+# ==================== AUTH ROUTES ====================
+
+@api_router.post("/auth/register", response_model=TokenResponse)
+async def register_admin(input: AdminUserCreate):
+    """Register a new admin user"""
+    # Check if email already exists
+    existing = await db.admin_users.find_one({"email": input.email}, {"_id": 0})
+    if existing:
+        raise HTTPException(status_code=400, detail="Email already registered")
+    
+    # Create user
+    user = AdminUser(
+        email=input.email,
+        name=input.name,
+        password=hash_password(input.password)
+    )
+    doc = user.model_dump()
+    doc['created_at'] = doc['created_at'].isoformat()
+    
+    await db.admin_users.insert_one(doc)
+    
+    # Generate token
+    access_token = create_access_token({"sub": user.id, "email": user.email})
+    
+    return TokenResponse(
+        access_token=access_token,
+        user={"id": user.id, "email": user.email, "name": user.name, "role": user.role}
+    )
+
+@api_router.post("/auth/login", response_model=TokenResponse)
+async def login_admin(input: AdminUserLogin):
+    """Login admin user"""
+    user = await db.admin_users.find_one({"email": input.email}, {"_id": 0})
+    if not user:
+        raise HTTPException(status_code=401, detail="Invalid email or password")
+    
+    if not verify_password(input.password, user['password']):
+        raise HTTPException(status_code=401, detail="Invalid email or password")
+    
+    # Generate token
+    access_token = create_access_token({"sub": user['id'], "email": user['email']})
+    
+    return TokenResponse(
+        access_token=access_token,
+        user={"id": user['id'], "email": user['email'], "name": user['name'], "role": user.get('role', 'admin')}
+    )
+
+@api_router.get("/auth/me")
+async def get_current_admin(current_user: dict = Depends(get_current_user)):
+    """Get current authenticated user"""
+    return current_user
+
+@api_router.post("/auth/verify")
+async def verify_token(credentials: HTTPAuthorizationCredentials = Depends(security)):
+    """Verify if token is valid"""
+    token = credentials.credentials
+    payload = decode_token(token)
+    return {"valid": True, "user_id": payload.get("sub")}
+
 # ==================== CONTACT ROUTES ====================
 
 @api_router.post("/contacts", response_model=Contact)
