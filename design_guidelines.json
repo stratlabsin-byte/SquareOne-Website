@@ -1,0 +1,111 @@
+{
+  "identity": {
+    "name": "SquareOne Services and Consulting",
+    "archetype": "The Strategic Architect",
+    "vibe": "Premium, Authoritative, Dynamic, Trustworthy",
+    "mission": "Empowering Startups and SMEs with integrated business solutions."
+  },
+  "typography": {
+    "headings": {
+      "font_family": "Montserrat, sans-serif",
+      "weights": ["600", "700", "800"],
+      "usage": "Use for all H1-H6. H1 should be ExtraBold (800). H2-H3 Bold (700).",
+      "letter_spacing": "tracking-tight"
+    },
+    "body": {
+      "font_family": "Inter, sans-serif",
+      "weights": ["400", "500"],
+      "usage": "Use for all paragraphs, labels, and UI text.",
+      "letter_spacing": "tracking-normal"
+    }
+  },
+  "colors": {
+    "primary": {
+      "name": "Deep Navy",
+      "hex": "#0B1F3B",
+      "tailwind": "bg-[#0B1F3B] text-[#0B1F3B]",
+      "usage": "Primary backgrounds, Footer, Headings in light sections"
+    },
+    "accent": {
+      "name": "Executive Gold",
+      "hex": "#C9A227",
+      "tailwind": "bg-[#C9A227] text-[#C9A227]",
+      "usage": "CTAs, Highlights, Icons, Progress Bars"
+    },
+    "neutral": {
+      "charcoal": "#2E2E2E",
+      "white": "#FFFFFF",
+      "light_grey": "#F8F9FA",
+      "border": "#E2E8F0"
+    },
+    "gradients": {
+      "hero": "bg-gradient-to-r from-[#0B1F3B] to-[#1a3b66]",
+      "gold_shine": "bg-gradient-to-r from-[#C9A227] to-[#E5C558]"
+    }
+  },
+  "visual_enhancers": {
+    "shadows": "shadow-[0_4px_20px_rgba(11,31,59,0.08)]",
+    "borders": "border border-gray-100 hover:border-[#C9A227]/50 transition-colors duration-300",
+    "glassmorphism": "backdrop-blur-md bg-white/90 border-white/20",
+    "radius": "rounded-sm"
+  },
+  "layout_strategies": {
+    "hero": "Split screen: Left content (H1 + CTA), Right visual (Image or 3D). Or Full-width with dark overlay.",
+    "services": "Bento Grid: Mix of 1x1 and 2x1 cards. Hover effects reveal details.",
+    "process": "Horizontal Timeline: Step-by-step flow with connecting lines.",
+    "testimonials": "Carousel: Clean cards with client photo and quote.",
+    "spacing": "Generous padding (py-20 or py-24) between sections."
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-[#C9A227] text-white hover:bg-[#b08d1f] font-semibold px-8 py-3 rounded-sm transition-all shadow-md hover:shadow-lg",
+      "secondary": "border-2 border-[#0B1F3B] text-[#0B1F3B] hover:bg-[#0B1F3B] hover:text-white font-semibold px-8 py-3 rounded-sm transition-all"
+    },
+    "cards": {
+      "service": "bg-white p-8 shadow-sm hover:shadow-xl transition-all duration-300 border-t-4 border-transparent hover:border-[#C9A227] group",
+      "feature": "bg-gray-50 p-6 rounded-sm hover:bg-white hover:shadow-md transition-all"
+    }
+  },
+  "image_urls": {
+    "hero": {
+      "url": "https://images.unsplash.com/photo-1765031434571-3da6e019a94d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2MTJ8MHwxfHNlYXJjaHwyfHxtb2Rlcm4lMjBnbGFzcyUyMG9mZmljZSUyMGJ1aWxkaW5nJTIwc2t5c2NyYXBlciUyMGJsdWUlMjBza3klMjBsb3clMjBhbmdsZXxlbnwwfHx8fDE3NzExNzkyNDJ8MA&ixlib=rb-4.1.0&q=85",
+      "alt": "Modern Corporate Skyscraper",
+      "usage": "Hero Section Background or Side Image"
+    },
+    "about": {
+      "url": "https://images.unsplash.com/photo-1758691736975-9f7f643d178e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1Mjh8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBjb3Jwb3JhdGUlMjBvZmZpY2UlMjB0ZWFtJTIwbWVldGluZyUyMGRpdmVyc2UlMjBwcm9mZXNzaW9uYWx8ZW58MHx8fHwxNzcxMTc5MjIyfDA&ixlib=rb-4.1.0&q=85",
+      "alt": "Diverse Team Meeting",
+      "usage": "About Us Section"
+    },
+    "services": {
+      "url": "https://images.unsplash.com/photo-1752159400890-d906038f1b35?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzB8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMGhhbmRzaGFrZSUyMGNsb3NlJTIwdXAlMjBzdWl0JTIwcHJvZmVzc2lvbmFsfGVufDB8fHx8MTc3MTE3OTI0N3ww&ixlib=rb-4.1.0&q=85",
+      "alt": "Business Handshake",
+      "usage": "Services or Partnership Section"
+    },
+    "backgrounds": {
+      "abstract": "https://images.unsplash.com/photo-1766431546153-d3a999d3c1f7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2MTJ8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGdvbGQlMjBhbmQlMjBuYXZ5JTIwYmx1ZSUyMGdlb21ldHJpYyUyMGJ1c2luZXNzJTIwYmFja2dyb3VuZHxlbnwwfHx8fDE3NzExNzkyMjh8MA&ixlib=rb-4.1.0&q=85",
+      "usage": "Subtle background for 'Why Choose Us' or Stats"
+    }
+  },
+  "instructions_to_main_agent": [
+    "Use 'Montserrat' for all Headings. Import it from Google Fonts.",
+    "Use 'Inter' for all Body text. Import it from Google Fonts.",
+    "Implement the 'Deep Navy' (#0B1F3B) as the primary brand color.",
+    "Use 'Executive Gold' (#C9A227) sparingly for high-impact elements (Buttons, Active States).",
+    "Ensure all interactive elements have 'data-testid' attributes.",
+    "Use Shadcn components (Card, Accordion, Button, Input, Select, Sheet) but customize them to match the 'SquareOne' theme.",
+    "Create a 'Navbar' that is sticky, white background, with Navy text and a Gold CTA button.",
+    "The 'Services' section should use a Grid layout with hover effects that lift the card.",
+    "The 'Process' section should be a horizontal step-by-step guide.",
+    "Ensure the site is fully responsive (Mobile First approach).",
+    "Use the provided image URLs for their respective sections."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "Do not use generic centered layouts. Use asymmetry where possible.",
+    "Use 2-3x more spacing (padding/margin) than typical designs.",
+    "Add micro-interactions (hover, focus, active) to all clickable elements.",
+    "Ensure text contrast meets WCAG AA standards.",
+    "Do not use 'transition: all'. Animate specific properties.",
+    "Use 'sonner' for toast notifications."
+  ]
+}
