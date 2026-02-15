@@ -128,7 +128,7 @@ const Navbar = () => {
                   className={`px-4 py-2 text-sm font-medium transition-colors underline-animation ${
                     isActive(link.path)
                       ? activeColor
-                      : "text-[#2E2E2E] hover:text-[#0B1F3B]"
+                      : `${textColor} hover:text-[#C9A227]`
                   }`}
                 >
                   {link.name}
