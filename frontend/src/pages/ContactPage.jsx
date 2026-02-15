@@ -190,12 +190,18 @@ const ContactPage = () => {
                 ))}
               </div>
 
-              {/* Map Placeholder */}
-              <div className="mt-8 bg-gray-200 h-48 rounded-lg flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-                  <p className="text-gray-500 text-sm">Map Location</p>
-                </div>
+              {/* Google Map */}
+              <div className="mt-8 rounded-lg overflow-hidden shadow-md h-52">
+                <iframe
+                  src={siteSettings.map_embed_url || defaultMapUrl}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Office Location"
+                />
               </div>
             </div>
 
