@@ -37,6 +37,9 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  
+  // Check if we're on a page with dark hero
+  const isDarkHero = ["/", "/about", "/services", "/industries", "/why-squareone", "/insights", "/careers", "/contact"].includes(location.pathname) || location.pathname.startsWith("/insights/");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,6 +53,11 @@ const Navbar = () => {
     if (path === "/") return location.pathname === "/";
     return location.pathname.startsWith(path);
   };
+  
+  // Text color based on scroll and page
+  const textColor = isScrolled ? "text-[#2E2E2E]" : (isDarkHero ? "text-white" : "text-[#2E2E2E]");
+  const activeColor = "text-[#C9A227]";
+  const logoTextColor = isScrolled ? "text-[#0B1F3B]" : (isDarkHero ? "text-white" : "text-[#0B1F3B]");
 
   return (
     <nav
