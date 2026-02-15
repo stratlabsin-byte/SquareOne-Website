@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { 
   FileText, Briefcase, MessageSquare, Users, Plus, Edit, Trash2, 
-  Eye, EyeOff, Save, X
+  Eye, EyeOff, Save, X, LogOut, User
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -22,9 +23,12 @@ import {
   getTestimonials, createTestimonial, deleteTestimonial,
   getContacts, getApplications
 } from "@/services/api";
+import { useAuth } from "@/context/AuthContext";
 import { toast } from "sonner";
 
 const AdminPage = () => {
+  const navigate = useNavigate();
+  const { user, logout } = useAuth();
   const [activeTab, setActiveTab] = useState("blog");
   
   // Blog state
@@ -58,6 +62,12 @@ const AdminPage = () => {
   const [applications, setApplications] = useState([]);
 
   const [loading, setLoading] = useState(false);
+  
+  const handleLogout = () => {
+    logout();
+    toast.success("Logged out successfully");
+    navigate("/login");
+  };
 
   useEffect(() => {
     fetchData();
