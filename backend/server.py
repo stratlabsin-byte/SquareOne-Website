@@ -278,6 +278,72 @@ class NewsletterSubscription(BaseModel):
     subscribed_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     active: bool = True
 
+# Site Settings Model
+class SiteSettingsUpdate(BaseModel):
+    company_name: Optional[str] = None
+    tagline: Optional[str] = None
+    email: Optional[str] = None
+    phone: Optional[str] = None
+    address: Optional[str] = None
+    city: Optional[str] = None
+    map_embed_url: Optional[str] = None
+    linkedin_url: Optional[str] = None
+    twitter_url: Optional[str] = None
+    facebook_url: Optional[str] = None
+    privacy_policy: Optional[str] = None
+    terms_of_service: Optional[str] = None
+
+class SiteSettings(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = "main_settings"
+    company_name: str = "SquareOne Services and Consulting Pvt. Ltd."
+    tagline: str = "Building Strong Businesses from Square One"
+    email: str = "info@squareone.in"
+    phone: str = "+91 123 456 7890"
+    address: str = "123 Business Park, Andheri East"
+    city: str = "Mumbai, Maharashtra 400069, India"
+    map_embed_url: str = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241317.11609823277!2d72.74109995709657!3d19.08219783958221!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c6306644edc1%3A0x5da4ed8f8d648c69!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1645000000000!5m2!1sen!2sin"
+    linkedin_url: str = "https://linkedin.com/company/squareone"
+    twitter_url: str = "https://twitter.com/squareone"
+    facebook_url: str = "https://facebook.com/squareone"
+    privacy_policy: str = """<h2>Privacy Policy</h2>
+<p><strong>Last Updated:</strong> February 2025</p>
+
+<h3>1. Information We Collect</h3>
+<p>We collect information you provide directly to us, such as when you fill out a contact form, apply for a job, or subscribe to our newsletter.</p>
+
+<h3>2. How We Use Your Information</h3>
+<p>We use the information we collect to provide, maintain, and improve our services, to communicate with you, and to send you promotional communications.</p>
+
+<h3>3. Information Sharing</h3>
+<p>We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except as described in this policy.</p>
+
+<h3>4. Data Security</h3>
+<p>We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.</p>
+
+<h3>5. Contact Us</h3>
+<p>If you have any questions about this Privacy Policy, please contact us at info@squareone.in</p>"""
+    terms_of_service: str = """<h2>Terms of Service</h2>
+<p><strong>Last Updated:</strong> February 2025</p>
+
+<h3>1. Acceptance of Terms</h3>
+<p>By accessing and using this website, you accept and agree to be bound by the terms and provisions of this agreement.</p>
+
+<h3>2. Services</h3>
+<p>SquareOne Services and Consulting provides business consulting, HR solutions, legal advisory, and technology services to startups and SMEs.</p>
+
+<h3>3. Intellectual Property</h3>
+<p>All content on this website, including text, graphics, logos, and images, is the property of SquareOne Services and is protected by copyright laws.</p>
+
+<h3>4. Limitation of Liability</h3>
+<p>SquareOne shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of our services.</p>
+
+<h3>5. Governing Law</h3>
+<p>These terms shall be governed by and construed in accordance with the laws of India.</p>
+
+<h3>6. Contact</h3>
+<p>For any questions regarding these terms, please contact us at info@squareone.in</p>"""
+
 # ==================== EMAIL HELPER ====================
 
 async def send_notification_email(subject: str, html_content: str):
