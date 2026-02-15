@@ -689,11 +689,58 @@ async def subscribe_newsletter(input: NewsletterSubscribe):
     await db.newsletter.insert_one(doc)
     return subscription
 
+@api_router.get("/newsletter/subscribers")
+async def get_newsletter_subscribers():
+    subscribers = await db.newsletter.find({}, {"_id": 0}).sort("subscribed_at", -1).to_list(1000)
+    for s in subscribers:
+        if isinstance(s.get('subscribed_at'), str):
+            s['subscribed_at'] = datetime.fromisoformat(s['subscribed_at'])
+    return subscribers
+
+@api_router.delete("/newsletter/{subscriber_id}")
+async def unsubscribe_newsletter(subscriber_id: str):
+    result = await db.newsletter.delete_one({"id": subscriber_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Subscriber not found")
+    return {"message": "Subscriber removed"}
+
+# ==================== SITE SETTINGS ROUTES ====================
+
+@api_router.get("/settings", response_model=SiteSettings)
+async def get_site_settings():
+    settings = await db.site_settings.find_one({"id": "main_settings"}, {"_id": 0})
+    if not settings:
+        return SiteSettings()
+    return settings
+
+@api_router.put("/settings", response_model=SiteSettings)
+async def update_site_settings(input: SiteSettingsUpdate):
+    current = await db.site_settings.find_one({"id": "main_settings"}, {"_id": 0})
+    if not current:
+        current = SiteSettings().model_dump()
+    
+    update_data = {k: v for k, v in input.model_dump().items() if v is not None}
+    current.update(update_data)
+    
+    await db.site_settings.update_one(
+        {"id": "main_settings"},
+        {"$set": current},
+        upsert=True
+    )
+    
+    return current
+
 # ==================== SEED DATA ====================
 
 @api_router.post("/seed")
 async def seed_data():
     """Seed initial data for the website"""
+    
+    # Seed site settings
+    existing_settings = await db.site_settings.find_one({"id": "main_settings"}, {"_id": 0})
+    if not existing_settings:
+        settings = SiteSettings()
+        await db.site_settings.insert_one(settings.model_dump())
     
     # Seed testimonials
     testimonials_data = [
