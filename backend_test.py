@@ -350,6 +350,7 @@ def main():
     
     # Test all endpoints
     tester.test_root_endpoint()
+    tester.test_auth_endpoints()  # Test authentication first
     tester.test_seed_endpoint()  # Ensure data is seeded
     tester.test_stats_endpoints()
     tester.test_testimonials_endpoints()
