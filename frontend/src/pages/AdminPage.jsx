@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { 
   FileText, Briefcase, MessageSquare, Users, Plus, Edit, Trash2, 
-  Eye, EyeOff, Save, X, LogOut, User
+  Settings, Mail, LogOut, User, BarChart3, Globe, Save, Eye
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Dialog,
@@ -21,7 +21,8 @@ import {
   getBlogPosts, createBlogPost, updateBlogPost, deleteBlogPost,
   getJobs, createJob, updateJob, deleteJob,
   getTestimonials, createTestimonial, deleteTestimonial,
-  getContacts, getApplications
+  getContacts, getApplications, getStats, updateStats,
+  getSiteSettings, updateSiteSettings, getNewsletterSubscribers, deleteNewsletterSubscriber
 } from "@/services/api";
 import { useAuth } from "@/context/AuthContext";
 import { toast } from "sonner";
@@ -29,8 +30,17 @@ import { toast } from "sonner";
 const AdminPage = () => {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
-  const [activeTab, setActiveTab] = useState("blog");
+  const [activeTab, setActiveTab] = useState("dashboard");
   
+  // Dashboard stats
+  const [dashboardStats, setDashboardStats] = useState({
+    totalContacts: 0,
+    totalApplications: 0,
+    totalPosts: 0,
+    totalJobs: 0,
+    totalSubscribers: 0
+  });
+
   // Blog state
   const [posts, setPosts] = useState([]);
   const [editingPost, setEditingPost] = useState(null);
@@ -61,6 +71,21 @@ const AdminPage = () => {
   const [contacts, setContacts] = useState([]);
   const [applications, setApplications] = useState([]);
 
+  // Site Settings state
+  const [siteSettings, setSiteSettings] = useState({});
+  const [settingsLoading, setSettingsLoading] = useState(false);
+
+  // Stats state
+  const [stats, setStats] = useState({
+    years_experience: 10,
+    clients_served: 500,
+    projects_completed: 1200,
+    team_members: 75
+  });
+
+  // Newsletter state
+  const [subscribers, setSubscribers] = useState([]);
+
   const [loading, setLoading] = useState(false);
   
   const handleLogout = () => {
@@ -77,25 +102,53 @@ const AdminPage = () => {
     setLoading(true);
     try {
       switch (activeTab) {
+        case "dashboard":
+          const [contactsData, appsData, postsData, jobsData, subsData] = await Promise.all([
+            getContacts(),
+            getApplications(),
+            getBlogPosts(false),
+            getJobs(false),
+            getNewsletterSubscribers().catch(() => [])
+          ]);
+          setDashboardStats({
+            totalContacts: contactsData.length,
+            totalApplications: appsData.length,
+            totalPosts: postsData.length,
+            totalJobs: jobsData.length,
+            totalSubscribers: subsData.length
+          });
+          break;
         case "blog":
           const blogData = await getBlogPosts(false);
           setPosts(blogData);
           break;
         case "jobs":
-          const jobsData = await getJobs(false);
-          setJobs(jobsData);
+          const jobsListData = await getJobs(false);
+          setJobs(jobsListData);
           break;
         case "testimonials":
           const testimonialData = await getTestimonials(false);
           setTestimonials(testimonialData);
           break;
         case "leads":
-          const [contactsData, appsData] = await Promise.all([
+          const [contactsList, appsList] = await Promise.all([
             getContacts(),
             getApplications()
           ]);
-          setContacts(contactsData);
-          setApplications(appsData);
+          setContacts(contactsList);
+          setApplications(appsList);
+          break;
+        case "settings":
+          const [settingsData, statsData] = await Promise.all([
+            getSiteSettings(),
+            getStats()
+          ]);
+          setSiteSettings(settingsData);
+          setStats(statsData);
+          break;
+        case "newsletter":
+          const subscribersList = await getNewsletterSubscribers();
+          setSubscribers(subscribersList);
           break;
         default:
           break;
@@ -208,6 +261,32 @@ const AdminPage = () => {
     }
   };
 
+  // Settings handlers
+  const handleSaveSettings = async () => {
+    setSettingsLoading(true);
+    try {
+      await updateSiteSettings(siteSettings);
+      await updateStats(stats);
+      toast.success("Settings saved successfully");
+    } catch (error) {
+      toast.error("Failed to save settings");
+    } finally {
+      setSettingsLoading(false);
+    }
+  };
+
+  // Newsletter handlers
+  const handleDeleteSubscriber = async (id) => {
+    if (!window.confirm("Remove this subscriber?")) return;
+    try {
+      await deleteNewsletterSubscriber(id);
+      toast.success("Subscriber removed");
+      fetchData();
+    } catch (error) {
+      toast.error("Failed to remove subscriber");
+    }
+  };
+
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric', month: 'short', day: 'numeric'
@@ -215,19 +294,20 @@ const AdminPage = () => {
   };
 
   return (
-    <div data-testid="admin-page" className="pt-24 pb-16 bg-[#F8F9FA] min-h-screen">
+    <div data-testid="admin-page" className="pt-24 pb-16 bg-gray-50 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
         <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <h1 className="text-3xl font-bold text-[#0B1F3B] font-['Montserrat']">
               Admin Dashboard
             </h1>
-            <p className="text-gray-600 mt-2">
-              Manage your website content, jobs, and leads.
+            <p className="text-gray-600 mt-1">
+              Manage your website content, settings, and leads
             </p>
           </div>
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 text-gray-600">
+            <div className="flex items-center gap-2 text-gray-600 bg-white px-4 py-2 rounded-lg shadow-sm">
               <div className="w-8 h-8 rounded-full bg-[#0B1F3B] flex items-center justify-center">
                 <User className="w-4 h-4 text-white" />
               </div>
@@ -247,9 +327,15 @@ const AdminPage = () => {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="bg-white shadow-sm mb-8">
+          <TabsList className="bg-white shadow-sm mb-8 flex-wrap h-auto p-1">
+            <TabsTrigger value="dashboard" data-testid="tab-dashboard" className="flex items-center gap-2">
+              <BarChart3 className="w-4 h-4" /> Overview
+            </TabsTrigger>
+            <TabsTrigger value="settings" data-testid="tab-settings" className="flex items-center gap-2">
+              <Settings className="w-4 h-4" /> Site Settings
+            </TabsTrigger>
             <TabsTrigger value="blog" data-testid="tab-blog" className="flex items-center gap-2">
-              <FileText className="w-4 h-4" /> Blog Posts
+              <FileText className="w-4 h-4" /> Blog
             </TabsTrigger>
             <TabsTrigger value="jobs" data-testid="tab-jobs" className="flex items-center gap-2">
               <Briefcase className="w-4 h-4" /> Jobs
@@ -260,7 +346,303 @@ const AdminPage = () => {
             <TabsTrigger value="leads" data-testid="tab-leads" className="flex items-center gap-2">
               <Users className="w-4 h-4" /> Leads
             </TabsTrigger>
+            <TabsTrigger value="newsletter" data-testid="tab-newsletter" className="flex items-center gap-2">
+              <Mail className="w-4 h-4" /> Newsletter
+            </TabsTrigger>
           </TabsList>
+
+          {/* Dashboard Tab */}
+          <TabsContent value="dashboard">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+              <Card className="bg-white">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-500">Contact Leads</p>
+                      <p className="text-3xl font-bold text-[#0B1F3B]">{dashboardStats.totalContacts}</p>
+                    </div>
+                    <Users className="w-10 h-10 text-[#C9A227] opacity-50" />
+                  </div>
+                </CardContent>
+              </Card>
+              <Card className="bg-white">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-500">Job Applications</p>
+                      <p className="text-3xl font-bold text-[#0B1F3B]">{dashboardStats.totalApplications}</p>
+                    </div>
+                    <Briefcase className="w-10 h-10 text-[#C9A227] opacity-50" />
+                  </div>
+                </CardContent>
+              </Card>
+              <Card className="bg-white">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-500">Blog Posts</p>
+                      <p className="text-3xl font-bold text-[#0B1F3B]">{dashboardStats.totalPosts}</p>
+                    </div>
+                    <FileText className="w-10 h-10 text-[#C9A227] opacity-50" />
+                  </div>
+                </CardContent>
+              </Card>
+              <Card className="bg-white">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-500">Active Jobs</p>
+                      <p className="text-3xl font-bold text-[#0B1F3B]">{dashboardStats.totalJobs}</p>
+                    </div>
+                    <Briefcase className="w-10 h-10 text-[#C9A227] opacity-50" />
+                  </div>
+                </CardContent>
+              </Card>
+              <Card className="bg-white">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-500">Subscribers</p>
+                      <p className="text-3xl font-bold text-[#0B1F3B]">{dashboardStats.totalSubscribers}</p>
+                    </div>
+                    <Mail className="w-10 h-10 text-[#C9A227] opacity-50" />
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+            <Card>
+              <CardHeader>
+                <CardTitle>Quick Actions</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <Button onClick={() => setActiveTab("blog")} variant="outline" className="h-20 flex-col">
+                    <Plus className="w-5 h-5 mb-2" />
+                    New Blog Post
+                  </Button>
+                  <Button onClick={() => setActiveTab("jobs")} variant="outline" className="h-20 flex-col">
+                    <Plus className="w-5 h-5 mb-2" />
+                    New Job Listing
+                  </Button>
+                  <Button onClick={() => setActiveTab("testimonials")} variant="outline" className="h-20 flex-col">
+                    <Plus className="w-5 h-5 mb-2" />
+                    Add Testimonial
+                  </Button>
+                  <Button onClick={() => setActiveTab("settings")} variant="outline" className="h-20 flex-col">
+                    <Settings className="w-5 h-5 mb-2" />
+                    Site Settings
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Site Settings Tab */}
+          <TabsContent value="settings">
+            <div className="grid lg:grid-cols-2 gap-6">
+              {/* Company Info */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Company Information</CardTitle>
+                  <CardDescription>Basic company details shown across the website</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div>
+                    <Label>Company Name</Label>
+                    <Input
+                      value={siteSettings.company_name || ""}
+                      onChange={(e) => setSiteSettings({...siteSettings, company_name: e.target.value})}
+                      className="mt-1"
+                    />
+                  </div>
+                  <div>
+                    <Label>Tagline</Label>
+                    <Input
+                      value={siteSettings.tagline || ""}
+                      onChange={(e) => setSiteSettings({...siteSettings, tagline: e.target.value})}
+                      className="mt-1"
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <Label>Email</Label>
+                      <Input
+                        value={siteSettings.email || ""}
+                        onChange={(e) => setSiteSettings({...siteSettings, email: e.target.value})}
+                        className="mt-1"
+                      />
+                    </div>
+                    <div>
+                      <Label>Phone</Label>
+                      <Input
+                        value={siteSettings.phone || ""}
+                        onChange={(e) => setSiteSettings({...siteSettings, phone: e.target.value})}
+                        className="mt-1"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <Label>Address</Label>
+                    <Input
+                      value={siteSettings.address || ""}
+                      onChange={(e) => setSiteSettings({...siteSettings, address: e.target.value})}
+                      className="mt-1"
+                    />
+                  </div>
+                  <div>
+                    <Label>City, State, ZIP</Label>
+                    <Input
+                      value={siteSettings.city || ""}
+                      onChange={(e) => setSiteSettings({...siteSettings, city: e.target.value})}
+                      className="mt-1"
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Social & Map */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Social Media & Map</CardTitle>
+                  <CardDescription>Social links and Google Maps embed URL</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div>
+                    <Label>LinkedIn URL</Label>
+                    <Input
+                      value={siteSettings.linkedin_url || ""}
+                      onChange={(e) => setSiteSettings({...siteSettings, linkedin_url: e.target.value})}
+                      className="mt-1"
+                    />
+                  </div>
+                  <div>
+                    <Label>Twitter URL</Label>
+                    <Input
+                      value={siteSettings.twitter_url || ""}
+                      onChange={(e) => setSiteSettings({...siteSettings, twitter_url: e.target.value})}
+                      className="mt-1"
+                    />
+                  </div>
+                  <div>
+                    <Label>Facebook URL</Label>
+                    <Input
+                      value={siteSettings.facebook_url || ""}
+                      onChange={(e) => setSiteSettings({...siteSettings, facebook_url: e.target.value})}
+                      className="mt-1"
+                    />
+                  </div>
+                  <div>
+                    <Label>Google Maps Embed URL</Label>
+                    <Input
+                      value={siteSettings.map_embed_url || ""}
+                      onChange={(e) => setSiteSettings({...siteSettings, map_embed_url: e.target.value})}
+                      placeholder="https://www.google.com/maps/embed?pb=..."
+                      className="mt-1"
+                    />
+                    <p className="text-xs text-gray-500 mt-1">Go to Google Maps → Share → Embed a map → Copy the src URL</p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Stats */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Website Statistics</CardTitle>
+                  <CardDescription>Numbers displayed on the homepage</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <Label>Years of Experience</Label>
+                      <Input
+                        type="number"
+                        value={stats.years_experience || 0}
+                        onChange={(e) => setStats({...stats, years_experience: parseInt(e.target.value)})}
+                        className="mt-1"
+                      />
+                    </div>
+                    <div>
+                      <Label>Clients Served</Label>
+                      <Input
+                        type="number"
+                        value={stats.clients_served || 0}
+                        onChange={(e) => setStats({...stats, clients_served: parseInt(e.target.value)})}
+                        className="mt-1"
+                      />
+                    </div>
+                    <div>
+                      <Label>Projects Completed</Label>
+                      <Input
+                        type="number"
+                        value={stats.projects_completed || 0}
+                        onChange={(e) => setStats({...stats, projects_completed: parseInt(e.target.value)})}
+                        className="mt-1"
+                      />
+                    </div>
+                    <div>
+                      <Label>Team Members</Label>
+                      <Input
+                        type="number"
+                        value={stats.team_members || 0}
+                        onChange={(e) => setStats({...stats, team_members: parseInt(e.target.value)})}
+                        className="mt-1"
+                      />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Save Button */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Save Changes</CardTitle>
+                  <CardDescription>Save all settings changes at once</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Button 
+                    onClick={handleSaveSettings} 
+                    disabled={settingsLoading}
+                    className="w-full bg-[#C9A227] hover:bg-[#b08d1f]"
+                  >
+                    <Save className="w-4 h-4 mr-2" />
+                    {settingsLoading ? "Saving..." : "Save All Settings"}
+                  </Button>
+                </CardContent>
+              </Card>
+
+              {/* Privacy Policy */}
+              <Card className="lg:col-span-2">
+                <CardHeader>
+                  <CardTitle>Privacy Policy</CardTitle>
+                  <CardDescription>HTML content for the privacy policy page</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Textarea
+                    value={siteSettings.privacy_policy || ""}
+                    onChange={(e) => setSiteSettings({...siteSettings, privacy_policy: e.target.value})}
+                    rows={10}
+                    className="font-mono text-sm"
+                  />
+                </CardContent>
+              </Card>
+
+              {/* Terms of Service */}
+              <Card className="lg:col-span-2">
+                <CardHeader>
+                  <CardTitle>Terms of Service</CardTitle>
+                  <CardDescription>HTML content for the terms of service page</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Textarea
+                    value={siteSettings.terms_of_service || ""}
+                    onChange={(e) => setSiteSettings({...siteSettings, terms_of_service: e.target.value})}
+                    rows={10}
+                    className="font-mono text-sm"
+                  />
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
 
           {/* Blog Tab */}
           <TabsContent value="blog">
@@ -477,7 +859,7 @@ const AdminPage = () => {
                             <span className="text-xs text-gray-500">{formatDate(contact.created_at)}</span>
                           </div>
                           <p className="text-sm text-gray-600 mb-1">{contact.email}</p>
-                          <p className="text-sm text-gray-500 mb-2">{contact.service_interest}</p>
+                          <p className="text-sm text-[#C9A227] font-medium mb-2">{contact.service_interest}</p>
                           <p className="text-sm text-gray-600">{contact.message}</p>
                         </div>
                       ))}
@@ -518,6 +900,46 @@ const AdminPage = () => {
               </Card>
             </div>
           </TabsContent>
+
+          {/* Newsletter Tab */}
+          <TabsContent value="newsletter">
+            <Card>
+              <CardHeader>
+                <CardTitle>Newsletter Subscribers ({subscribers.length})</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {loading ? (
+                  <div className="text-center py-8 text-gray-500">Loading...</div>
+                ) : subscribers.length > 0 ? (
+                  <div className="space-y-2">
+                    {subscribers.map((sub) => (
+                      <div
+                        key={sub.id}
+                        className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+                      >
+                        <div>
+                          <p className="font-medium text-[#0B1F3B]">{sub.email}</p>
+                          <p className="text-xs text-gray-500">Subscribed: {formatDate(sub.subscribed_at)}</p>
+                        </div>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => handleDeleteSubscriber(sub.id)}
+                          className="text-red-500 hover:text-red-600"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-8 text-gray-500">
+                    No newsletter subscribers yet.
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
         </Tabs>
 
         {/* Blog Post Form Dialog */}
@@ -535,7 +957,6 @@ const AdminPage = () => {
                   value={postForm.title}
                   onChange={(e) => setPostForm({ ...postForm, title: e.target.value })}
                   required
-                  data-testid="post-title"
                 />
               </div>
               <div>
@@ -545,7 +966,6 @@ const AdminPage = () => {
                   onChange={(e) => setPostForm({ ...postForm, slug: e.target.value })}
                   required
                   placeholder="url-friendly-slug"
-                  data-testid="post-slug"
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
@@ -555,7 +975,6 @@ const AdminPage = () => {
                     value={postForm.category}
                     onChange={(e) => setPostForm({ ...postForm, category: e.target.value })}
                     required
-                    data-testid="post-category"
                   />
                 </div>
                 <div>
@@ -564,7 +983,6 @@ const AdminPage = () => {
                     value={postForm.author}
                     onChange={(e) => setPostForm({ ...postForm, author: e.target.value })}
                     required
-                    data-testid="post-author"
                   />
                 </div>
               </div>
@@ -574,7 +992,6 @@ const AdminPage = () => {
                   value={postForm.image_url}
                   onChange={(e) => setPostForm({ ...postForm, image_url: e.target.value })}
                   placeholder="https://..."
-                  data-testid="post-image"
                 />
               </div>
               <div>
@@ -584,7 +1001,6 @@ const AdminPage = () => {
                   onChange={(e) => setPostForm({ ...postForm, excerpt: e.target.value })}
                   required
                   rows={2}
-                  data-testid="post-excerpt"
                 />
               </div>
               <div>
@@ -594,14 +1010,12 @@ const AdminPage = () => {
                   onChange={(e) => setPostForm({ ...postForm, content: e.target.value })}
                   required
                   rows={8}
-                  data-testid="post-content"
                 />
               </div>
               <div className="flex items-center gap-2">
                 <Switch
                   checked={postForm.published}
                   onCheckedChange={(checked) => setPostForm({ ...postForm, published: checked })}
-                  data-testid="post-published"
                 />
                 <Label>Published</Label>
               </div>
@@ -635,7 +1049,6 @@ const AdminPage = () => {
                   value={jobForm.title}
                   onChange={(e) => setJobForm({ ...jobForm, title: e.target.value })}
                   required
-                  data-testid="job-title"
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
@@ -645,7 +1058,6 @@ const AdminPage = () => {
                     value={jobForm.department}
                     onChange={(e) => setJobForm({ ...jobForm, department: e.target.value })}
                     required
-                    data-testid="job-department"
                   />
                 </div>
                 <div>
@@ -654,7 +1066,6 @@ const AdminPage = () => {
                     value={jobForm.location}
                     onChange={(e) => setJobForm({ ...jobForm, location: e.target.value })}
                     required
-                    data-testid="job-location"
                   />
                 </div>
               </div>
@@ -666,7 +1077,6 @@ const AdminPage = () => {
                     onChange={(e) => setJobForm({ ...jobForm, type: e.target.value })}
                     required
                     placeholder="full-time, part-time, contract"
-                    data-testid="job-type"
                   />
                 </div>
                 <div>
@@ -675,7 +1085,6 @@ const AdminPage = () => {
                     value={jobForm.salary_range}
                     onChange={(e) => setJobForm({ ...jobForm, salary_range: e.target.value })}
                     placeholder="₹10-15 LPA"
-                    data-testid="job-salary"
                   />
                 </div>
               </div>
@@ -686,7 +1095,6 @@ const AdminPage = () => {
                   onChange={(e) => setJobForm({ ...jobForm, description: e.target.value })}
                   required
                   rows={3}
-                  data-testid="job-description"
                 />
               </div>
               <div>
@@ -696,7 +1104,6 @@ const AdminPage = () => {
                   onChange={(e) => setJobForm({ ...jobForm, requirements: e.target.value })}
                   required
                   rows={4}
-                  data-testid="job-requirements"
                 />
               </div>
               <div>
@@ -705,14 +1112,12 @@ const AdminPage = () => {
                   value={jobForm.benefits}
                   onChange={(e) => setJobForm({ ...jobForm, benefits: e.target.value })}
                   rows={3}
-                  data-testid="job-benefits"
                 />
               </div>
               <div className="flex items-center gap-2">
                 <Switch
                   checked={jobForm.active}
                   onCheckedChange={(checked) => setJobForm({ ...jobForm, active: checked })}
-                  data-testid="job-active"
                 />
                 <Label>Active</Label>
               </div>
@@ -744,7 +1149,6 @@ const AdminPage = () => {
                   value={testimonialForm.client_name}
                   onChange={(e) => setTestimonialForm({ ...testimonialForm, client_name: e.target.value })}
                   required
-                  data-testid="testimonial-name"
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
@@ -754,7 +1158,6 @@ const AdminPage = () => {
                     value={testimonialForm.company}
                     onChange={(e) => setTestimonialForm({ ...testimonialForm, company: e.target.value })}
                     required
-                    data-testid="testimonial-company"
                   />
                 </div>
                 <div>
@@ -763,7 +1166,6 @@ const AdminPage = () => {
                     value={testimonialForm.position}
                     onChange={(e) => setTestimonialForm({ ...testimonialForm, position: e.target.value })}
                     required
-                    data-testid="testimonial-position"
                   />
                 </div>
               </div>
@@ -774,7 +1176,6 @@ const AdminPage = () => {
                   onChange={(e) => setTestimonialForm({ ...testimonialForm, quote: e.target.value })}
                   required
                   rows={3}
-                  data-testid="testimonial-quote"
                 />
               </div>
               <div>
@@ -783,7 +1184,6 @@ const AdminPage = () => {
                   value={testimonialForm.image_url}
                   onChange={(e) => setTestimonialForm({ ...testimonialForm, image_url: e.target.value })}
                   placeholder="https://..."
-                  data-testid="testimonial-image"
                 />
               </div>
               <div className="flex gap-2 justify-end">
