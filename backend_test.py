@@ -69,7 +69,7 @@ class SquareOneAPITester:
         print("\n🔐 Testing Authentication Endpoints...")
         
         # Test registration with new user
-        test_email = f"test_{datetime.now().strftime('%Y%m%d_%H%M%S')}@squareone.test"
+        test_email = f"test_{datetime.now().strftime('%Y%m%d_%H%M%S')}@example.com"
         register_data = {
             "email": test_email,
             "password": "testpass123",
