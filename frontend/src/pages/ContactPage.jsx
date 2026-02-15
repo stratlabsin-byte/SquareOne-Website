@@ -74,19 +74,19 @@ const ContactPage = () => {
     {
       icon: Mail,
       title: "Email Us",
-      details: "info@squareone.in",
-      link: "mailto:info@squareone.in"
+      details: siteSettings.email || "info@squareone.in",
+      link: `mailto:${siteSettings.email || "info@squareone.in"}`
     },
     {
       icon: Phone,
       title: "Call Us",
-      details: "+91 123 456 7890",
-      link: "tel:+911234567890"
+      details: siteSettings.phone || "+91 123 456 7890",
+      link: `tel:${(siteSettings.phone || "+91 123 456 7890").replace(/\s/g, '')}`
     },
     {
       icon: MapPin,
       title: "Visit Us",
-      details: "Mumbai, Maharashtra, India"
+      details: siteSettings.city || "Mumbai, Maharashtra, India"
     },
     {
       icon: Clock,
@@ -94,6 +94,8 @@ const ContactPage = () => {
       details: "Mon - Fri: 9:00 AM - 6:00 PM"
     }
   ];
+
+  const defaultMapUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241317.11609823277!2d72.74109995709657!3d19.08219783958221!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c6306644edc1%3A0x5da4ed8f8d648c69!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1645000000000!5m2!1sen!2sin";
 
   if (submitted) {
     return (
