@@ -124,6 +124,27 @@ export const subscribeNewsletter = async (email) => {
   return response.data;
 };
 
+export const getNewsletterSubscribers = async () => {
+  const response = await apiClient.get("/newsletter/subscribers");
+  return response.data;
+};
+
+export const deleteNewsletterSubscriber = async (subscriberId) => {
+  const response = await apiClient.delete(`/newsletter/${subscriberId}`);
+  return response.data;
+};
+
+// ==================== SITE SETTINGS ====================
+export const getSiteSettings = async () => {
+  const response = await apiClient.get("/settings");
+  return response.data;
+};
+
+export const updateSiteSettings = async (settingsData) => {
+  const response = await apiClient.put("/settings", settingsData);
+  return response.data;
+};
+
 // ==================== SEED ====================
 export const seedData = async () => {
   const response = await apiClient.post("/seed");
