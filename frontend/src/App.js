@@ -16,6 +16,8 @@ import CareersPage from "@/pages/CareersPage";
 import ContactPage from "@/pages/ContactPage";
 import AdminPage from "@/pages/AdminPage";
 import LoginPage from "@/pages/LoginPage";
+import PrivacyPage from "@/pages/PrivacyPage";
+import TermsPage from "@/pages/TermsPage";
 
 // Components
 import Navbar from "@/components/Navbar";
@@ -80,6 +82,8 @@ function AppContent() {
           <Route path="/insights/:slug" element={<BlogPostPage />} />
           <Route path="/careers" element={<CareersPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route
             path="/admin"
