@@ -202,6 +202,9 @@ const Footer = () => {
               <Link to="/terms" className="text-gray-400 hover:text-[#C9A227] text-sm transition-colors">
                 Terms of Service
               </Link>
+              <Link to="/login" className="text-gray-400 hover:text-[#C9A227] text-sm transition-colors">
+                Admin
+              </Link>
             </div>
           </div>
         </div>
