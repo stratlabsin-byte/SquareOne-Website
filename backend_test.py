@@ -64,6 +64,78 @@ class SquareOneAPITester:
         """Test root API endpoint"""
         return self.run_test("Root API", "GET", "", 200)
 
+    def test_auth_endpoints(self):
+        """Test authentication endpoints"""
+        print("\n🔐 Testing Authentication Endpoints...")
+        
+        # Test registration with new user
+        test_email = f"test_{datetime.now().strftime('%Y%m%d_%H%M%S')}@squareone.test"
+        register_data = {
+            "email": test_email,
+            "password": "testpass123",
+            "name": "Test User"
+        }
+        
+        success, register_response = self.run_test("Register New Admin", "POST", "auth/register", 200, register_data)
+        if success and 'access_token' in register_response:
+            print(f"   Registration successful, token received")
+            test_token = register_response['access_token']
+            test_user = register_response['user']
+            
+            # Test duplicate registration (should fail)
+            self.run_test("Register Duplicate Email", "POST", "auth/register", 400, register_data)
+            
+            # Test login with created user
+            login_data = {
+                "email": test_email,
+                "password": "testpass123"
+            }
+            success, login_response = self.run_test("Login Admin", "POST", "auth/login", 200, login_data)
+            if success and 'access_token' in login_response:
+                self.auth_token = login_response['access_token']
+                print(f"   Login successful, token stored")
+                
+                # Test /auth/me endpoint
+                success, me_response = self.run_test("Get Current User", "GET", "auth/me", 200, auth_required=True)
+                if success:
+                    print(f"   Current user: {me_response.get('email', 'Unknown')}")
+                
+                # Test token verification
+                success, verify_response = self.run_test("Verify Token", "POST", "auth/verify", 200, auth_required=True)
+                if success:
+                    print(f"   Token verification successful")
+            
+            # Test login with wrong password
+            wrong_login = {
+                "email": test_email,
+                "password": "wrongpassword"
+            }
+            self.run_test("Login Wrong Password", "POST", "auth/login", 401, wrong_login)
+            
+            # Test login with non-existent email
+            nonexistent_login = {
+                "email": "nonexistent@test.com",
+                "password": "testpass123"
+            }
+            self.run_test("Login Non-existent User", "POST", "auth/login", 401, nonexistent_login)
+        
+        # Test existing admin login (admin@squareone.in / admin123)
+        admin_login = {
+            "email": "admin@squareone.in",
+            "password": "admin123"
+        }
+        success, admin_response = self.run_test("Login Existing Admin", "POST", "auth/login", 200, admin_login)
+        if success and 'access_token' in admin_response:
+            self.auth_token = admin_response['access_token']
+            print(f"   Admin login successful")
+            
+            # Test protected endpoint with admin token
+            success, me_response = self.run_test("Get Admin User Info", "GET", "auth/me", 200, auth_required=True)
+            if success:
+                print(f"   Admin user: {me_response.get('email', 'Unknown')}")
+        
+        return success
+
     def test_stats_endpoints(self):
         """Test stats endpoints"""
         print("\n📊 Testing Stats Endpoints...")
