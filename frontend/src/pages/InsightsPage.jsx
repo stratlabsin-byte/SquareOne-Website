@@ -4,13 +4,16 @@ import { Calendar, User, ArrowRight, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { getBlogPosts } from "@/services/api";
+import { getBlogPosts, subscribeNewsletter } from "@/services/api";
+import { toast } from "sonner";
 
 const InsightsPage = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [subscribing, setSubscribing] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -37,20 +40,34 @@ const InsightsPage = () => {
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
     });
   };
 
-  // Placeholder posts for when database is empty
+  const handleNewsletterSubscribe = async (e) => {
+    e.preventDefault();
+    if (!newsletterEmail) return;
+    setSubscribing(true);
+    try {
+      await subscribeNewsletter(newsletterEmail);
+      toast.success("Successfully subscribed to newsletter!");
+      setNewsletterEmail("");
+    } catch (error) {
+      toast.error("Failed to subscribe. Please try again.");
+    } finally {
+      setSubscribing(false);
+    }
+  };
+
   const placeholderPosts = [
     {
       id: "1",
-      title: "5 Key Strategies for SME Growth in 2024",
-      slug: "sme-growth-strategies-2024",
-      excerpt: "Discover the essential strategies that successful SMEs are implementing to drive sustainable growth in today's competitive landscape.",
+      title: "5 Key Strategies for SME Growth in 2025",
+      slug: "sme-growth-strategies-2025",
+      excerpt: "Discover the essential strategies that successful SMEs are implementing to drive sustainable growth.",
       category: "Business Strategy",
       author: "ADVISERVE Team",
       image_url: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop",
@@ -70,7 +87,7 @@ const InsightsPage = () => {
       id: "3",
       title: "Digital Transformation for SMEs",
       slug: "digital-transformation-sme",
-      excerpt: "Learn how small and medium enterprises can leverage technology to streamline operations and boost productivity.",
+      excerpt: "Learn how small and medium enterprises can leverage technology to streamline operations.",
       category: "Technology",
       author: "ADVISERVE Team",
       image_url: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop",
@@ -87,162 +104,189 @@ const InsightsPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <span className="inline-block px-4 py-2 bg-[#C9A227]/20 text-[#C9A227] text-sm font-medium rounded-full mb-6">
-              Insights & Resources
+              Insights & Articles
             </span>
             <h1 className="text-4xl sm:text-5xl font-bold text-white font-['Montserrat'] mb-6">
               Knowledge Hub for Growing Businesses
             </h1>
             <p className="text-xl text-gray-300">
-              Expert insights, industry trends, and practical guides to help your business 
+              Expert insights, industry trends, and practical guides to help your business
               navigate challenges and seize opportunities.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Search & Filter */}
+      {/* Search Bar */}
       <section className="py-8 bg-white border-b border-gray-100 sticky top-[72px] z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-            <div className="relative w-full md:w-96">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-              <Input
-                type="text"
-                placeholder="Search articles..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                data-testid="search-input"
-                className="pl-10 border-gray-200 focus:border-[#C9A227]"
-              />
-            </div>
-            <div className="flex gap-2 overflow-x-auto w-full md:w-auto">
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  onClick={() => setSelectedCategory(category)}
-                  data-testid={`category-${category}`}
-                  className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
-                    selectedCategory === category
-                      ? "bg-[#0B1F3B] text-white"
-                      : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                  }`}
-                >
-                  {category === "all" ? "All Categories" : category}
-                </button>
-              ))}
-            </div>
+          <div className="relative w-full md:w-96">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <Input
+              type="text"
+              placeholder="Search articles..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              data-testid="search-input"
+              className="pl-10 border-gray-200 focus:border-[#C9A227]"
+            />
           </div>
         </div>
       </section>
 
-      {/* Blog Posts Grid */}
+      {/* Blog Posts Grid + Sidebar */}
       <section className="section-padding bg-[#F8F9FA]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {loading ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[1, 2, 3].map((i) => (
-                <Card key={i} className="bg-white overflow-hidden">
-                  <div className="h-48 skeleton" />
-                  <CardContent className="p-6">
-                    <div className="h-4 w-20 skeleton mb-3" />
-                    <div className="h-6 w-full skeleton mb-2" />
-                    <div className="h-4 w-full skeleton mb-4" />
-                    <div className="h-4 w-32 skeleton" />
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          ) : (
-            <>
-              {displayPosts.length > 0 ? (
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {displayPosts.map((post, index) => (
-                    <Card
-                      key={post.id}
-                      data-testid={`blog-post-${index}`}
-                      className="bg-white border-none shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden group card-hover"
-                    >
-                      <div className="relative h-48 overflow-hidden">
-                        <img
-                          src={post.image_url || "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=400&fit=crop"}
-                          alt={post.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                        <div className="absolute top-4 left-4">
-                          <span className="px-3 py-1 bg-[#C9A227] text-white text-xs font-medium rounded-full">
-                            {post.category}
-                          </span>
-                        </div>
-                      </div>
+          <div className="grid lg:grid-cols-[1fr_320px] gap-12">
+            {/* Main Content */}
+            <div>
+              {loading ? (
+                <div className="grid md:grid-cols-2 gap-8">
+                  {[1, 2, 3, 4].map((i) => (
+                    <Card key={i} className="bg-white overflow-hidden">
+                      <div className="h-48 skeleton" />
                       <CardContent className="p-6">
-                        <div className="flex items-center text-gray-500 text-sm mb-3 space-x-4">
-                          <span className="flex items-center">
-                            <Calendar className="w-4 h-4 mr-1" />
-                            {formatDate(post.created_at)}
-                          </span>
-                          <span className="flex items-center">
-                            <User className="w-4 h-4 mr-1" />
-                            {post.author}
-                          </span>
-                        </div>
-                        <h3 className="text-xl font-bold text-[#0B1F3B] font-['Montserrat'] mb-3 line-clamp-2 group-hover:text-[#C9A227] transition-colors">
-                          {post.title}
-                        </h3>
-                        <p className="text-gray-600 text-sm line-clamp-3 mb-4">
-                          {post.excerpt}
-                        </p>
-                        <Link
-                          to={`/insights/${post.slug}`}
-                          className="inline-flex items-center text-[#C9A227] font-medium text-sm group-hover:translate-x-2 transition-transform"
-                        >
-                          Read More <ArrowRight className="ml-1 w-4 h-4" />
-                        </Link>
+                        <div className="h-4 w-20 skeleton mb-3" />
+                        <div className="h-6 w-full skeleton mb-2" />
+                        <div className="h-4 w-full skeleton mb-4" />
+                        <div className="h-4 w-32 skeleton" />
                       </CardContent>
                     </Card>
                   ))}
                 </div>
               ) : (
-                <div className="text-center py-16">
-                  <p className="text-gray-500 text-lg">No articles found matching your criteria.</p>
-                  <Button
-                    onClick={() => {
-                      setSearchTerm("");
-                      setSelectedCategory("all");
-                    }}
-                    variant="outline"
-                    className="mt-4"
-                  >
-                    Clear Filters
-                  </Button>
-                </div>
+                <>
+                  {displayPosts.length > 0 ? (
+                    <div className="grid md:grid-cols-2 gap-8">
+                      {displayPosts.map((post, index) => (
+                        <Card
+                          key={post.id}
+                          data-testid={`blog-post-${index}`}
+                          className="bg-white border-none shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden group card-hover"
+                        >
+                          <div className="relative h-48 overflow-hidden">
+                            <img
+                              src={post.image_url || "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=400&fit=crop"}
+                              alt={post.title}
+                              loading="lazy"
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                            <div className="absolute top-4 left-4">
+                              <span className="px-3 py-1 bg-[#C9A227] text-white text-xs font-medium rounded-full">
+                                {post.category}
+                              </span>
+                            </div>
+                          </div>
+                          <CardContent className="p-6">
+                            <div className="flex items-center text-gray-500 text-sm mb-3 space-x-4">
+                              <span className="flex items-center">
+                                <Calendar className="w-4 h-4 mr-1" />
+                                {formatDate(post.created_at)}
+                              </span>
+                              <span className="flex items-center">
+                                <User className="w-4 h-4 mr-1" />
+                                {post.author}
+                              </span>
+                            </div>
+                            <h3 className="text-xl font-bold text-[#0B1F3B] font-['Montserrat'] mb-3 line-clamp-2 group-hover:text-[#C9A227] transition-colors">
+                              {post.title}
+                            </h3>
+                            <p className="text-gray-600 text-sm line-clamp-3 mb-4">
+                              {post.excerpt}
+                            </p>
+                            <Link
+                              to={`/insights/${post.slug}`}
+                              className="inline-flex items-center text-[#C9A227] font-medium text-sm group-hover:translate-x-2 transition-transform"
+                            >
+                              Read More <ArrowRight className="ml-1 w-4 h-4" />
+                            </Link>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-center py-16">
+                      <p className="text-gray-500 text-lg">No articles found matching your criteria.</p>
+                      <Button
+                        onClick={() => {
+                          setSearchTerm("");
+                          setSelectedCategory("all");
+                        }}
+                        variant="outline"
+                        className="mt-4"
+                      >
+                        Clear Filters
+                      </Button>
+                    </div>
+                  )}
+                </>
               )}
-            </>
-          )}
-        </div>
-      </section>
+            </div>
 
-      {/* Newsletter CTA */}
-      <section className="section-padding bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-[#0B1F3B] font-['Montserrat'] mb-4">
-            Stay Informed
-          </h2>
-          <p className="text-gray-600 mb-8">
-            Subscribe to our newsletter for the latest insights delivered to your inbox.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <Input
-              type="email"
-              placeholder="Enter your email"
-              data-testid="newsletter-email-insights"
-              className="flex-1 border-gray-200 focus:border-[#C9A227]"
-            />
-            <Button
-              data-testid="newsletter-subscribe-btn"
-              className="bg-[#C9A227] hover:bg-[#b08d1f] text-white font-semibold px-8"
-            >
-              Subscribe
-            </Button>
+            {/* Sidebar */}
+            <aside className="space-y-8 lg:sticky lg:top-[140px] lg:self-start">
+              {/* Categories Widget */}
+              <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <h3 className="text-lg font-bold text-[#0B1F3B] font-['Montserrat'] mb-4">Categories</h3>
+                <ul className="space-y-1">
+                  {categories.map((category) => (
+                    <li key={category}>
+                      <button
+                        onClick={() => setSelectedCategory(category)}
+                        className={`w-full text-left px-3 py-2 rounded text-sm transition-colors ${
+                          selectedCategory === category
+                            ? "bg-[#C9A227]/10 text-[#C9A227] font-semibold"
+                            : "text-slate-600 hover:bg-slate-50"
+                        }`}
+                      >
+                        {category === "all" ? "All Categories" : category}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Recent Posts Widget */}
+              <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <h3 className="text-lg font-bold text-[#0B1F3B] font-['Montserrat'] mb-4">Recent Posts</h3>
+                <ul className="space-y-4">
+                  {displayPosts.slice(0, 5).map((post) => (
+                    <li key={post.id}>
+                      <Link
+                        to={`/insights/${post.slug}`}
+                        className="text-sm text-slate-700 hover:text-[#C9A227] font-medium transition-colors line-clamp-2"
+                      >
+                        {post.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Newsletter Widget */}
+              <div className="bg-[#0B1F3B] p-6 rounded-xl text-white">
+                <h3 className="text-lg font-bold font-['Montserrat'] mb-2">Stay Updated</h3>
+                <p className="text-gray-400 text-sm mb-4">Subscribe for the latest insights.</p>
+                <form onSubmit={handleNewsletterSubscribe} className="space-y-3">
+                  <Input
+                    type="email"
+                    placeholder="Your email"
+                    value={newsletterEmail}
+                    onChange={(e) => setNewsletterEmail(e.target.value)}
+                    data-testid="sidebar-newsletter-email"
+                    className="bg-white/10 border-white/20 text-white placeholder:text-gray-500"
+                  />
+                  <Button
+                    type="submit"
+                    disabled={subscribing}
+                    data-testid="sidebar-newsletter-btn"
+                    className="w-full bg-[#C9A227] hover:bg-[#b08d1f] text-white"
+                  >
+                    {subscribing ? "Subscribing..." : "Subscribe"}
+                  </Button>
+                </form>
+              </div>
+            </aside>
           </div>
         </div>
       </section>

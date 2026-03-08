@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { 
-  Laptop, ShoppingBag, Building, HeartPulse, Factory, Truck,
-  GraduationCap, Banknote, ArrowRight
+import {
+  Laptop, ShoppingBag, HeartPulse, Factory,
+  GraduationCap, Briefcase, ArrowRight
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -14,18 +14,6 @@ const IndustriesPage = () => {
       title: "Technology & IT",
       description: "Supporting tech startups and IT companies with talent acquisition, compliance, and scalable solutions for rapid growth.",
       clients: "150+ Clients"
-    },
-    {
-      icon: ShoppingBag,
-      title: "Retail & E-commerce",
-      description: "End-to-end solutions for retail businesses from workforce management to digital transformation and supply chain optimization.",
-      clients: "80+ Clients"
-    },
-    {
-      icon: Building,
-      title: "Real Estate",
-      description: "Comprehensive services for real estate developers and property management firms including legal and HR support.",
-      clients: "45+ Clients"
     },
     {
       icon: HeartPulse,
@@ -40,21 +28,21 @@ const IndustriesPage = () => {
       clients: "60+ Clients"
     },
     {
-      icon: Truck,
-      title: "Logistics & Supply Chain",
-      description: "Enabling logistics companies with efficient HR management, technology solutions, and business process optimization.",
-      clients: "40+ Clients"
-    },
-    {
       icon: GraduationCap,
       title: "Education & EdTech",
       description: "Supporting educational institutions and EdTech startups with talent, technology, and growth advisory services.",
       clients: "55+ Clients"
     },
     {
-      icon: Banknote,
-      title: "Financial Services",
-      description: "Comprehensive support for fintech startups and financial services firms with compliance, HR, and technology solutions.",
+      icon: ShoppingBag,
+      title: "Retail & E-commerce",
+      description: "End-to-end solutions for retail businesses from workforce management to digital transformation and supply chain optimization.",
+      clients: "80+ Clients"
+    },
+    {
+      icon: Briefcase,
+      title: "Professional Services",
+      description: "Comprehensive support for professional services firms with compliance, HR, technology solutions, and strategic growth advisory.",
       clients: "30+ Clients"
     }
   ];
@@ -82,7 +70,7 @@ const IndustriesPage = () => {
       {/* Industries Grid */}
       <section className="section-padding bg-[#F8F9FA]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {industries.map((industry, index) => (
               <Card
                 key={industry.title}

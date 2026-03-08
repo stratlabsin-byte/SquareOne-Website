@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { MapPin, Clock, Briefcase, ArrowRight, Send, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -29,6 +29,7 @@ const CareersPage = () => {
     cover_letter: ""
   });
   const [submitting, setSubmitting] = useState(false);
+  const applyFormRef = useRef(null);
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -43,6 +44,13 @@ const CareersPage = () => {
     };
     fetchJobs();
   }, []);
+
+  // Auto-scroll to application form when isApplying is set
+  useEffect(() => {
+    if (isApplying && applyFormRef.current) {
+      applyFormRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [isApplying]);
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -348,90 +356,106 @@ const CareersPage = () => {
         </DialogContent>
       </Dialog>
 
-      {/* Application Dialog */}
-      <Dialog open={isApplying} onOpenChange={setIsApplying}>
-        <DialogContent className="max-w-lg">
-          <DialogHeader>
-            <DialogTitle className="text-xl font-bold text-[#0B1F3B] font-['Montserrat']">
-              Apply for {selectedJob?.title}
-            </DialogTitle>
-          </DialogHeader>
-          <form onSubmit={handleApply} className="mt-4 space-y-4">
-            <div>
-              <Label htmlFor="name">Full Name *</Label>
-              <Input
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                required
-                data-testid="apply-name"
-                className="mt-1"
-              />
+      {/* Inline Application Form */}
+      {isApplying && selectedJob && (
+        <section ref={applyFormRef} className="section-padding bg-white">
+          <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="bg-[#F8F9FA] p-8 md:p-10 rounded-xl shadow-lg">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold text-[#0B1F3B] font-['Montserrat']">
+                  Apply for {selectedJob.title}
+                </h2>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setIsApplying(false)}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  <X className="w-5 h-5" />
+                </Button>
+              </div>
+              <form onSubmit={handleApply} className="space-y-5">
+                <div className="grid md:grid-cols-2 gap-5">
+                  <div>
+                    <Label htmlFor="name">Full Name *</Label>
+                    <Input
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      required
+                      data-testid="apply-name"
+                      className="mt-1 border-gray-200 focus:border-[#C9A227]"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="email">Email Address *</Label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      required
+                      data-testid="apply-email"
+                      className="mt-1 border-gray-200 focus:border-[#C9A227]"
+                    />
+                  </div>
+                </div>
+                <div className="grid md:grid-cols-2 gap-5">
+                  <div>
+                    <Label htmlFor="phone">Phone Number *</Label>
+                    <Input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      required
+                      data-testid="apply-phone"
+                      className="mt-1 border-gray-200 focus:border-[#C9A227]"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="linkedin_url">LinkedIn Profile URL</Label>
+                    <Input
+                      id="linkedin_url"
+                      name="linkedin_url"
+                      value={formData.linkedin_url}
+                      onChange={handleInputChange}
+                      placeholder="https://linkedin.com/in/yourprofile"
+                      data-testid="apply-linkedin"
+                      className="mt-1 border-gray-200 focus:border-[#C9A227]"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <Label htmlFor="cover_letter">Cover Letter</Label>
+                  <Textarea
+                    id="cover_letter"
+                    name="cover_letter"
+                    value={formData.cover_letter}
+                    onChange={handleInputChange}
+                    placeholder="Tell us why you're interested in this role..."
+                    rows={4}
+                    data-testid="apply-cover-letter"
+                    className="mt-1 border-gray-200 focus:border-[#C9A227]"
+                  />
+                </div>
+                <Button
+                  type="submit"
+                  disabled={submitting}
+                  data-testid="submit-application"
+                  className="w-full bg-[#C9A227] hover:bg-[#b08d1f] text-white font-semibold py-3"
+                >
+                  {submitting ? "Submitting..." : "Submit Application"}
+                  <Send className="ml-2 w-4 h-4" />
+                </Button>
+              </form>
             </div>
-            <div>
-              <Label htmlFor="email">Email Address *</Label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-                data-testid="apply-email"
-                className="mt-1"
-              />
-            </div>
-            <div>
-              <Label htmlFor="phone">Phone Number *</Label>
-              <Input
-                id="phone"
-                name="phone"
-                type="tel"
-                value={formData.phone}
-                onChange={handleInputChange}
-                required
-                data-testid="apply-phone"
-                className="mt-1"
-              />
-            </div>
-            <div>
-              <Label htmlFor="linkedin_url">LinkedIn Profile URL</Label>
-              <Input
-                id="linkedin_url"
-                name="linkedin_url"
-                value={formData.linkedin_url}
-                onChange={handleInputChange}
-                placeholder="https://linkedin.com/in/yourprofile"
-                data-testid="apply-linkedin"
-                className="mt-1"
-              />
-            </div>
-            <div>
-              <Label htmlFor="cover_letter">Cover Letter</Label>
-              <Textarea
-                id="cover_letter"
-                name="cover_letter"
-                value={formData.cover_letter}
-                onChange={handleInputChange}
-                placeholder="Tell us why you're interested in this role..."
-                rows={4}
-                data-testid="apply-cover-letter"
-                className="mt-1"
-              />
-            </div>
-            <Button
-              type="submit"
-              disabled={submitting}
-              data-testid="submit-application"
-              className="w-full bg-[#C9A227] hover:bg-[#b08d1f] text-white"
-            >
-              {submitting ? "Submitting..." : "Submit Application"}
-              <Send className="ml-2 w-4 h-4" />
-            </Button>
-          </form>
-        </DialogContent>
-      </Dialog>
+          </div>
+        </section>
+      )}
 
       {/* CTA Section */}
       <section className="section-padding gradient-navy">

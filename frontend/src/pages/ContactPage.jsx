@@ -40,10 +40,11 @@ const ContactPage = () => {
   }, []);
 
   const services = [
-    "Business Foundation Services",
-    "Workforce & HR Solutions",
-    "Growth & Capability Development",
-    "Technology & Digital Services",
+    "Talent & HR Solutions",
+    "Corporate Training",
+    "Business Consulting",
+    "Legal Consulting",
+    "Technology & IT Services",
     "General Inquiry"
   ];
 
@@ -155,9 +156,9 @@ const ContactPage = () => {
       {/* Contact Form & Info */}
       <section className="section-padding bg-[#F8F9FA]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-3 gap-12">
+          <div className="grid lg:grid-cols-[380px_1fr] gap-12">
             {/* Contact Info */}
-            <div className="lg:col-span-1">
+            <div>
               <h2 className="text-2xl font-bold text-[#0B1F3B] font-['Montserrat'] mb-8">
                 Contact Information
               </h2>
@@ -189,24 +190,10 @@ const ContactPage = () => {
                   </div>
                 ))}
               </div>
-
-              {/* Google Map */}
-              <div className="mt-8 rounded-lg overflow-hidden shadow-md h-52">
-                <iframe
-                  src={siteSettings.map_embed_url || defaultMapUrl}
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Office Location"
-                />
-              </div>
             </div>
 
             {/* Contact Form */}
-            <div className="lg:col-span-2">
+            <div>
               <div className="bg-white p-8 md:p-10 rounded-xl shadow-lg">
                 <h2 className="text-2xl font-bold text-[#0B1F3B] font-['Montserrat'] mb-2">
                   Send Us a Message
@@ -317,6 +304,24 @@ const ContactPage = () => {
                 </form>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Google Map - Full Width */}
+      <section className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+          <div className="rounded-xl overflow-hidden shadow-md h-72">
+            <iframe
+              src={siteSettings.map_embed_url || defaultMapUrl}
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Office Location"
+            />
           </div>
         </div>
       </section>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
+import { LogoIcon } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -16,21 +17,22 @@ import {
 
 const navLinks = [
   { name: "Home", path: "/" },
-  { name: "About Us", path: "/about" },
-  { 
-    name: "Services", 
+  { name: "About", path: "/about" },
+  {
+    name: "Services",
     path: "/services",
     dropdown: [
-      { name: "Business Foundation", path: "/services#business-foundation" },
-      { name: "Workforce & HR", path: "/services#workforce-hr" },
-      { name: "Growth & Capability", path: "/services#growth-capability" },
-      { name: "Technology & Digital", path: "/services#technology-digital" },
+      { name: "Talent & HR Solutions", path: "/services#talent-hr" },
+      { name: "Corporate Training", path: "/services#corporate-training" },
+      { name: "Business Consulting", path: "/services#business-consulting" },
+      { name: "Legal Consulting", path: "/services#legal-consulting" },
+      { name: "Technology & IT Services", path: "/services#technology-it" },
     ]
   },
   { name: "Industries", path: "/industries" },
-  { name: "Why ADVISERVE", path: "/why-adviserve" },
   { name: "Insights", path: "/insights" },
   { name: "Careers", path: "/careers" },
+  { name: "Contact", path: "/contact" },
 ];
 
 const Navbar = () => {
@@ -39,7 +41,7 @@ const Navbar = () => {
   const location = useLocation();
   
   // Check if we're on a page with dark hero
-  const isDarkHero = ["/", "/about", "/services", "/industries", "/why-adviserve", "/insights", "/careers", "/contact"].includes(location.pathname) || location.pathname.startsWith("/insights/");
+  const isDarkHero = ["/", "/about", "/services", "/industries", "/insights", "/careers", "/contact"].includes(location.pathname) || location.pathname.startsWith("/insights/");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -74,17 +76,21 @@ const Navbar = () => {
           <Link
             to="/"
             data-testid="logo-link"
-            className="flex items-center space-x-2"
+            className="flex items-center space-x-2.5"
           >
-            <div className={`w-10 h-10 rounded flex items-center justify-center ${isScrolled ? 'bg-[#0B1F3B]' : 'bg-white/10 backdrop-blur-sm'}`}>
-              <span className="text-[#C9A227] font-bold text-xl font-['Montserrat']">A</span>
-            </div>
-            <div className="hidden sm:block">
-              <span className={`font-bold text-lg font-['Montserrat'] tracking-tight ${logoTextColor}`}>
-                ADVISERVE
+            <LogoIcon size={36} variant={isScrolled ? "dark" : (isDarkHero ? "light" : "dark")} />
+            <div className="hidden sm:flex items-center">
+              <span className={`text-[17px] font-light tracking-[0.02em] ${logoTextColor}`} style={{ fontFamily: "'Inter', sans-serif" }}>
+                adiser
               </span>
-              <span className={`text-xs block -mt-1 ${isScrolled ? 'text-[#2E2E2E]' : (isDarkHero ? 'text-gray-300' : 'text-[#2E2E2E]')}`}>
-                Services & Consulting
+              <svg viewBox="0 0 20 24" width="14" height="18" className="mx-[1px] mt-[1px]">
+                <circle cx="10" cy="5" r="2.5" fill="#5CE0C2" />
+                <circle cx="5" cy="13" r="2.5" fill="#5CE0C2" />
+                <circle cx="15" cy="13" r="2.5" fill="#5CE0C2" />
+                <circle cx="10" cy="21" r="2.5" fill="#5CE0C2" />
+              </svg>
+              <span className={`text-[17px] font-light tracking-[0.02em] ${logoTextColor}`} style={{ fontFamily: "'Inter', sans-serif" }}>
+                e.
               </span>
             </div>
           </Link>
@@ -168,14 +174,23 @@ const Navbar = () => {
                     <Link
                       to="/"
                       onClick={() => setIsOpen(false)}
-                      className="flex items-center space-x-2"
+                      className="flex items-center space-x-2.5"
                     >
-                      <div className="w-10 h-10 bg-[#0B1F3B] rounded flex items-center justify-center">
-                        <span className="text-[#C9A227] font-bold text-xl font-['Montserrat']">A</span>
+                      <LogoIcon size={36} variant="dark" />
+                      <div className="flex items-center">
+                        <span className="text-[17px] font-light tracking-[0.02em] text-[#0B1F3B]" style={{ fontFamily: "'Inter', sans-serif" }}>
+                          adiser
+                        </span>
+                        <svg viewBox="0 0 20 24" width="14" height="18" className="mx-[1px] mt-[1px]">
+                          <circle cx="10" cy="5" r="2.5" fill="#5CE0C2" />
+                          <circle cx="5" cy="13" r="2.5" fill="#5CE0C2" />
+                          <circle cx="15" cy="13" r="2.5" fill="#5CE0C2" />
+                          <circle cx="10" cy="21" r="2.5" fill="#5CE0C2" />
+                        </svg>
+                        <span className="text-[17px] font-light tracking-[0.02em] text-[#0B1F3B]" style={{ fontFamily: "'Inter', sans-serif" }}>
+                          e.
+                        </span>
                       </div>
-                      <span className="text-[#0B1F3B] font-bold text-lg font-['Montserrat']">
-                        ADVISERVE
-                      </span>
                     </Link>
                   </div>
                   <nav className="flex-1 p-6">

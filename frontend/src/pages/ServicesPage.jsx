@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { 
+import {
   Building2, Users, TrendingUp, Monitor, ChevronDown, ChevronRight,
   FileText, Scale, Shield, UserPlus, Clock, CreditCard, GraduationCap,
-  BarChart, Settings, Globe, Database, Smartphone, ArrowRight
+  BarChart, Settings, Globe, Database, Smartphone, ArrowRight, Award, Target, Landmark
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,39 +15,16 @@ import {
 
 const ServicesPage = () => {
   const location = useLocation();
-  const [activeService, setActiveService] = useState(location.hash?.slice(1) || "business-foundation");
+  const [activeService, setActiveService] = useState(location.hash?.slice(1) || "talent-hr");
 
   const services = [
     {
-      id: "business-foundation",
-      icon: Building2,
-      title: "Business Foundation Services",
-      description: "Build a solid legal and operational foundation for your business with our comprehensive structuring and compliance services.",
-      color: "#0B1F3B",
-      subServices: [
-        {
-          icon: FileText,
-          title: "Corporate Structuring",
-          description: "Expert guidance on choosing the right business structure, company registration, and organizational setup tailored to your growth plans."
-        },
-        {
-          icon: Scale,
-          title: "Legal Documentation",
-          description: "Comprehensive legal documentation including agreements, contracts, policies, and regulatory filings to protect your business interests."
-        },
-        {
-          icon: Shield,
-          title: "Compliance Advisory",
-          description: "Navigate complex regulatory requirements with our compliance experts who ensure your business meets all statutory obligations."
-        }
-      ]
-    },
-    {
-      id: "workforce-hr",
+      id: "talent-hr",
+      shortName: "Talent & HR",
       icon: Users,
-      title: "Workforce & HR Solutions",
+      title: "Talent & HR Solutions",
       description: "End-to-end human resource solutions to build, manage, and retain top talent while ensuring full compliance with labor laws.",
-      color: "#C9A227",
+      color: "#0B1F3B",
       subServices: [
         {
           icon: UserPlus,
@@ -67,35 +44,87 @@ const ServicesPage = () => {
       ]
     },
     {
-      id: "growth-capability",
-      icon: TrendingUp,
-      title: "Growth & Capability Development",
-      description: "Accelerate your business growth with strategic advisory and capability building programs designed for SMEs.",
-      color: "#0B1F3B",
+      id: "corporate-training",
+      shortName: "Corporate Training",
+      icon: GraduationCap,
+      title: "Corporate Training",
+      description: "Customized training programs and leadership development initiatives to build organizational capability and drive performance.",
+      color: "#C9A227",
       subServices: [
         {
-          icon: GraduationCap,
-          title: "Corporate Training",
-          description: "Customized training programs to upskill your workforce in leadership, technical skills, and professional development."
+          icon: Award,
+          title: "Leadership Development",
+          description: "Executive coaching and management development programs to build a strong leadership pipeline for your organization."
         },
         {
           icon: BarChart,
-          title: "Leadership Programs",
-          description: "Executive coaching and leadership development programs to build a strong management pipeline for your organization."
+          title: "Skills Training",
+          description: "Technical and professional skills training customized to your industry needs and organizational goals."
         },
         {
-          icon: Settings,
-          title: "SME Advisory",
-          description: "Strategic consulting for SMEs covering business planning, market expansion, operational efficiency, and funding strategies."
+          icon: Target,
+          title: "Team Building",
+          description: "Collaborative workshops and team development programs designed to build high-performance cultures."
         }
       ]
     },
     {
-      id: "technology-digital",
-      icon: Monitor,
-      title: "Technology & Digital Services",
-      description: "Transform your business with cutting-edge technology solutions from IT infrastructure to digital transformation.",
+      id: "business-consulting",
+      shortName: "Business Consulting",
+      icon: TrendingUp,
+      title: "Business Consulting",
+      description: "Strategic advisory covering business planning, corporate structuring, market expansion, and operational efficiency for growing enterprises.",
+      color: "#0B1F3B",
+      subServices: [
+        {
+          icon: Building2,
+          title: "Corporate Structuring",
+          description: "Expert guidance on business structure, company registration, and organizational setup tailored to your growth plans."
+        },
+        {
+          icon: BarChart,
+          title: "Growth Strategy",
+          description: "Market analysis, business planning, and growth roadmap development to accelerate your business trajectory."
+        },
+        {
+          icon: Settings,
+          title: "Operational Excellence",
+          description: "Process optimization, performance management, and efficiency improvements for scalable operations."
+        }
+      ]
+    },
+    {
+      id: "legal-consulting",
+      shortName: "Legal Consulting",
+      icon: Scale,
+      title: "Legal Consulting",
+      description: "Comprehensive legal advisory including documentation, compliance, and regulatory guidance for business protection and governance.",
       color: "#C9A227",
+      subServices: [
+        {
+          icon: FileText,
+          title: "Legal Documentation",
+          description: "Agreements, contracts, policies, and regulatory filings to protect your business interests and ensure legal compliance."
+        },
+        {
+          icon: Shield,
+          title: "Compliance Advisory",
+          description: "Navigate complex regulatory requirements with our compliance experts who ensure your business meets all statutory obligations."
+        },
+        {
+          icon: Landmark,
+          title: "Corporate Governance",
+          description: "Board advisory, governance frameworks, and risk management to build institutional confidence."
+        }
+      ]
+    },
+    {
+      id: "technology-it",
+      shortName: "Technology & IT",
+      icon: Monitor,
+      title: "Technology & IT Services",
+      description: "IT consulting, digital transformation, and technology implementation for modern business operations and competitive advantage.",
+      color: "#0B1F3B",
       subServices: [
         {
           icon: Globe,
@@ -110,7 +139,7 @@ const ServicesPage = () => {
         {
           icon: Database,
           title: "ERP / CRM Implementation",
-          description: "End-to-end implementation of enterprise resource planning and customer relationship management systems for operational excellence."
+          description: "End-to-end implementation of enterprise resource planning and customer relationship management systems."
         }
       ]
     }
@@ -155,7 +184,7 @@ const ServicesPage = () => {
                 }`}
               >
                 <service.icon className="w-4 h-4 mr-2" />
-                {service.title.split(" ").slice(0, 2).join(" ")}
+                {service.shortName}
               </button>
             ))}
           </div>

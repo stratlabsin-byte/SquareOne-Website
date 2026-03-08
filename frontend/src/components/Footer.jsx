@@ -1,47 +1,31 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook, Send } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { subscribeNewsletter } from "@/services/api";
-import { toast } from "sonner";
+import { Linkedin } from "lucide-react";
+import { LogoIcon } from "@/components/Logo";
 
 const Footer = () => {
-  const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const handleSubscribe = async (e) => {
-    e.preventDefault();
-    if (!email) return;
-    
-    setLoading(true);
-    try {
-      await subscribeNewsletter(email);
-      toast.success("Successfully subscribed to newsletter!");
-      setEmail("");
-    } catch (error) {
-      toast.error("Failed to subscribe. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  const services = [
+    { name: "HR Consulting", path: "/services#talent-hr" },
+    { name: "Corporate Training", path: "/services#corporate-training" },
+    { name: "Business Consulting", path: "/services#business-consulting" },
+    { name: "Legal Advisory", path: "/services#legal-consulting" },
+    { name: "IT Services", path: "/services#technology-it" },
+  ];
 
   const quickLinks = [
     { name: "Home", path: "/" },
-    { name: "About Us", path: "/about" },
+    { name: "About", path: "/about" },
     { name: "Services", path: "/services" },
-    { name: "Industries", path: "/industries" },
-    { name: "Why ADVISERVE", path: "/why-adviserve" },
     { name: "Insights", path: "/insights" },
     { name: "Careers", path: "/careers" },
     { name: "Contact", path: "/contact" },
   ];
 
-  const services = [
-    { name: "Business Foundation", path: "/services#business-foundation" },
-    { name: "Workforce & HR", path: "/services#workforce-hr" },
-    { name: "Growth & Capability", path: "/services#growth-capability" },
-    { name: "Technology & Digital", path: "/services#technology-digital" },
+  const legal = [
+    { name: "Privacy Policy", path: "/privacy" },
+    { name: "Terms of Service", path: "/terms" },
+    { name: "Cookie Policy", path: "/privacy" },
+    { name: "Disclaimer", path: "/terms" },
   ];
 
   return (
@@ -49,22 +33,28 @@ const Footer = () => {
       {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Company Info */}
+          {/* Column 1: Logo + Description */}
           <div className="lg:col-span-1">
-            <Link to="/" className="flex items-center space-x-2 mb-6">
-              <div className="w-12 h-12 bg-[#C9A227] rounded flex items-center justify-center">
-                <span className="text-[#0B1F3B] font-bold text-2xl font-['Montserrat']">A</span>
-              </div>
-              <div>
-                <span className="text-white font-bold text-lg font-['Montserrat'] tracking-tight block">
-                  ADVISERVE
+            <Link to="/" className="flex items-center space-x-2.5 mb-6">
+              <LogoIcon size={40} variant="light" />
+              <div className="flex items-center">
+                <span className="text-[17px] font-light tracking-[0.02em] text-[#D4B896]" style={{ fontFamily: "'Inter', sans-serif" }}>
+                  adiser
                 </span>
-                <span className="text-gray-400 text-xs">Services & Consulting</span>
+                <svg viewBox="0 0 20 24" width="14" height="18" className="mx-[1px] mt-[1px]">
+                  <circle cx="10" cy="5" r="2.5" fill="#5CE0C2" />
+                  <circle cx="5" cy="13" r="2.5" fill="#5CE0C2" />
+                  <circle cx="15" cy="13" r="2.5" fill="#5CE0C2" />
+                  <circle cx="10" cy="21" r="2.5" fill="#5CE0C2" />
+                </svg>
+                <span className="text-[17px] font-light tracking-[0.02em] text-[#D4B896]" style={{ fontFamily: "'Inter', sans-serif" }}>
+                  e.
+                </span>
               </div>
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              Building Strong Businesses with ADVISERVE. Integrated HR, Legal, Business,
-              and IT solutions designed for growing enterprises.
+              Empowering Startups and SMEs with integrated business solutions
+              across HR, legal, technology, and strategic growth.
             </p>
             <div className="flex space-x-4">
               <a
@@ -76,28 +66,29 @@ const Footer = () => {
               >
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                data-testid="social-twitter"
-                className="w-10 h-10 rounded bg-white/10 flex items-center justify-center hover:bg-[#C9A227] transition-colors"
-              >
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                data-testid="social-facebook"
-                className="w-10 h-10 rounded bg-white/10 flex items-center justify-center hover:bg-[#C9A227] transition-colors"
-              >
-                <Facebook className="w-5 h-5" />
-              </a>
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Column 2: Services */}
+          <div>
+            <h3 className="text-white font-semibold text-lg font-['Montserrat'] mb-6">
+              Services
+            </h3>
+            <ul className="space-y-3">
+              {services.map((service) => (
+                <li key={service.name}>
+                  <Link
+                    to={service.path}
+                    className="text-gray-400 hover:text-[#C9A227] transition-colors text-sm"
+                  >
+                    {service.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 3: Quick Links */}
           <div>
             <h3 className="text-white font-semibold text-lg font-['Montserrat'] mb-6">
               Quick Links
@@ -116,74 +107,23 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Column 4: Legal */}
           <div>
             <h3 className="text-white font-semibold text-lg font-['Montserrat'] mb-6">
-              Our Services
+              Legal
             </h3>
             <ul className="space-y-3">
-              {services.map((service) => (
-                <li key={service.name}>
+              {legal.map((item) => (
+                <li key={item.name}>
                   <Link
-                    to={service.path}
+                    to={item.path}
                     className="text-gray-400 hover:text-[#C9A227] transition-colors text-sm"
                   >
-                    {service.name}
+                    {item.name}
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
-
-          {/* Newsletter & Contact */}
-          <div>
-            <h3 className="text-white font-semibold text-lg font-['Montserrat'] mb-6">
-              Stay Updated
-            </h3>
-            <p className="text-gray-400 text-sm mb-4">
-              Subscribe to our newsletter for insights and updates.
-            </p>
-            <form onSubmit={handleSubscribe} className="mb-6">
-              <div className="flex">
-                <Input
-                  type="email"
-                  placeholder="Your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  data-testid="newsletter-email"
-                  className="bg-white/10 border-white/20 text-white placeholder:text-gray-500 rounded-r-none focus:border-[#C9A227]"
-                />
-                <Button
-                  type="submit"
-                  disabled={loading}
-                  data-testid="newsletter-submit"
-                  className="bg-[#C9A227] hover:bg-[#b08d1f] rounded-l-none px-4"
-                >
-                  <Send className="w-4 h-4" />
-                </Button>
-              </div>
-            </form>
-            
-            <div className="space-y-3">
-              <a
-                href="mailto:info@adviserve.in"
-                className="flex items-center text-gray-400 hover:text-[#C9A227] transition-colors text-sm"
-              >
-                <Mail className="w-4 h-4 mr-3" />
-                info@adviserve.in
-              </a>
-              <a
-                href="tel:+911234567890"
-                className="flex items-center text-gray-400 hover:text-[#C9A227] transition-colors text-sm"
-              >
-                <Phone className="w-4 h-4 mr-3" />
-                +91 123 456 7890
-              </a>
-              <div className="flex items-start text-gray-400 text-sm">
-                <MapPin className="w-4 h-4 mr-3 mt-0.5 flex-shrink-0" />
-                <span>Mumbai, Maharashtra, India</span>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -193,19 +133,11 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-gray-400 text-sm">
-              © {new Date().getFullYear()} ADVISERVE Services and Consulting Pvt. Ltd. All rights reserved.
+              &copy; {new Date().getFullYear()} Adviserve Talent and Consulting Private Limited. All rights reserved.
             </p>
-            <div className="flex space-x-6">
-              <Link to="/privacy" className="text-gray-400 hover:text-[#C9A227] text-sm transition-colors">
-                Privacy Policy
-              </Link>
-              <Link to="/terms" className="text-gray-400 hover:text-[#C9A227] text-sm transition-colors">
-                Terms of Service
-              </Link>
-              <Link to="/login" className="text-gray-400 hover:text-[#C9A227] text-sm transition-colors">
-                Admin
-              </Link>
-            </div>
+            <Link to="/login" className="text-gray-500 hover:text-gray-400 text-xs transition-colors">
+              Admin
+            </Link>
           </div>
         </div>
       </div>
