@@ -47,7 +47,7 @@ const AdminPage = () => {
   const [showPostForm, setShowPostForm] = useState(false);
   const [postForm, setPostForm] = useState({
     title: "", slug: "", excerpt: "", content: "", 
-    category: "", author: "SquareOne Team", image_url: "", published: false
+    category: "", author: "ADVISERVE Team", image_url: "", published: false
   });
 
   // Jobs state
@@ -175,7 +175,7 @@ const AdminPage = () => {
       setEditingPost(null);
       setPostForm({
         title: "", slug: "", excerpt: "", content: "", 
-        category: "", author: "SquareOne Team", image_url: "", published: false
+        category: "", author: "ADVISERVE Team", image_url: "", published: false
       });
       fetchData();
     } catch (error) {

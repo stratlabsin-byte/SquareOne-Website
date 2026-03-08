@@ -52,7 +52,7 @@ const InsightsPage = () => {
       slug: "sme-growth-strategies-2024",
       excerpt: "Discover the essential strategies that successful SMEs are implementing to drive sustainable growth in today's competitive landscape.",
       category: "Business Strategy",
-      author: "SquareOne Team",
+      author: "ADVISERVE Team",
       image_url: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop",
       created_at: new Date().toISOString()
     },
@@ -62,7 +62,7 @@ const InsightsPage = () => {
       slug: "hr-compliance-india-guide",
       excerpt: "Understanding and managing HR compliance requirements is crucial for every business operating in India.",
       category: "HR Solutions",
-      author: "SquareOne Team",
+      author: "ADVISERVE Team",
       image_url: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&h=400&fit=crop",
       created_at: new Date().toISOString()
     },
@@ -72,7 +72,7 @@ const InsightsPage = () => {
       slug: "digital-transformation-sme",
       excerpt: "Learn how small and medium enterprises can leverage technology to streamline operations and boost productivity.",
       category: "Technology",
-      author: "SquareOne Team",
+      author: "ADVISERVE Team",
       image_url: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop",
       created_at: new Date().toISOString()
     }

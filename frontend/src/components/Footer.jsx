@@ -31,7 +31,7 @@ const Footer = () => {
     { name: "About Us", path: "/about" },
     { name: "Services", path: "/services" },
     { name: "Industries", path: "/industries" },
-    { name: "Why SquareOne", path: "/why-squareone" },
+    { name: "Why ADVISERVE", path: "/why-adviserve" },
     { name: "Insights", path: "/insights" },
     { name: "Careers", path: "/careers" },
     { name: "Contact", path: "/contact" },
@@ -53,17 +53,17 @@ const Footer = () => {
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center space-x-2 mb-6">
               <div className="w-12 h-12 bg-[#C9A227] rounded flex items-center justify-center">
-                <span className="text-[#0B1F3B] font-bold text-2xl font-['Montserrat']">S1</span>
+                <span className="text-[#0B1F3B] font-bold text-2xl font-['Montserrat']">A</span>
               </div>
               <div>
                 <span className="text-white font-bold text-lg font-['Montserrat'] tracking-tight block">
-                  SquareOne
+                  ADVISERVE
                 </span>
                 <span className="text-gray-400 text-xs">Services & Consulting</span>
               </div>
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              Building Strong Businesses from Square One. Integrated HR, Legal, Business, 
+              Building Strong Businesses with ADVISERVE. Integrated HR, Legal, Business,
               and IT solutions designed for growing enterprises.
             </p>
             <div className="flex space-x-4">
@@ -166,11 +166,11 @@ const Footer = () => {
             
             <div className="space-y-3">
               <a
-                href="mailto:info@squareone.in"
+                href="mailto:info@adviserve.in"
                 className="flex items-center text-gray-400 hover:text-[#C9A227] transition-colors text-sm"
               >
                 <Mail className="w-4 h-4 mr-3" />
-                info@squareone.in
+                info@adviserve.in
               </a>
               <a
                 href="tel:+911234567890"
@@ -193,7 +193,7 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-gray-400 text-sm">
-              © {new Date().getFullYear()} SquareOne Services and Consulting Pvt. Ltd. All rights reserved.
+              © {new Date().getFullYear()} ADVISERVE Services and Consulting Pvt. Ltd. All rights reserved.
             </p>
             <div className="flex space-x-6">
               <Link to="/privacy" className="text-gray-400 hover:text-[#C9A227] text-sm transition-colors">

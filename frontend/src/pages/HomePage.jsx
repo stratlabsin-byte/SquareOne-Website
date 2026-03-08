@@ -196,7 +196,7 @@ const HomePage = () => {
                 Premium consulting that brings structure, clarity, and momentum.
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">
-                SquareOne partners with ambitious businesses to architect stronger operations across HR, legal,
+                ADVISERVE partners with ambitious businesses to architect stronger operations across HR, legal,
                 technology, and strategic growth.
               </p>
               <div className="mt-10 flex flex-col gap-4 sm:flex-row">
@@ -313,7 +313,7 @@ const HomePage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-14 lg:grid-cols-[1fr_1.1fr]">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#B7932B]">Why SquareOne</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#B7932B]">Why ADVISERVE</p>
               <h2 className="mt-4 text-3xl font-bold text-[#0B1F3B] sm:text-4xl">
                 Institutional discipline with entrepreneurial pace.
               </h2>

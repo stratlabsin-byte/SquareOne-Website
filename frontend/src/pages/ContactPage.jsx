@@ -74,8 +74,8 @@ const ContactPage = () => {
     {
       icon: Mail,
       title: "Email Us",
-      details: siteSettings.email || "info@squareone.in",
-      link: `mailto:${siteSettings.email || "info@squareone.in"}`
+      details: siteSettings.email || "info@adviserve.in",
+      link: `mailto:${siteSettings.email || "info@adviserve.in"}`
     },
     {
       icon: Phone,

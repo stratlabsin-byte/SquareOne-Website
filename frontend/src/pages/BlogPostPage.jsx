@@ -20,7 +20,7 @@ const BlogPostPage = () => {
         setPost({
           title: "Article Not Found",
           content: "<p>The requested article could not be found. Please check the URL or browse our other articles.</p>",
-          author: "SquareOne Team",
+          author: "ADVISERVE Team",
           category: "General",
           created_at: new Date().toISOString(),
           image_url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&h=600&fit=crop"
@@ -148,7 +148,7 @@ const BlogPostPage = () => {
                 Written by {post?.author}
               </p>
               <p className="text-gray-500 text-sm">
-                SquareOne Services and Consulting
+                ADVISERVE Services and Consulting
               </p>
             </div>
           </div>

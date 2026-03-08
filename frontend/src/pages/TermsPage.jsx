@@ -25,15 +25,15 @@ const TermsPage = () => {
     <h3>1. Acceptance of Terms</h3>
     <p>By accessing and using this website, you accept and agree to be bound by the terms and provisions of this agreement.</p>
     <h3>2. Services</h3>
-    <p>SquareOne Services and Consulting provides business consulting, HR solutions, legal advisory, and technology services to startups and SMEs.</p>
+    <p>ADVISERVE Services and Consulting provides business consulting, HR solutions, legal advisory, and technology services to startups and SMEs.</p>
     <h3>3. Intellectual Property</h3>
-    <p>All content on this website, including text, graphics, logos, and images, is the property of SquareOne Services and is protected by copyright laws.</p>
+    <p>All content on this website, including text, graphics, logos, and images, is the property of ADVISERVE Services and is protected by copyright laws.</p>
     <h3>4. Limitation of Liability</h3>
-    <p>SquareOne shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of our services.</p>
+    <p>ADVISERVE shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of our services.</p>
     <h3>5. Governing Law</h3>
     <p>These terms shall be governed by and construed in accordance with the laws of India.</p>
     <h3>6. Contact</h3>
-    <p>For any questions regarding these terms, please contact us at info@squareone.in</p>
+    <p>For any questions regarding these terms, please contact us at info@adviserve.in</p>
   `;
 
   return (

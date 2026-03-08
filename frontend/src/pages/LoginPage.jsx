@@ -68,9 +68,9 @@ const LoginPage = () => {
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center space-x-2">
             <div className="w-12 h-12 bg-[#C9A227] rounded flex items-center justify-center">
-              <span className="text-[#0B1F3B] font-bold text-2xl font-['Montserrat']">S1</span>
+              <span className="text-[#0B1F3B] font-bold text-2xl font-['Montserrat']">A</span>
             </div>
-            <span className="text-white font-bold text-xl font-['Montserrat']">SquareOne</span>
+            <span className="text-white font-bold text-xl font-['Montserrat']">ADVISERVE</span>
           </Link>
           <p className="text-gray-400 mt-2">Admin Portal</p>
         </div>
@@ -97,7 +97,7 @@ const LoginPage = () => {
                       onChange={(e) => setLoginForm({ ...loginForm, email: e.target.value })}
                       required
                       data-testid="login-email"
-                      placeholder="admin@squareone.in"
+                      placeholder="admin@adviserve.in"
                       className="pl-10 border-gray-200"
                     />
                   </div>
@@ -169,7 +169,7 @@ const LoginPage = () => {
                       onChange={(e) => setRegisterForm({ ...registerForm, email: e.target.value })}
                       required
                       data-testid="register-email"
-                      placeholder="admin@squareone.in"
+                      placeholder="admin@adviserve.in"
                       className="pl-10 border-gray-200"
                     />
                   </div>

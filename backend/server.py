@@ -305,16 +305,16 @@ class SiteSettingsUpdate(BaseModel):
 class SiteSettings(BaseModel):
     model_config = ConfigDict(extra="ignore")
     id: str = "main_settings"
-    company_name: str = "SquareOne Services and Consulting Pvt. Ltd."
-    tagline: str = "Building Strong Businesses from Square One"
-    email: str = "info@squareone.in"
+    company_name: str = "ADVISERVE Services and Consulting Pvt. Ltd."
+    tagline: str = "Building Strong Businesses with ADVISERVE"
+    email: str = "info@adviserve.in"
     phone: str = "+91 123 456 7890"
     address: str = "123 Business Park, Andheri East"
     city: str = "Mumbai, Maharashtra 400069, India"
     map_embed_url: str = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241317.11609823277!2d72.74109995709657!3d19.08219783958221!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c6306644edc1%3A0x5da4ed8f8d648c69!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1645000000000!5m2!1sen!2sin"
-    linkedin_url: str = "https://linkedin.com/company/squareone"
-    twitter_url: str = "https://twitter.com/squareone"
-    facebook_url: str = "https://facebook.com/squareone"
+    linkedin_url: str = "https://linkedin.com/company/adviserve"
+    twitter_url: str = "https://twitter.com/adviserve"
+    facebook_url: str = "https://facebook.com/adviserve"
     privacy_policy: str = """<h2>Privacy Policy</h2>
 <p><strong>Last Updated:</strong> February 2025</p>
 
@@ -331,7 +331,7 @@ class SiteSettings(BaseModel):
 <p>We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.</p>
 
 <h3>5. Contact Us</h3>
-<p>If you have any questions about this Privacy Policy, please contact us at info@squareone.in</p>"""
+<p>If you have any questions about this Privacy Policy, please contact us at info@adviserve.in</p>"""
     terms_of_service: str = """<h2>Terms of Service</h2>
 <p><strong>Last Updated:</strong> February 2025</p>
 
@@ -339,19 +339,19 @@ class SiteSettings(BaseModel):
 <p>By accessing and using this website, you accept and agree to be bound by the terms and provisions of this agreement.</p>
 
 <h3>2. Services</h3>
-<p>SquareOne Services and Consulting provides business consulting, HR solutions, legal advisory, and technology services to startups and SMEs.</p>
+<p>ADVISERVE Services and Consulting provides business consulting, HR solutions, legal advisory, and technology services to startups and SMEs.</p>
 
 <h3>3. Intellectual Property</h3>
-<p>All content on this website, including text, graphics, logos, and images, is the property of SquareOne Services and is protected by copyright laws.</p>
+<p>All content on this website, including text, graphics, logos, and images, is the property of ADVISERVE Services and is protected by copyright laws.</p>
 
 <h3>4. Limitation of Liability</h3>
-<p>SquareOne shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of our services.</p>
+<p>ADVISERVE shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of our services.</p>
 
 <h3>5. Governing Law</h3>
 <p>These terms shall be governed by and construed in accordance with the laws of India.</p>
 
 <h3>6. Contact</h3>
-<p>For any questions regarding these terms, please contact us at info@squareone.in</p>"""
+<p>For any questions regarding these terms, please contact us at info@adviserve.in</p>"""
 
 # ==================== EMAIL HELPER ====================
 
@@ -380,7 +380,7 @@ async def send_notification_email(subject: str, html_content: str):
 
 @api_router.get("/")
 async def root():
-    return {"message": "SquareOne Services API"}
+    return {"message": "ADVISERVE Services API"}
 
 # ==================== AUTH ROUTES ====================
 
@@ -757,7 +757,7 @@ async def seed_data(current_user: dict = Depends(get_current_user)):
             "client_name": "Rajesh Kumar",
             "company": "TechStart Solutions",
             "position": "Founder & CEO",
-            "quote": "SquareOne transformed our startup's operations. Their integrated approach to business consulting helped us scale from 5 to 50 employees in just 18 months.",
+            "quote": "ADVISERVE transformed our startup's operations. Their integrated approach to business consulting helped us scale from 5 to 50 employees in just 18 months.",
             "image_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop",
             "rating": 5
         },
@@ -765,7 +765,7 @@ async def seed_data(current_user: dict = Depends(get_current_user)):
             "client_name": "Priya Sharma",
             "company": "GreenLeaf Industries",
             "position": "Managing Director",
-            "quote": "The HR solutions and compliance advisory from SquareOne gave us peace of mind. They truly understand the challenges SMEs face in India.",
+            "quote": "The HR solutions and compliance advisory from ADVISERVE gave us peace of mind. They truly understand the challenges SMEs face in India.",
             "image_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop",
             "rating": 5
         },
@@ -880,7 +880,7 @@ async def seed_data(current_user: dict = Depends(get_current_user)):
 <p>Maintain robust financial management practices to ensure sustainable growth.</p>
             """,
             "category": "Business Strategy",
-            "author": "SquareOne Team",
+            "author": "ADVISERVE Team",
             "image_url": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop",
             "published": True
         },
@@ -905,7 +905,7 @@ async def seed_data(current_user: dict = Depends(get_current_user)):
 <p>Regular audits, proper documentation, and staying updated with regulatory changes are essential for maintaining compliance.</p>
             """,
             "category": "HR Solutions",
-            "author": "SquareOne Team",
+            "author": "ADVISERVE Team",
             "image_url": "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&h=400&fit=crop",
             "published": True
         }

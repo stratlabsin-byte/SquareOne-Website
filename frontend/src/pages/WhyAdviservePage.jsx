@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const WhySquareOnePage = () => {
+const WhyAdviservePage = () => {
   const advantages = [
     {
       icon: Layers,
@@ -65,7 +65,7 @@ const WhySquareOnePage = () => {
 
   const testimonialHighlights = [
     {
-      quote: "SquareOne helped us set up compliant HR processes that scaled with our growth from 10 to 200 employees.",
+      quote: "ADVISERVE helped us set up compliant HR processes that scaled with our growth from 10 to 200 employees.",
       author: "Tech Startup Founder"
     },
     {
@@ -79,19 +79,19 @@ const WhySquareOnePage = () => {
   ];
 
   return (
-    <div data-testid="why-squareone-page">
+    <div data-testid="why-adviserve-page">
       {/* Hero Section */}
       <section className="pt-32 pb-20 gradient-navy">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <span className="inline-block px-4 py-2 bg-[#C9A227]/20 text-[#C9A227] text-sm font-medium rounded-full mb-6">
-              Why SquareOne
+              Why ADVISERVE
             </span>
             <h1 className="text-4xl sm:text-5xl font-bold text-white font-['Montserrat'] mb-6">
-              The SquareOne Advantage
+              The ADVISERVE Advantage
             </h1>
             <p className="text-xl text-gray-300">
-              Discover why hundreds of startups and SMEs choose SquareOne as their strategic 
+              Discover why hundreds of startups and SMEs choose ADVISERVE as their strategic
               partner for business growth and transformation.
             </p>
           </div>
@@ -174,7 +174,7 @@ const WhySquareOnePage = () => {
                 Our Commitment to You
               </h2>
               <p className="text-gray-600 mb-8">
-                When you partner with SquareOne, you're not just getting a service provider – 
+                When you partner with ADVISERVE, you're not just getting a service provider –
                 you're gaining a committed partner invested in your success.
               </p>
               <ul className="space-y-4">
@@ -266,7 +266,7 @@ const WhySquareOnePage = () => {
             Ready to Experience the Difference?
           </h2>
           <p className="text-xl text-gray-300 mb-10">
-            Join hundreds of successful businesses that have chosen SquareOne as their growth partner.
+            Join hundreds of successful businesses that have chosen ADVISERVE as their growth partner.
           </p>
           <Link to="/contact">
             <Button
@@ -283,4 +283,4 @@ const WhySquareOnePage = () => {
   );
 };
 
-export default WhySquareOnePage;
+export default WhyAdviservePage;

@@ -117,7 +117,7 @@ const CareersPage = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <span className="inline-block px-4 py-2 bg-[#C9A227]/20 text-[#C9A227] text-sm font-medium rounded-full mb-6">
-                Careers at SquareOne
+                Careers at ADVISERVE
               </span>
               <h1 className="text-4xl sm:text-5xl font-bold text-white font-['Montserrat'] mb-6">
                 Build Your Career With Us
@@ -153,11 +153,11 @@ const CareersPage = () => {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-3xl sm:text-4xl font-bold text-[#0B1F3B] font-['Montserrat'] mb-6">
-                Why Join SquareOne?
+                Why Join ADVISERVE?
               </h2>
               <p className="text-gray-600 mb-8">
-                At SquareOne, you'll work with diverse clients, tackle challenging problems, 
-                and grow alongside talented colleagues. We invest in our people because we 
+                At ADVISERVE, you'll work with diverse clients, tackle challenging problems,
+                and grow alongside talented colleagues. We invest in our people because we
                 believe they are our greatest asset.
               </p>
               <ul className="space-y-4">
@@ -273,8 +273,8 @@ const CareersPage = () => {
               <p className="text-gray-500 text-lg mb-4">No open positions at the moment.</p>
               <p className="text-gray-600">
                 Send your resume to{" "}
-                <a href="mailto:careers@squareone.in" className="text-[#C9A227] font-semibold">
-                  careers@squareone.in
+                <a href="mailto:careers@adviserve.in" className="text-[#C9A227] font-semibold">
+                  careers@adviserve.in
                 </a>{" "}
                 and we'll reach out when suitable positions open up.
               </p>
@@ -443,7 +443,7 @@ const CareersPage = () => {
             We're always looking for talented individuals. Send us your resume and we'll 
             keep you in mind for future opportunities.
           </p>
-          <a href="mailto:careers@squareone.in">
+          <a href="mailto:careers@adviserve.in">
             <Button
               data-testid="careers-email-btn"
               className="bg-[#C9A227] hover:bg-[#b08d1f] text-white font-semibold px-10 py-6 text-lg rounded transition-all hover:shadow-xl"

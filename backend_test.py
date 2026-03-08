@@ -3,7 +3,7 @@ import sys
 import json
 from datetime import datetime
 
-class SquareOneAPITester:
+class AdviserveAPITester:
     def __init__(self, base_url="https://premium-bizpartner.preview.emergentagent.com/api"):
         self.base_url = base_url
         self.tests_run = 0
@@ -119,9 +119,9 @@ class SquareOneAPITester:
             }
             self.run_test("Login Non-existent User", "POST", "auth/login", 401, nonexistent_login)
         
-        # Test existing admin login (admin@squareone.in / admin123)
+        # Test existing admin login (admin@adviserve.in / admin123)
         admin_login = {
-            "email": "admin@squareone.in",
+            "email": "admin@adviserve.in",
             "password": "admin123"
         }
         success, admin_response = self.run_test("Login Existing Admin", "POST", "auth/login", 200, admin_login)
@@ -170,7 +170,7 @@ class SquareOneAPITester:
             "client_name": "Test Client",
             "company": "Test Company",
             "position": "CEO",
-            "quote": "Excellent service from SquareOne!",
+            "quote": "Excellent service from ADVISERVE!",
             "rating": 5,
             "active": True
         }
@@ -343,10 +343,10 @@ class SquareOneAPITester:
         return success
 
 def main():
-    print("🚀 Starting SquareOne API Testing...")
+    print("🚀 Starting ADVISERVE API Testing...")
     print("=" * 60)
-    
-    tester = SquareOneAPITester()
+
+    tester = AdviserveAPITester()
     
     # Test all endpoints
     tester.test_root_endpoint()

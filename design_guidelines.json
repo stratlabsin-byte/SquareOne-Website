@@ -1,6 +1,6 @@
 {
   "identity": {
-    "name": "SquareOne Services and Consulting",
+    "name": "ADVISERVE Services and Consulting",
     "archetype": "The Strategic Architect",
     "vibe": "Premium, Authoritative, Dynamic, Trustworthy",
     "mission": "Empowering Startups and SMEs with integrated business solutions."
@@ -93,7 +93,7 @@
     "Implement the 'Deep Navy' (#0B1F3B) as the primary brand color.",
     "Use 'Executive Gold' (#C9A227) sparingly for high-impact elements (Buttons, Active States).",
     "Ensure all interactive elements have 'data-testid' attributes.",
-    "Use Shadcn components (Card, Accordion, Button, Input, Select, Sheet) but customize them to match the 'SquareOne' theme.",
+    "Use Shadcn components (Card, Accordion, Button, Input, Select, Sheet) but customize them to match the 'ADVISERVE' theme.",
     "Create a 'Navbar' that is sticky, white background, with Navy text and a Gold CTA button.",
     "The 'Services' section should use a Grid layout with hover effects that lift the card.",
     "The 'Process' section should be a horizontal step-by-step guide.",

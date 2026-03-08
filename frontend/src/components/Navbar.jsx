@@ -28,7 +28,7 @@ const navLinks = [
     ]
   },
   { name: "Industries", path: "/industries" },
-  { name: "Why SquareOne", path: "/why-squareone" },
+  { name: "Why ADVISERVE", path: "/why-adviserve" },
   { name: "Insights", path: "/insights" },
   { name: "Careers", path: "/careers" },
 ];
@@ -39,7 +39,7 @@ const Navbar = () => {
   const location = useLocation();
   
   // Check if we're on a page with dark hero
-  const isDarkHero = ["/", "/about", "/services", "/industries", "/why-squareone", "/insights", "/careers", "/contact"].includes(location.pathname) || location.pathname.startsWith("/insights/");
+  const isDarkHero = ["/", "/about", "/services", "/industries", "/why-adviserve", "/insights", "/careers", "/contact"].includes(location.pathname) || location.pathname.startsWith("/insights/");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -77,11 +77,11 @@ const Navbar = () => {
             className="flex items-center space-x-2"
           >
             <div className={`w-10 h-10 rounded flex items-center justify-center ${isScrolled ? 'bg-[#0B1F3B]' : 'bg-white/10 backdrop-blur-sm'}`}>
-              <span className="text-[#C9A227] font-bold text-xl font-['Montserrat']">S1</span>
+              <span className="text-[#C9A227] font-bold text-xl font-['Montserrat']">A</span>
             </div>
             <div className="hidden sm:block">
               <span className={`font-bold text-lg font-['Montserrat'] tracking-tight ${logoTextColor}`}>
-                SquareOne
+                ADVISERVE
               </span>
               <span className={`text-xs block -mt-1 ${isScrolled ? 'text-[#2E2E2E]' : (isDarkHero ? 'text-gray-300' : 'text-[#2E2E2E]')}`}>
                 Services & Consulting
@@ -171,10 +171,10 @@ const Navbar = () => {
                       className="flex items-center space-x-2"
                     >
                       <div className="w-10 h-10 bg-[#0B1F3B] rounded flex items-center justify-center">
-                        <span className="text-[#C9A227] font-bold text-xl font-['Montserrat']">S1</span>
+                        <span className="text-[#C9A227] font-bold text-xl font-['Montserrat']">A</span>
                       </div>
                       <span className="text-[#0B1F3B] font-bold text-lg font-['Montserrat']">
-                        SquareOne
+                        ADVISERVE
                       </span>
                     </Link>
                   </div>

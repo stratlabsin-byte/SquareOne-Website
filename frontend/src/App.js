@@ -9,7 +9,7 @@ import HomePage from "@/pages/HomePage";
 import AboutPage from "@/pages/AboutPage";
 import ServicesPage from "@/pages/ServicesPage";
 import IndustriesPage from "@/pages/IndustriesPage";
-import WhySquareOnePage from "@/pages/WhySquareOnePage";
+import WhyAdviservePage from "@/pages/WhyAdviservePage";
 import InsightsPage from "@/pages/InsightsPage";
 import BlogPostPage from "@/pages/BlogPostPage";
 import CareersPage from "@/pages/CareersPage";
@@ -77,7 +77,7 @@ function AppContent() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/industries" element={<IndustriesPage />} />
-          <Route path="/why-squareone" element={<WhySquareOnePage />} />
+          <Route path="/why-adviserve" element={<WhyAdviservePage />} />
           <Route path="/insights" element={<InsightsPage />} />
           <Route path="/insights/:slug" element={<BlogPostPage />} />
           <Route path="/careers" element={<CareersPage />} />

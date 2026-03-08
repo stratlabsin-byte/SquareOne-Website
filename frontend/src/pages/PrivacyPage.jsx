@@ -31,7 +31,7 @@ const PrivacyPage = () => {
     <h3>4. Data Security</h3>
     <p>We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.</p>
     <h3>5. Contact Us</h3>
-    <p>If you have any questions about this Privacy Policy, please contact us at info@squareone.in</p>
+    <p>If you have any questions about this Privacy Policy, please contact us at info@adviserve.in</p>
   `;
 
   return (

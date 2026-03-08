@@ -67,7 +67,7 @@ const AboutPage = () => {
               Your Trusted Partner in Business Growth
             </h1>
             <p className="text-xl text-gray-300">
-              Since 2014, SquareOne has been helping startups and SMEs build strong foundations 
+              Since 2014, ADVISERVE has been helping startups and SMEs build strong foundations
               and achieve sustainable growth through integrated business solutions.
             </p>
           </div>
@@ -83,7 +83,7 @@ const AboutPage = () => {
                 Our Story
               </h2>
               <p className="text-gray-600 mb-4">
-                SquareOne Services and Consulting was founded with a simple yet powerful vision: 
+                ADVISERVE Services and Consulting was founded with a simple yet powerful vision: 
                 to be the single strategic partner that growing businesses need to navigate their 
                 journey from inception to scale.
               </p>
@@ -189,7 +189,7 @@ const AboutPage = () => {
               Leadership Team
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Meet the experienced professionals driving SquareOne's mission forward.
+              Meet the experienced professionals driving ADVISERVE's mission forward.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -231,7 +231,7 @@ const AboutPage = () => {
             Ready to Work With Us?
           </h2>
           <p className="text-xl text-gray-300 mb-10">
-            Let's discuss how SquareOne can become your strategic partner for growth.
+            Let's discuss how ADVISERVE can become your strategic partner for growth.
           </p>
           <Link to="/contact">
             <Button
