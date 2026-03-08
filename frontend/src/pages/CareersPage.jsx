@@ -160,7 +160,7 @@ const CareersPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-3xl sm:text-4xl font-bold text-[#0B1F3B] font-['Montserrat'] mb-6">
+              <h2 className="text-3xl sm:text-4xl font-bold text-[#0F2D3C] font-['Montserrat'] mb-6">
                 Why Join ADVISERVE?
               </h2>
               <p className="text-gray-600 mb-8">
@@ -191,10 +191,10 @@ const CareersPage = () => {
       </section>
 
       {/* Job Openings */}
-      <section id="openings" className="section-padding bg-[#F8F9FA]">
+      <section id="openings" className="section-padding bg-[#F5F7F8]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#0B1F3B] font-['Montserrat'] mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#0F2D3C] font-['Montserrat'] mb-4">
               Current Openings
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
@@ -226,7 +226,7 @@ const CareersPage = () => {
                     <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
                       <div className="flex-1">
                         <div className="flex flex-wrap items-center gap-3 mb-3">
-                          <h3 className="text-xl font-bold text-[#0B1F3B] font-['Montserrat']">
+                          <h3 className="text-xl font-bold text-[#0F2D3C] font-['Montserrat']">
                             {job.title}
                           </h3>
                           <span className="px-3 py-1 bg-[#C9A227]/10 text-[#C9A227] text-xs font-medium rounded-full">
@@ -256,7 +256,7 @@ const CareersPage = () => {
                           variant="outline"
                           onClick={() => setSelectedJob(job)}
                           data-testid={`view-job-${index}`}
-                          className="border-[#0B1F3B] text-[#0B1F3B] hover:bg-[#0B1F3B] hover:text-white"
+                          className="border-[#0F2D3C] text-[#0F2D3C] hover:bg-[#0F2D3C] hover:text-white"
                         >
                           View Details
                         </Button>
@@ -281,8 +281,8 @@ const CareersPage = () => {
               <p className="text-gray-500 text-lg mb-4">No open positions at the moment.</p>
               <p className="text-gray-600">
                 Send your resume to{" "}
-                <a href="mailto:careers@adviserve.in" className="text-[#C9A227] font-semibold">
-                  careers@adviserve.in
+                <a href="mailto:careers@adviserve.org.in" className="text-[#C9A227] font-semibold">
+                  careers@adviserve.org.in
                 </a>{" "}
                 and we'll reach out when suitable positions open up.
               </p>
@@ -295,7 +295,7 @@ const CareersPage = () => {
       <Dialog open={!!selectedJob && !isApplying} onOpenChange={() => setSelectedJob(null)}>
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="text-2xl font-bold text-[#0B1F3B] font-['Montserrat']">
+            <DialogTitle className="text-2xl font-bold text-[#0F2D3C] font-['Montserrat']">
               {selectedJob?.title}
             </DialogTitle>
             <DialogDescription className="flex flex-wrap gap-4 text-sm">
@@ -311,11 +311,11 @@ const CareersPage = () => {
           </DialogHeader>
           <div className="mt-4 space-y-6">
             <div>
-              <h4 className="font-semibold text-[#0B1F3B] mb-2">About the Role</h4>
+              <h4 className="font-semibold text-[#0F2D3C] mb-2">About the Role</h4>
               <p className="text-gray-600">{selectedJob?.description}</p>
             </div>
             <div>
-              <h4 className="font-semibold text-[#0B1F3B] mb-2">Requirements</h4>
+              <h4 className="font-semibold text-[#0F2D3C] mb-2">Requirements</h4>
               <ul className="space-y-2">
                 {selectedJob?.requirements?.map((req, i) => (
                   <li key={i} className="flex items-start text-gray-600">
@@ -327,7 +327,7 @@ const CareersPage = () => {
             </div>
             {selectedJob?.benefits?.length > 0 && (
               <div>
-                <h4 className="font-semibold text-[#0B1F3B] mb-2">Benefits</h4>
+                <h4 className="font-semibold text-[#0F2D3C] mb-2">Benefits</h4>
                 <ul className="space-y-2">
                   {selectedJob?.benefits?.map((benefit, i) => (
                     <li key={i} className="flex items-start text-gray-600">
@@ -340,7 +340,7 @@ const CareersPage = () => {
             )}
             {selectedJob?.salary_range && (
               <div>
-                <h4 className="font-semibold text-[#0B1F3B] mb-2">Salary Range</h4>
+                <h4 className="font-semibold text-[#0F2D3C] mb-2">Salary Range</h4>
                 <p className="text-[#C9A227] font-semibold">{selectedJob.salary_range}</p>
               </div>
             )}
@@ -360,9 +360,9 @@ const CareersPage = () => {
       {isApplying && selectedJob && (
         <section ref={applyFormRef} className="section-padding bg-white">
           <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-[#F8F9FA] p-8 md:p-10 rounded-xl shadow-lg">
+            <div className="bg-[#F5F7F8] p-8 md:p-10 rounded-xl shadow-lg">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-[#0B1F3B] font-['Montserrat']">
+                <h2 className="text-2xl font-bold text-[#0F2D3C] font-['Montserrat']">
                   Apply for {selectedJob.title}
                 </h2>
                 <Button
@@ -467,7 +467,7 @@ const CareersPage = () => {
             We're always looking for talented individuals. Send us your resume and we'll 
             keep you in mind for future opportunities.
           </p>
-          <a href="mailto:careers@adviserve.in">
+          <a href="mailto:careers@adviserve.org.in">
             <Button
               data-testid="careers-email-btn"
               className="bg-[#C9A227] hover:bg-[#b08d1f] text-white font-semibold px-10 py-6 text-lg rounded transition-all hover:shadow-xl"

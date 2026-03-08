@@ -5,13 +5,13 @@
 @tailwind utilities;
 
 :root {
-    --navy: #0B1F3B;
+    --navy: #0F2D3C;
     --navy-light: #1a3b66;
-    --charcoal: #2E2E2E;
+    --charcoal: #1A1F24;
     --gold: #C9A227;
     --gold-light: #E5C558;
     --white: #FFFFFF;
-    --light-grey: #F8F9FA;
+    --light-grey: #F5F7F8;
     --border-color: #E2E8F0;
 }
 
@@ -146,7 +146,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .card-hover:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(11, 31, 59, 0.12);
+    box-shadow: 0 20px 40px rgba(15, 45, 60, 0.12);
 }
 
 /* Button Styles */

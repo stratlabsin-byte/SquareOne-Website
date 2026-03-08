@@ -29,7 +29,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer data-testid="footer" className="bg-[#0B1F3B] text-white">
+    <footer data-testid="footer" className="bg-[#0F2D3C] text-white">
       {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
@@ -38,16 +38,16 @@ const Footer = () => {
             <Link to="/" className="flex items-center space-x-2.5 mb-6">
               <LogoIcon size={40} variant="light" />
               <div className="flex items-center">
-                <span className="text-[17px] font-light tracking-[0.02em] text-[#D4B896]" style={{ fontFamily: "'Inter', sans-serif" }}>
+                <span className="text-[17px] font-light tracking-[0.02em] text-[#E6D3B3]" style={{ fontFamily: "'Inter', sans-serif" }}>
                   adiser
                 </span>
                 <svg viewBox="0 0 20 24" width="14" height="18" className="mx-[1px] mt-[1px]">
-                  <circle cx="10" cy="5" r="2.5" fill="#5CE0C2" />
-                  <circle cx="5" cy="13" r="2.5" fill="#5CE0C2" />
-                  <circle cx="15" cy="13" r="2.5" fill="#5CE0C2" />
-                  <circle cx="10" cy="21" r="2.5" fill="#5CE0C2" />
+                  <circle cx="10" cy="5" r="2.5" fill="#5FE3CF" />
+                  <circle cx="5" cy="13" r="2.5" fill="#5FE3CF" />
+                  <circle cx="15" cy="13" r="2.5" fill="#5FE3CF" />
+                  <circle cx="10" cy="21" r="2.5" fill="#5FE3CF" />
                 </svg>
-                <span className="text-[17px] font-light tracking-[0.02em] text-[#D4B896]" style={{ fontFamily: "'Inter', sans-serif" }}>
+                <span className="text-[17px] font-light tracking-[0.02em] text-[#E6D3B3]" style={{ fontFamily: "'Inter', sans-serif" }}>
                   e.
                 </span>
               </div>

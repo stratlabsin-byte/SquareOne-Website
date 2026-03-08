@@ -75,8 +75,8 @@ const ContactPage = () => {
     {
       icon: Mail,
       title: "Email Us",
-      details: siteSettings.email || "info@adviserve.in",
-      link: `mailto:${siteSettings.email || "info@adviserve.in"}`
+      details: siteSettings.email || "info@adviserve.org.in",
+      link: `mailto:${siteSettings.email || "info@adviserve.org.in"}`
     },
     {
       icon: Phone,
@@ -100,12 +100,12 @@ const ContactPage = () => {
 
   if (submitted) {
     return (
-      <div data-testid="contact-success" className="min-h-screen flex items-center justify-center bg-[#F8F9FA] pt-20">
+      <div data-testid="contact-success" className="min-h-screen flex items-center justify-center bg-[#F5F7F8] pt-20">
         <div className="text-center max-w-lg mx-auto px-4">
           <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
             <CheckCircle className="w-10 h-10 text-green-600" />
           </div>
-          <h1 className="text-3xl font-bold text-[#0B1F3B] font-['Montserrat'] mb-4">
+          <h1 className="text-3xl font-bold text-[#0F2D3C] font-['Montserrat'] mb-4">
             Thank You!
           </h1>
           <p className="text-gray-600 mb-8">
@@ -124,7 +124,7 @@ const ContactPage = () => {
                 message: ""
               });
             }}
-            className="bg-[#0B1F3B] hover:bg-[#1a3b66] text-white"
+            className="bg-[#0F2D3C] hover:bg-[#1a3b66] text-white"
           >
             Send Another Message
           </Button>
@@ -154,12 +154,12 @@ const ContactPage = () => {
       </section>
 
       {/* Contact Form & Info */}
-      <section className="section-padding bg-[#F8F9FA]">
+      <section className="section-padding bg-[#F5F7F8]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-[380px_1fr] gap-12">
             {/* Contact Info */}
             <div>
-              <h2 className="text-2xl font-bold text-[#0B1F3B] font-['Montserrat'] mb-8">
+              <h2 className="text-2xl font-bold text-[#0F2D3C] font-['Montserrat'] mb-8">
                 Contact Information
               </h2>
               <div className="space-y-6">
@@ -173,7 +173,7 @@ const ContactPage = () => {
                       <item.icon className="w-5 h-5 text-[#C9A227]" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-[#0B1F3B] font-['Montserrat']">
+                      <h3 className="font-semibold text-[#0F2D3C] font-['Montserrat']">
                         {item.title}
                       </h3>
                       {item.link ? (
@@ -195,7 +195,7 @@ const ContactPage = () => {
             {/* Contact Form */}
             <div>
               <div className="bg-white p-8 md:p-10 rounded-xl shadow-lg">
-                <h2 className="text-2xl font-bold text-[#0B1F3B] font-['Montserrat'] mb-2">
+                <h2 className="text-2xl font-bold text-[#0F2D3C] font-['Montserrat'] mb-2">
                   Send Us a Message
                 </h2>
                 <p className="text-gray-600 mb-8">
@@ -330,13 +330,13 @@ const ContactPage = () => {
       <section className="section-padding bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-[#0B1F3B] font-['Montserrat'] mb-4">
+            <h2 className="text-3xl font-bold text-[#0F2D3C] font-['Montserrat'] mb-4">
               Frequently Asked Questions
             </h2>
           </div>
           <div className="space-y-6">
-            <div className="bg-[#F8F9FA] p-6 rounded-lg">
-              <h3 className="font-semibold text-[#0B1F3B] font-['Montserrat'] mb-2">
+            <div className="bg-[#F5F7F8] p-6 rounded-lg">
+              <h3 className="font-semibold text-[#0F2D3C] font-['Montserrat'] mb-2">
                 How quickly can you start working with us?
               </h3>
               <p className="text-gray-600">
@@ -344,8 +344,8 @@ const ContactPage = () => {
                 depending on the scope of services required.
               </p>
             </div>
-            <div className="bg-[#F8F9FA] p-6 rounded-lg">
-              <h3 className="font-semibold text-[#0B1F3B] font-['Montserrat'] mb-2">
+            <div className="bg-[#F5F7F8] p-6 rounded-lg">
+              <h3 className="font-semibold text-[#0F2D3C] font-['Montserrat'] mb-2">
                 Do you work with startups or only established companies?
               </h3>
               <p className="text-gray-600">
@@ -353,8 +353,8 @@ const ContactPage = () => {
                 SMEs. Our solutions are tailored to match your current stage and growth objectives.
               </p>
             </div>
-            <div className="bg-[#F8F9FA] p-6 rounded-lg">
-              <h3 className="font-semibold text-[#0B1F3B] font-['Montserrat'] mb-2">
+            <div className="bg-[#F5F7F8] p-6 rounded-lg">
+              <h3 className="font-semibold text-[#0F2D3C] font-['Montserrat'] mb-2">
                 What is your pricing model?
               </h3>
               <p className="text-gray-600">

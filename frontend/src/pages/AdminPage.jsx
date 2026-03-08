@@ -299,7 +299,7 @@ const AdminPage = () => {
         {/* Header */}
         <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-[#0B1F3B] font-['Montserrat']">
+            <h1 className="text-3xl font-bold text-[#0F2D3C] font-['Montserrat']">
               Admin Dashboard
             </h1>
             <p className="text-gray-600 mt-1">
@@ -308,7 +308,7 @@ const AdminPage = () => {
           </div>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2 text-gray-600 bg-white px-4 py-2 rounded-lg shadow-sm">
-              <div className="w-8 h-8 rounded-full bg-[#0B1F3B] flex items-center justify-center">
+              <div className="w-8 h-8 rounded-full bg-[#0F2D3C] flex items-center justify-center">
                 <User className="w-4 h-4 text-white" />
               </div>
               <span className="text-sm font-medium">{user?.name || user?.email}</span>
@@ -359,7 +359,7 @@ const AdminPage = () => {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm text-gray-500">Contact Leads</p>
-                      <p className="text-3xl font-bold text-[#0B1F3B]">{dashboardStats.totalContacts}</p>
+                      <p className="text-3xl font-bold text-[#0F2D3C]">{dashboardStats.totalContacts}</p>
                     </div>
                     <Users className="w-10 h-10 text-[#C9A227] opacity-50" />
                   </div>
@@ -370,7 +370,7 @@ const AdminPage = () => {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm text-gray-500">Job Applications</p>
-                      <p className="text-3xl font-bold text-[#0B1F3B]">{dashboardStats.totalApplications}</p>
+                      <p className="text-3xl font-bold text-[#0F2D3C]">{dashboardStats.totalApplications}</p>
                     </div>
                     <Briefcase className="w-10 h-10 text-[#C9A227] opacity-50" />
                   </div>
@@ -381,7 +381,7 @@ const AdminPage = () => {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm text-gray-500">Blog Posts</p>
-                      <p className="text-3xl font-bold text-[#0B1F3B]">{dashboardStats.totalPosts}</p>
+                      <p className="text-3xl font-bold text-[#0F2D3C]">{dashboardStats.totalPosts}</p>
                     </div>
                     <FileText className="w-10 h-10 text-[#C9A227] opacity-50" />
                   </div>
@@ -392,7 +392,7 @@ const AdminPage = () => {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm text-gray-500">Active Jobs</p>
-                      <p className="text-3xl font-bold text-[#0B1F3B]">{dashboardStats.totalJobs}</p>
+                      <p className="text-3xl font-bold text-[#0F2D3C]">{dashboardStats.totalJobs}</p>
                     </div>
                     <Briefcase className="w-10 h-10 text-[#C9A227] opacity-50" />
                   </div>
@@ -403,7 +403,7 @@ const AdminPage = () => {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm text-gray-500">Subscribers</p>
-                      <p className="text-3xl font-bold text-[#0B1F3B]">{dashboardStats.totalSubscribers}</p>
+                      <p className="text-3xl font-bold text-[#0F2D3C]">{dashboardStats.totalSubscribers}</p>
                     </div>
                     <Mail className="w-10 h-10 text-[#C9A227] opacity-50" />
                   </div>
@@ -669,7 +669,7 @@ const AdminPage = () => {
                       >
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-1">
-                            <h3 className="font-semibold text-[#0B1F3B]">{post.title}</h3>
+                            <h3 className="font-semibold text-[#0F2D3C]">{post.title}</h3>
                             {post.published ? (
                               <span className="px-2 py-0.5 bg-green-100 text-green-600 text-xs rounded-full">
                                 Published
@@ -742,7 +742,7 @@ const AdminPage = () => {
                       >
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-1">
-                            <h3 className="font-semibold text-[#0B1F3B]">{job.title}</h3>
+                            <h3 className="font-semibold text-[#0F2D3C]">{job.title}</h3>
                             {job.active ? (
                               <span className="px-2 py-0.5 bg-green-100 text-green-600 text-xs rounded-full">
                                 Active
@@ -819,7 +819,7 @@ const AdminPage = () => {
                       >
                         <div className="flex-1">
                           <p className="italic text-gray-600 mb-2">"{t.quote}"</p>
-                          <p className="font-semibold text-[#0B1F3B]">{t.client_name}</p>
+                          <p className="font-semibold text-[#0F2D3C]">{t.client_name}</p>
                           <p className="text-sm text-gray-500">{t.position}, {t.company}</p>
                         </div>
                         <Button
@@ -855,7 +855,7 @@ const AdminPage = () => {
                       {contacts.map((contact) => (
                         <div key={contact.id} className="p-4 bg-gray-50 rounded-lg">
                           <div className="flex justify-between mb-2">
-                            <h4 className="font-semibold text-[#0B1F3B]">{contact.name}</h4>
+                            <h4 className="font-semibold text-[#0F2D3C]">{contact.name}</h4>
                             <span className="text-xs text-gray-500">{formatDate(contact.created_at)}</span>
                           </div>
                           <p className="text-sm text-gray-600 mb-1">{contact.email}</p>
@@ -882,7 +882,7 @@ const AdminPage = () => {
                       {applications.map((app) => (
                         <div key={app.id} className="p-4 bg-gray-50 rounded-lg">
                           <div className="flex justify-between mb-2">
-                            <h4 className="font-semibold text-[#0B1F3B]">{app.name}</h4>
+                            <h4 className="font-semibold text-[#0F2D3C]">{app.name}</h4>
                             <span className="text-xs text-gray-500">{formatDate(app.created_at)}</span>
                           </div>
                           <p className="text-sm text-[#C9A227] font-medium mb-1">{app.job_title}</p>
@@ -918,7 +918,7 @@ const AdminPage = () => {
                         className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
                       >
                         <div>
-                          <p className="font-medium text-[#0B1F3B]">{sub.email}</p>
+                          <p className="font-medium text-[#0F2D3C]">{sub.email}</p>
                           <p className="text-xs text-gray-500">Subscribed: {formatDate(sub.subscribed_at)}</p>
                         </div>
                         <Button

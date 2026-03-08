@@ -68,7 +68,7 @@ const IndustriesPage = () => {
       </section>
 
       {/* Industries Grid */}
-      <section className="section-padding bg-[#F8F9FA]">
+      <section className="section-padding bg-[#F5F7F8]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {industries.map((industry, index) => (
@@ -78,10 +78,10 @@ const IndustriesPage = () => {
                 className="bg-white border-none shadow-sm hover:shadow-xl transition-all duration-300 group card-hover overflow-hidden"
               >
                 <CardContent className="p-8">
-                  <div className="w-14 h-14 rounded-lg bg-[#0B1F3B]/10 flex items-center justify-center mb-6 group-hover:bg-[#C9A227]/10 transition-colors">
-                    <industry.icon className="w-7 h-7 text-[#0B1F3B] group-hover:text-[#C9A227] transition-colors" />
+                  <div className="w-14 h-14 rounded-lg bg-[#0F2D3C]/10 flex items-center justify-center mb-6 group-hover:bg-[#C9A227]/10 transition-colors">
+                    <industry.icon className="w-7 h-7 text-[#0F2D3C] group-hover:text-[#C9A227] transition-colors" />
                   </div>
-                  <h3 className="text-xl font-bold text-[#0B1F3B] font-['Montserrat'] mb-3">
+                  <h3 className="text-xl font-bold text-[#0F2D3C] font-['Montserrat'] mb-3">
                     {industry.title}
                   </h3>
                   <p className="text-gray-600 text-sm leading-relaxed mb-4">
@@ -102,7 +102,7 @@ const IndustriesPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-3xl sm:text-4xl font-bold text-[#0B1F3B] font-['Montserrat'] mb-6">
+              <h2 className="text-3xl sm:text-4xl font-bold text-[#0F2D3C] font-['Montserrat'] mb-6">
                 Why Industry Expertise Matters
               </h2>
               <p className="text-gray-600 mb-6">
@@ -116,7 +116,7 @@ const IndustriesPage = () => {
                     <span className="w-2 h-2 bg-[#C9A227] rounded-full" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-[#0B1F3B] font-['Montserrat']">
+                    <h4 className="font-semibold text-[#0F2D3C] font-['Montserrat']">
                       Regulatory Knowledge
                     </h4>
                     <p className="text-gray-500 text-sm">
@@ -129,7 +129,7 @@ const IndustriesPage = () => {
                     <span className="w-2 h-2 bg-[#C9A227] rounded-full" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-[#0B1F3B] font-['Montserrat']">
+                    <h4 className="font-semibold text-[#0F2D3C] font-['Montserrat']">
                       Best Practices
                     </h4>
                     <p className="text-gray-500 text-sm">
@@ -142,7 +142,7 @@ const IndustriesPage = () => {
                     <span className="w-2 h-2 bg-[#C9A227] rounded-full" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-[#0B1F3B] font-['Montserrat']">
+                    <h4 className="font-semibold text-[#0F2D3C] font-['Montserrat']">
                       Network Access
                     </h4>
                     <p className="text-gray-500 text-sm">

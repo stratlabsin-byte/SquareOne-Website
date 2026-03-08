@@ -23,23 +23,23 @@ const ServicesPage = () => {
       shortName: "Talent & HR",
       icon: Users,
       title: "Talent & HR Solutions",
-      description: "End-to-end human resource solutions to build, manage, and retain top talent while ensuring full compliance with labor laws.",
-      color: "#0B1F3B",
+      description: "End-to-end human resource solutions including recruitment, HR outsourcing, payroll management, and compliance advisory to help organizations build and manage effective teams.",
+      color: "#0F2D3C",
       subServices: [
         {
           icon: UserPlus,
-          title: "Talent Acquisition",
+          title: "Recruitment & Talent Acquisition",
           description: "Strategic recruitment solutions to attract and hire the best talent for your organization, from entry-level to executive positions."
         },
         {
           icon: Clock,
-          title: "HR Outsourcing",
-          description: "Complete HR management services allowing you to focus on core business while we handle all HR functions efficiently."
+          title: "HR Outsourcing & Payroll Management",
+          description: "Complete HR management and payroll processing services allowing you to focus on core business while we handle all HR functions efficiently."
         },
         {
           icon: CreditCard,
-          title: "Payroll & Compliance",
-          description: "Accurate payroll processing, statutory compliance, and employee benefits administration with zero errors and full transparency."
+          title: "HR Compliance Advisory",
+          description: "Expert guidance on labor law compliance, statutory requirements, and employee benefits administration with full transparency."
         }
       ]
     },
@@ -48,7 +48,7 @@ const ServicesPage = () => {
       shortName: "Corporate Training",
       icon: GraduationCap,
       title: "Corporate Training",
-      description: "Customized training programs and leadership development initiatives to build organizational capability and drive performance.",
+      description: "Structured training programs for leadership development, soft skills enhancement, employee productivity, and compliance awareness designed to improve workforce capability.",
       color: "#C9A227",
       subServices: [
         {
@@ -58,13 +58,13 @@ const ServicesPage = () => {
         },
         {
           icon: BarChart,
-          title: "Skills Training",
-          description: "Technical and professional skills training customized to your industry needs and organizational goals."
+          title: "Soft Skills & Productivity Training",
+          description: "Professional skills training and employee productivity programs customized to your industry needs and organizational goals."
         },
         {
           icon: Target,
-          title: "Team Building",
-          description: "Collaborative workshops and team development programs designed to build high-performance cultures."
+          title: "Compliance Training",
+          description: "Regulatory and compliance awareness programs designed to ensure your workforce understands and follows industry standards."
         }
       ]
     },
@@ -73,23 +73,23 @@ const ServicesPage = () => {
       shortName: "Business Consulting",
       icon: TrendingUp,
       title: "Business Consulting",
-      description: "Strategic advisory covering business planning, corporate structuring, market expansion, and operational efficiency for growing enterprises.",
-      color: "#0B1F3B",
+      description: "Advisory services covering business strategy, startup guidance, operational optimization, and process improvement to support sustainable business growth.",
+      color: "#0F2D3C",
       subServices: [
         {
           icon: Building2,
-          title: "Corporate Structuring",
-          description: "Expert guidance on business structure, company registration, and organizational setup tailored to your growth plans."
+          title: "Business Strategy & Startup Advisory",
+          description: "Expert guidance on business strategy, company registration, and organizational setup tailored to your growth plans."
         },
         {
           icon: BarChart,
-          title: "Growth Strategy",
-          description: "Market analysis, business planning, and growth roadmap development to accelerate your business trajectory."
+          title: "Operational Optimization",
+          description: "Process optimization, performance management, and efficiency improvements for scalable operations."
         },
         {
           icon: Settings,
-          title: "Operational Excellence",
-          description: "Process optimization, performance management, and efficiency improvements for scalable operations."
+          title: "Process Improvement",
+          description: "Systematic identification and elimination of inefficiencies to streamline workflows and improve business outcomes."
         }
       ]
     },
@@ -98,23 +98,23 @@ const ServicesPage = () => {
       shortName: "Legal Consulting",
       icon: Scale,
       title: "Legal Consulting",
-      description: "Comprehensive legal advisory including documentation, compliance, and regulatory guidance for business protection and governance.",
+      description: "Legal support services including corporate documentation, contract drafting and review, regulatory compliance advisory, and employment law guidance.",
       color: "#C9A227",
       subServices: [
         {
           icon: FileText,
-          title: "Legal Documentation",
+          title: "Corporate Documentation & Contract Drafting",
           description: "Agreements, contracts, policies, and regulatory filings to protect your business interests and ensure legal compliance."
         },
         {
           icon: Shield,
-          title: "Compliance Advisory",
+          title: "Regulatory Compliance Advisory",
           description: "Navigate complex regulatory requirements with our compliance experts who ensure your business meets all statutory obligations."
         },
         {
           icon: Landmark,
-          title: "Corporate Governance",
-          description: "Board advisory, governance frameworks, and risk management to build institutional confidence."
+          title: "Employment Law & Corporate Governance",
+          description: "Employment law support, board advisory, governance frameworks, and risk management to build institutional confidence."
         }
       ]
     },
@@ -123,23 +123,23 @@ const ServicesPage = () => {
       shortName: "Technology & IT",
       icon: Monitor,
       title: "Technology & IT Services",
-      description: "IT consulting, digital transformation, and technology implementation for modern business operations and competitive advantage.",
-      color: "#0B1F3B",
+      description: "Technology services including website development, custom software solutions, IT infrastructure consulting, and digital transformation to modernize business operations.",
+      color: "#0F2D3C",
       subServices: [
         {
           icon: Globe,
-          title: "IT Consulting",
-          description: "Strategic IT consulting to align technology investments with business goals and optimize your technology infrastructure."
-        },
-        {
-          icon: Smartphone,
-          title: "Web & App Development",
+          title: "Website & Custom Software Development",
           description: "Custom web applications, mobile apps, and digital solutions built with modern technologies for superior user experience."
         },
         {
+          icon: Smartphone,
+          title: "IT Infrastructure Consulting",
+          description: "Strategic IT consulting to align technology investments with business goals and optimize your technology infrastructure."
+        },
+        {
           icon: Database,
-          title: "ERP / CRM Implementation",
-          description: "End-to-end implementation of enterprise resource planning and customer relationship management systems."
+          title: "Digital Transformation Services",
+          description: "End-to-end digital transformation including ERP/CRM implementation and business process automation."
         }
       ]
     }
@@ -179,7 +179,7 @@ const ServicesPage = () => {
                 data-testid={`service-nav-${service.id}`}
                 className={`flex items-center px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
                   activeService === service.id
-                    ? "bg-[#0B1F3B] text-white"
+                    ? "bg-[#0F2D3C] text-white"
                     : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                 }`}
               >
@@ -197,7 +197,7 @@ const ServicesPage = () => {
           key={service.id}
           id={service.id}
           data-testid={`service-section-${service.id}`}
-          className={`section-padding ${serviceIndex % 2 === 0 ? "bg-white" : "bg-[#F8F9FA]"}`}
+          className={`section-padding ${serviceIndex % 2 === 0 ? "bg-white" : "bg-[#F5F7F8]"}`}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-16 items-start">
@@ -209,7 +209,7 @@ const ServicesPage = () => {
                 >
                   <service.icon className="w-8 h-8" style={{ color: service.color }} />
                 </div>
-                <h2 className="text-3xl sm:text-4xl font-bold text-[#0B1F3B] font-['Montserrat'] mb-4">
+                <h2 className="text-3xl sm:text-4xl font-bold text-[#0F2D3C] font-['Montserrat'] mb-4">
                   {service.title}
                 </h2>
                 <p className="text-gray-600 text-lg mb-8">
@@ -244,7 +244,7 @@ const ServicesPage = () => {
                           >
                             <subService.icon className="w-5 h-5" style={{ color: service.color }} />
                           </div>
-                          <span className="font-semibold text-[#0B1F3B] font-['Montserrat'] text-left">
+                          <span className="font-semibold text-[#0F2D3C] font-['Montserrat'] text-left">
                             {subService.title}
                           </span>
                         </div>

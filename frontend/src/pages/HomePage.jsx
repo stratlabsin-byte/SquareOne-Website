@@ -5,7 +5,6 @@ import {
   Users,
   TrendingUp,
   Monitor,
-  ShieldCheck,
   Layers,
   Target,
   GraduationCap,
@@ -84,63 +83,58 @@ const HomePage = () => {
     {
       icon: Users,
       title: "Talent & HR Solutions",
-      description: "End-to-end HR solutions from talent acquisition to payroll compliance, designed for scaling businesses.",
+      description: "End-to-end recruitment, HR outsourcing and workforce management services.",
     },
     {
       icon: GraduationCap,
       title: "Corporate Training",
-      description: "Customized training and leadership development programs to upskill your workforce and build capability.",
+      description: "Leadership development, professional skills training and workforce capability programs.",
     },
     {
       icon: TrendingUp,
-      title: "Business Consulting",
-      description: "Strategic advisory, corporate structuring, and growth consulting for SMEs and startups.",
+      title: "Business & Legal Consulting",
+      description: "Strategic advisory, compliance guidance, corporate structuring and legal documentation support.",
     },
     {
       icon: Monitor,
       title: "Technology & IT Services",
-      description: "IT consulting, web and app development, and digital transformation solutions for modern enterprises.",
+      description: "Digital transformation, software development and IT consulting services.",
     },
   ];
 
   const differentiators = [
     {
       icon: Layers,
-      title: "Integrated Consulting",
+      title: "Integrated Consulting Expertise",
       description: "One partner for HR, legal, business, and IT needs under a single strategic framework.",
     },
     {
       icon: Users,
-      title: "Experienced Professionals",
+      title: "Industry Experienced Professionals",
       description: "Seasoned consultants with deep domain expertise across multiple industries.",
     },
     {
       icon: Target,
-      title: "Business-Focused Solutions",
+      title: "Client-Focused Approach",
       description: "Every engagement is designed to deliver tangible, measurable business impact.",
     },
     {
       icon: Monitor,
-      title: "Technology Driven",
+      title: "Technology Driven Solutions",
       description: "Leveraging modern tools and platforms to drive efficiency and digital transformation.",
     },
     {
       icon: TrendingUp,
-      title: "Scalable Engagement",
+      title: "Scalable Business Support",
       description: "Flexible solutions that grow with your business from startup to established enterprise.",
-    },
-    {
-      icon: ShieldCheck,
-      title: "Strategic Advisory",
-      description: "Governance-first approach ensuring compliance, controls, and long-term confidence.",
     },
   ];
 
   const processSteps = [
-    { step: "01", title: "Understand", description: "We assess your business model, challenges, and operational landscape." },
-    { step: "02", title: "Strategize", description: "A structured roadmap with priorities, owners, and clear implementation sequence." },
-    { step: "03", title: "Implement", description: "Hands-on deployment with ongoing stakeholder alignment and progress tracking." },
-    { step: "04", title: "Deliver Results", description: "Measurable outcomes, refinement cycles, and continuous improvement." },
+    { step: "01", title: "Understand Client Needs", description: "We assess your business model, challenges, and operational landscape." },
+    { step: "02", title: "Design Strategic Solutions", description: "A structured roadmap with priorities, owners, and clear implementation sequence." },
+    { step: "03", title: "Implement Structured Processes", description: "Hands-on deployment with ongoing stakeholder alignment and progress tracking." },
+    { step: "04", title: "Deliver Measurable Results", description: "Measurable outcomes, refinement cycles, and continuous improvement." },
   ];
 
   const industries = [
@@ -210,15 +204,14 @@ const HomePage = () => {
                 Trusted Advisory for SMEs and Growth-Stage Firms
               </p>
               <h1 className="max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
-                Premium consulting that brings structure, clarity, and momentum.
+                Empowering Businesses with Talent, Strategy, and Technology.
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">
-                ADVISERVE partners with ambitious businesses to architect stronger operations across HR, legal,
-                technology, and strategic growth.
+                Adviserve Talent and Consulting provides integrated HR, corporate training, business advisory, legal consulting and technology services designed to help organizations grow and succeed.
               </p>
               <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                 <Link to="/contact">
-                  <Button data-testid="hero-cta-primary" className="h-12 rounded-md bg-[#C9A227] px-7 font-semibold text-[#0B1F3B] hover:bg-[#d8b648]">
+                  <Button data-testid="hero-cta-primary" className="h-12 rounded-md bg-[#C9A227] px-7 font-semibold text-[#0F2D3C] hover:bg-[#d8b648]">
                     Schedule Consultation
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
@@ -241,7 +234,7 @@ const HomePage = () => {
                 loading="lazy"
                 className="h-[560px] w-full rounded-2xl object-cover shadow-[0_36px_70px_-22px_rgba(0,0,0,0.55)]"
               />
-              <div className="absolute -left-5 bottom-6 rounded-xl border border-[#C9A227]/35 bg-[#0B1F3B]/90 px-5 py-4 backdrop-blur">
+              <div className="absolute -left-5 bottom-6 rounded-xl border border-[#C9A227]/35 bg-[#0F2D3C]/90 px-5 py-4 backdrop-blur">
                 <p className="text-xs uppercase tracking-[0.15em] text-slate-300">Client Programs Delivered</p>
                 <p className="mt-1 text-2xl font-bold text-[#E5C558]">{stats ? `${stats.projects_completed}+` : "—"} engagements</p>
               </div>
@@ -284,18 +277,14 @@ const HomePage = () => {
             </div>
             <div className={`transition-all duration-700 delay-200 ${aboutInView ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"}`}>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#B7932B]">Who We Are</p>
-              <h2 className="mt-4 text-3xl font-bold text-[#0B1F3B] sm:text-4xl font-['Montserrat']">
+              <h2 className="mt-4 text-3xl font-bold text-[#0F2D3C] sm:text-4xl font-['Montserrat']">
                 About ADVISERVE
               </h2>
               <p className="mt-5 text-slate-600 leading-relaxed">
-                ADVISERVE Services and Consulting empowers startups and SMEs with integrated
-                business solutions across HR, legal, technology, and strategic growth. We serve
-                as your single strategic partner, bringing together expertise across all critical
-                business functions under one roof.
+                Adviserve Talent and Consulting Private Limited is a multidisciplinary consulting firm delivering integrated solutions across talent acquisition, corporate training, business advisory, legal consulting and technology services.
               </p>
               <p className="mt-4 text-slate-600 leading-relaxed">
-                Since our founding, we have been committed to delivering practical, results-oriented
-                consulting that helps businesses build strong foundations and scale with confidence.
+                We help organizations simplify complexity, optimize operations and unlock sustainable growth.
               </p>
               <Link to="/about">
                 <Button className="mt-8 bg-[#C9A227] hover:bg-[#b08d1f] text-white font-semibold px-8 py-3 rounded transition-shadow hover:shadow-lg">
@@ -316,7 +305,7 @@ const HomePage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-14 max-w-3xl">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#B7932B]">Our Services</p>
-            <h2 className="mt-4 text-3xl font-bold text-[#0B1F3B] sm:text-4xl font-['Montserrat']">
+            <h2 className="mt-4 text-3xl font-bold text-[#0F2D3C] sm:text-4xl font-['Montserrat']">
               Strategic functions built for disciplined growth.
             </h2>
             <p className="mt-4 text-slate-600">
@@ -335,10 +324,10 @@ const HomePage = () => {
                 style={{ transitionDelay: `${index * 80}ms` }}
               >
                 <CardContent className="p-8">
-                  <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-md bg-[#0B1F3B]/8 text-[#0B1F3B] transition-colors group-hover:bg-[#C9A227]/20 group-hover:text-[#A07D13]">
+                  <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-md bg-[#0F2D3C]/8 text-[#0F2D3C] transition-colors group-hover:bg-[#C9A227]/20 group-hover:text-[#A07D13]">
                     <service.icon className="h-6 w-6" />
                   </div>
-                  <h3 className="mb-3 text-xl font-bold text-[#0B1F3B] group-hover:text-[#A07D13] font-['Montserrat']">
+                  <h3 className="mb-3 text-xl font-bold text-[#0F2D3C] group-hover:text-[#A07D13] font-['Montserrat']">
                     {service.title}
                   </h3>
                   <p className="mb-4 text-sm leading-relaxed text-slate-600">
@@ -366,7 +355,7 @@ const HomePage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#B7932B]">Why ADVISERVE</p>
-            <h2 className="mt-4 text-3xl font-bold text-[#0B1F3B] sm:text-4xl font-['Montserrat']">
+            <h2 className="mt-4 text-3xl font-bold text-[#0F2D3C] sm:text-4xl font-['Montserrat']">
               The ADVISERVE Advantage
             </h2>
             <p className="mt-4 mx-auto max-w-2xl text-slate-600">
@@ -383,10 +372,10 @@ const HomePage = () => {
                 }`}
                 style={{ transitionDelay: `${index * 80}ms` }}
               >
-                <div className="w-14 h-14 rounded-lg bg-[#0B1F3B]/10 flex items-center justify-center mb-6 group-hover:bg-[#C9A227]/10 transition-colors">
-                  <item.icon className="w-7 h-7 text-[#0B1F3B] group-hover:text-[#C9A227] transition-colors" />
+                <div className="w-14 h-14 rounded-lg bg-[#0F2D3C]/10 flex items-center justify-center mb-6 group-hover:bg-[#C9A227]/10 transition-colors">
+                  <item.icon className="w-7 h-7 text-[#0F2D3C] group-hover:text-[#C9A227] transition-colors" />
                 </div>
-                <h3 className="text-xl font-bold text-[#0B1F3B] mb-3 font-['Montserrat']">{item.title}</h3>
+                <h3 className="text-xl font-bold text-[#0F2D3C] mb-3 font-['Montserrat']">{item.title}</h3>
                 <p className="text-sm text-slate-600 leading-relaxed">{item.description}</p>
               </div>
             ))}
@@ -423,7 +412,7 @@ const HomePage = () => {
                 }`}
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
-                <div className="relative z-10 mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-[#C9A227] text-lg font-bold text-[#0B1F3B] shadow-lg">
+                <div className="relative z-10 mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-[#C9A227] text-lg font-bold text-[#0F2D3C] shadow-lg">
                   {step.step}
                 </div>
                 <h3 className="mb-2 text-xl font-bold text-white font-['Montserrat']">
@@ -447,7 +436,7 @@ const HomePage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#B7932B]">Industries We Serve</p>
-            <h2 className="mt-4 text-3xl font-bold text-[#0B1F3B] sm:text-4xl font-['Montserrat']">
+            <h2 className="mt-4 text-3xl font-bold text-[#0F2D3C] sm:text-4xl font-['Montserrat']">
               Expertise Across Key Sectors
             </h2>
           </div>
@@ -462,10 +451,10 @@ const HomePage = () => {
                 }`}
                 style={{ transitionDelay: `${index * 60}ms` }}
               >
-                <div className="w-16 h-16 rounded-full bg-[#0B1F3B]/10 flex items-center justify-center mb-4 group-hover:bg-[#C9A227]/10 transition-colors">
-                  <industry.icon className="w-8 h-8 text-[#0B1F3B] group-hover:text-[#C9A227] transition-colors" />
+                <div className="w-16 h-16 rounded-full bg-[#0F2D3C]/10 flex items-center justify-center mb-4 group-hover:bg-[#C9A227]/10 transition-colors">
+                  <industry.icon className="w-8 h-8 text-[#0F2D3C] group-hover:text-[#C9A227] transition-colors" />
                 </div>
-                <span className="text-sm font-semibold text-[#0B1F3B] text-center">{industry.title}</span>
+                <span className="text-sm font-semibold text-[#0F2D3C] text-center">{industry.title}</span>
               </Link>
             ))}
           </div>
@@ -478,11 +467,11 @@ const HomePage = () => {
           <div className="flex items-end justify-between mb-14">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#B7932B]">Latest Insights</p>
-              <h2 className="mt-4 text-3xl font-bold text-[#0B1F3B] sm:text-4xl font-['Montserrat']">
+              <h2 className="mt-4 text-3xl font-bold text-[#0F2D3C] sm:text-4xl font-['Montserrat']">
                 From Our Knowledge Hub
               </h2>
             </div>
-            <Link to="/insights" className="hidden md:inline-flex items-center text-sm font-semibold text-[#A07D13] hover:text-[#0B1F3B] transition-colors">
+            <Link to="/insights" className="hidden md:inline-flex items-center text-sm font-semibold text-[#A07D13] hover:text-[#0F2D3C] transition-colors">
               View All Articles <ArrowRight className="ml-1 w-4 h-4" />
             </Link>
           </div>
@@ -517,7 +506,7 @@ const HomePage = () => {
                       {post.author}
                     </span>
                   </div>
-                  <h3 className="text-lg font-bold text-[#0B1F3B] mb-2 line-clamp-2 group-hover:text-[#C9A227] transition-colors font-['Montserrat']">
+                  <h3 className="text-lg font-bold text-[#0F2D3C] mb-2 line-clamp-2 group-hover:text-[#C9A227] transition-colors font-['Montserrat']">
                     {post.title}
                   </h3>
                   <p className="text-gray-600 text-sm line-clamp-2 mb-4">{post.excerpt}</p>
@@ -533,7 +522,7 @@ const HomePage = () => {
           </div>
           <div className="text-center mt-10 md:hidden">
             <Link to="/insights">
-              <Button variant="outline" className="border-[#0B1F3B] text-[#0B1F3B] hover:bg-[#0B1F3B] hover:text-white">
+              <Button variant="outline" className="border-[#0F2D3C] text-[#0F2D3C] hover:bg-[#0F2D3C] hover:text-white">
                 View All Articles <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
@@ -546,7 +535,7 @@ const HomePage = () => {
         <section data-testid="testimonials-section" className="section-padding bg-white">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#B7932B]">Client Perspective</p>
-            <h2 className="mt-4 mb-12 text-3xl font-bold text-[#0B1F3B] sm:text-4xl font-['Montserrat']">
+            <h2 className="mt-4 mb-12 text-3xl font-bold text-[#0F2D3C] sm:text-4xl font-['Montserrat']">
               What Our Clients Say
             </h2>
 
@@ -579,7 +568,7 @@ const HomePage = () => {
                         className="w-14 h-14 rounded-full object-cover mr-4"
                       />
                       <div className="text-left">
-                        <p className="font-bold text-[#0B1F3B]">{testimonial.client_name}</p>
+                        <p className="font-bold text-[#0F2D3C]">{testimonial.client_name}</p>
                         <p className="text-gray-500 text-sm">{testimonial.position}, {testimonial.company}</p>
                       </div>
                     </div>
@@ -612,12 +601,12 @@ const HomePage = () => {
             Let's Build a Stronger Business Together
           </h2>
           <p className="mx-auto mb-10 max-w-2xl text-xl text-slate-300">
-            Speak with our advisory team to design an operating model that supports both control and speed.
+            Schedule a consultation with our experts today.
           </p>
           <Link to="/contact">
             <Button
               data-testid="cta-schedule-btn"
-              className="h-12 rounded-md bg-[#C9A227] px-10 text-base font-semibold text-[#0B1F3B] hover:bg-[#d8b648]"
+              className="h-12 rounded-md bg-[#C9A227] px-10 text-base font-semibold text-[#0F2D3C] hover:bg-[#d8b648]"
             >
               Schedule Consultation
               <ArrowRight className="ml-2 w-5 h-5" />

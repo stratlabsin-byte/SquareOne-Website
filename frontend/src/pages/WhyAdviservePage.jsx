@@ -102,7 +102,7 @@ const WhyAdviservePage = () => {
       <section className="section-padding bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#0B1F3B] font-['Montserrat'] mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#0F2D3C] font-['Montserrat'] mb-4">
               What Sets Us Apart
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
@@ -115,12 +115,12 @@ const WhyAdviservePage = () => {
               <div
                 key={item.title}
                 data-testid={`advantage-${index}`}
-                className="p-8 bg-[#F8F9FA] rounded-lg hover:bg-white hover:shadow-xl transition-all duration-300 group"
+                className="p-8 bg-[#F5F7F8] rounded-lg hover:bg-white hover:shadow-xl transition-all duration-300 group"
               >
-                <div className="w-14 h-14 rounded-lg bg-[#0B1F3B]/10 flex items-center justify-center mb-6 group-hover:bg-[#C9A227]/10 transition-colors">
-                  <item.icon className="w-7 h-7 text-[#0B1F3B] group-hover:text-[#C9A227] transition-colors" />
+                <div className="w-14 h-14 rounded-lg bg-[#0F2D3C]/10 flex items-center justify-center mb-6 group-hover:bg-[#C9A227]/10 transition-colors">
+                  <item.icon className="w-7 h-7 text-[#0F2D3C] group-hover:text-[#C9A227] transition-colors" />
                 </div>
-                <h3 className="text-xl font-bold text-[#0B1F3B] font-['Montserrat'] mb-3">
+                <h3 className="text-xl font-bold text-[#0F2D3C] font-['Montserrat'] mb-3">
                   {item.title}
                 </h3>
                 <p className="text-gray-600">
@@ -133,7 +133,7 @@ const WhyAdviservePage = () => {
       </section>
 
       {/* Numbers Section */}
-      <section className="section-padding bg-[#0B1F3B]">
+      <section className="section-padding bg-[#0F2D3C]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {differentiators.map((item, index) => (
@@ -154,7 +154,7 @@ const WhyAdviservePage = () => {
       </section>
 
       {/* Our Commitment */}
-      <section className="section-padding bg-[#F8F9FA]">
+      <section className="section-padding bg-[#F5F7F8]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="relative">
@@ -170,7 +170,7 @@ const WhyAdviservePage = () => {
               </div>
             </div>
             <div>
-              <h2 className="text-3xl sm:text-4xl font-bold text-[#0B1F3B] font-['Montserrat'] mb-6">
+              <h2 className="text-3xl sm:text-4xl font-bold text-[#0F2D3C] font-['Montserrat'] mb-6">
                 Our Commitment to You
               </h2>
               <p className="text-gray-600 mb-8">
@@ -181,7 +181,7 @@ const WhyAdviservePage = () => {
                 <li className="flex items-start">
                   <CheckCircle className="w-6 h-6 text-[#C9A227] mr-4 mt-0.5" />
                   <div>
-                    <h4 className="font-semibold text-[#0B1F3B] font-['Montserrat']">
+                    <h4 className="font-semibold text-[#0F2D3C] font-['Montserrat']">
                       Dedicated Account Manager
                     </h4>
                     <p className="text-gray-500 text-sm">
@@ -192,7 +192,7 @@ const WhyAdviservePage = () => {
                 <li className="flex items-start">
                   <CheckCircle className="w-6 h-6 text-[#C9A227] mr-4 mt-0.5" />
                   <div>
-                    <h4 className="font-semibold text-[#0B1F3B] font-['Montserrat']">
+                    <h4 className="font-semibold text-[#0F2D3C] font-['Montserrat']">
                       Transparent Pricing
                     </h4>
                     <p className="text-gray-500 text-sm">
@@ -203,7 +203,7 @@ const WhyAdviservePage = () => {
                 <li className="flex items-start">
                   <CheckCircle className="w-6 h-6 text-[#C9A227] mr-4 mt-0.5" />
                   <div>
-                    <h4 className="font-semibold text-[#0B1F3B] font-['Montserrat']">
+                    <h4 className="font-semibold text-[#0F2D3C] font-['Montserrat']">
                       Regular Business Reviews
                     </h4>
                     <p className="text-gray-500 text-sm">
@@ -214,7 +214,7 @@ const WhyAdviservePage = () => {
                 <li className="flex items-start">
                   <CheckCircle className="w-6 h-6 text-[#C9A227] mr-4 mt-0.5" />
                   <div>
-                    <h4 className="font-semibold text-[#0B1F3B] font-['Montserrat']">
+                    <h4 className="font-semibold text-[#0F2D3C] font-['Montserrat']">
                       Satisfaction Guarantee
                     </h4>
                     <p className="text-gray-500 text-sm">
@@ -232,7 +232,7 @@ const WhyAdviservePage = () => {
       <section className="section-padding bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#0B1F3B] font-['Montserrat'] mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#0F2D3C] font-['Montserrat'] mb-4">
               Voices of Our Clients
             </h2>
           </div>
@@ -241,7 +241,7 @@ const WhyAdviservePage = () => {
               <div
                 key={index}
                 data-testid={`testimonial-highlight-${index}`}
-                className="bg-[#F8F9FA] p-8 rounded-lg relative"
+                className="bg-[#F5F7F8] p-8 rounded-lg relative"
               >
                 <div className="text-[#C9A227] text-6xl font-serif absolute top-4 left-6 opacity-20">
                   "
@@ -249,7 +249,7 @@ const WhyAdviservePage = () => {
                 <p className="text-gray-600 italic mb-6 relative z-10">
                   {item.quote}
                 </p>
-                <p className="text-[#0B1F3B] font-semibold font-['Montserrat']">
+                <p className="text-[#0F2D3C] font-semibold font-['Montserrat']">
                   — {item.author}
                 </p>
               </div>

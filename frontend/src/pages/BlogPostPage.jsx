@@ -76,12 +76,12 @@ const BlogPostPage = () => {
   return (
     <div data-testid="blog-post-page">
       {/* Hero */}
-      <section className="pt-32 pb-12 bg-[#F8F9FA]">
+      <section className="pt-32 pb-12 bg-[#F5F7F8]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link
             to="/insights"
             data-testid="back-to-insights"
-            className="inline-flex items-center text-[#0B1F3B] hover:text-[#C9A227] mb-6 transition-colors"
+            className="inline-flex items-center text-[#0F2D3C] hover:text-[#C9A227] mb-6 transition-colors"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Insights
@@ -89,7 +89,7 @@ const BlogPostPage = () => {
           <span className="inline-block px-3 py-1 bg-[#C9A227] text-white text-xs font-medium rounded-full mb-4">
             {post?.category}
           </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0B1F3B] font-['Montserrat'] mb-6">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F2D3C] font-['Montserrat'] mb-6">
             {post?.title}
           </h1>
           <div className="flex flex-wrap items-center text-gray-500 text-sm gap-4">
@@ -130,21 +130,21 @@ const BlogPostPage = () => {
       <article className="section-padding bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
-            className="prose prose-lg max-w-none prose-headings:font-['Montserrat'] prose-headings:text-[#0B1F3B] prose-a:text-[#C9A227] prose-strong:text-[#0B1F3B]"
+            className="prose prose-lg max-w-none prose-headings:font-['Montserrat'] prose-headings:text-[#0F2D3C] prose-a:text-[#C9A227] prose-strong:text-[#0F2D3C]"
             dangerouslySetInnerHTML={{ __html: post?.content }}
           />
         </div>
       </article>
 
       {/* Author Section */}
-      <section className="py-12 bg-[#F8F9FA]">
+      <section className="py-12 bg-[#F5F7F8]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center p-6 bg-white rounded-lg shadow-sm">
-            <div className="w-16 h-16 rounded-full bg-[#0B1F3B] flex items-center justify-center text-white font-bold text-xl mr-4">
+            <div className="w-16 h-16 rounded-full bg-[#0F2D3C] flex items-center justify-center text-white font-bold text-xl mr-4">
               {post?.author?.charAt(0)}
             </div>
             <div>
-              <p className="font-semibold text-[#0B1F3B] font-['Montserrat']">
+              <p className="font-semibold text-[#0F2D3C] font-['Montserrat']">
                 Written by {post?.author}
               </p>
               <p className="text-gray-500 text-sm">

@@ -6,9 +6,19 @@ import { Button } from "@/components/ui/button";
 const AboutPage = () => {
   const values = [
     {
+      icon: Award,
+      title: "Integrity",
+      description: "We operate with the highest standards of integrity, building trust through transparency and honesty."
+    },
+    {
+      icon: Heart,
+      title: "Client Commitment",
+      description: "Our clients' success is our success. We put their needs at the center of everything we do."
+    },
+    {
       icon: Target,
-      title: "Excellence",
-      description: "We strive for excellence in everything we do, delivering high-quality solutions that exceed expectations."
+      title: "Innovation",
+      description: "We embrace innovative solutions and modern approaches to solve complex business challenges."
     },
     {
       icon: Users,
@@ -16,14 +26,9 @@ const AboutPage = () => {
       description: "We believe in the power of collaboration, working closely with clients as true partners in their success."
     },
     {
-      icon: Award,
-      title: "Integrity",
-      description: "We operate with the highest standards of integrity, building trust through transparency and honesty."
-    },
-    {
-      icon: Heart,
-      title: "Client-Centric",
-      description: "Our clients' success is our success. We put their needs at the center of everything we do."
+      icon: Briefcase,
+      title: "Professional Excellence",
+      description: "We strive for excellence in every engagement, delivering high-quality solutions that exceed expectations."
     }
   ];
 
@@ -79,23 +84,14 @@ const AboutPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-3xl sm:text-4xl font-bold text-[#0B1F3B] font-['Montserrat'] mb-6">
+              <h2 className="text-3xl sm:text-4xl font-bold text-[#0F2D3C] font-['Montserrat'] mb-6">
                 Our Story
               </h2>
               <p className="text-gray-600 mb-4">
-                ADVISERVE Services and Consulting was founded with a simple yet powerful vision: 
-                to be the single strategic partner that growing businesses need to navigate their 
-                journey from inception to scale.
-              </p>
-              <p className="text-gray-600 mb-4">
-                We recognized that startups and SMEs often struggle with multiple service providers 
-                for different business needs - HR, legal, technology, and growth advisory. This 
-                fragmented approach leads to inefficiencies, miscommunication, and missed opportunities.
+                Adviserve Talent and Consulting Private Limited was founded to help organizations address modern business challenges through integrated advisory and service solutions.
               </p>
               <p className="text-gray-600">
-                Our integrated approach brings together expertise across all critical business 
-                functions under one roof, ensuring cohesive strategy and seamless execution for 
-                our clients.
+                We combine talent expertise, strategic consulting, legal advisory and technology solutions to help businesses operate efficiently and grow sustainably.
               </p>
             </div>
             <div className="relative">
@@ -104,7 +100,7 @@ const AboutPage = () => {
                 alt="Team Meeting"
                 className="rounded-lg shadow-xl"
               />
-              <div className="absolute -bottom-8 -left-8 bg-[#0B1F3B] p-8 rounded-lg text-white">
+              <div className="absolute -bottom-8 -left-8 bg-[#0F2D3C] p-8 rounded-lg text-white">
                 <p className="text-4xl font-bold font-['Montserrat']">2014</p>
                 <p className="text-gray-300">Founded</p>
               </div>
@@ -114,34 +110,29 @@ const AboutPage = () => {
       </section>
 
       {/* Mission & Vision Section */}
-      <section className="section-padding bg-[#F8F9FA]">
+      <section className="section-padding bg-[#F5F7F8]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12">
             <div className="bg-white p-10 rounded-lg shadow-sm border-l-4 border-[#C9A227]">
               <div className="w-14 h-14 bg-[#C9A227]/10 rounded-lg flex items-center justify-center mb-6">
                 <Target className="w-7 h-7 text-[#C9A227]" />
               </div>
-              <h3 className="text-2xl font-bold text-[#0B1F3B] font-['Montserrat'] mb-4">
+              <h3 className="text-2xl font-bold text-[#0F2D3C] font-['Montserrat'] mb-4">
                 Our Mission
               </h3>
               <p className="text-gray-600">
-                To empower startups and SMEs with integrated business solutions that accelerate 
-                growth, ensure compliance, and build sustainable competitive advantages. We aim 
-                to be the catalyst that transforms ambitious ideas into thriving enterprises.
+                To empower organizations with expert consulting, talent solutions and innovative technology services.
               </p>
             </div>
-            <div className="bg-white p-10 rounded-lg shadow-sm border-l-4 border-[#0B1F3B]">
-              <div className="w-14 h-14 bg-[#0B1F3B]/10 rounded-lg flex items-center justify-center mb-6">
-                <Eye className="w-7 h-7 text-[#0B1F3B]" />
+            <div className="bg-white p-10 rounded-lg shadow-sm border-l-4 border-[#0F2D3C]">
+              <div className="w-14 h-14 bg-[#0F2D3C]/10 rounded-lg flex items-center justify-center mb-6">
+                <Eye className="w-7 h-7 text-[#0F2D3C]" />
               </div>
-              <h3 className="text-2xl font-bold text-[#0B1F3B] font-['Montserrat'] mb-4">
+              <h3 className="text-2xl font-bold text-[#0F2D3C] font-['Montserrat'] mb-4">
                 Our Vision
               </h3>
               <p className="text-gray-600">
-                To be India's most trusted business consulting partner for growing enterprises, 
-                known for our integrated approach, domain expertise, and unwavering commitment 
-                to client success. We envision a future where every promising business has access 
-                to world-class advisory support.
+                To become a trusted consulting partner supporting organizations in achieving sustainable growth and operational excellence.
               </p>
             </div>
           </div>
@@ -152,7 +143,7 @@ const AboutPage = () => {
       <section className="section-padding bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#0B1F3B] font-['Montserrat'] mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#0F2D3C] font-['Montserrat'] mb-4">
               Our Core Values
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
@@ -164,12 +155,12 @@ const AboutPage = () => {
               <div
                 key={value.title}
                 data-testid={`value-card-${index}`}
-                className="text-center p-8 rounded-lg bg-[#F8F9FA] hover:bg-white hover:shadow-xl transition-all duration-300"
+                className="text-center p-8 rounded-lg bg-[#F5F7F8] hover:bg-white hover:shadow-xl transition-all duration-300"
               >
                 <div className="w-16 h-16 bg-[#C9A227]/10 rounded-full flex items-center justify-center mx-auto mb-6">
                   <value.icon className="w-8 h-8 text-[#C9A227]" />
                 </div>
-                <h3 className="text-xl font-bold text-[#0B1F3B] font-['Montserrat'] mb-3">
+                <h3 className="text-xl font-bold text-[#0F2D3C] font-['Montserrat'] mb-3">
                   {value.title}
                 </h3>
                 <p className="text-gray-600 text-sm">
@@ -182,10 +173,10 @@ const AboutPage = () => {
       </section>
 
       {/* Leadership Team Section */}
-      <section data-testid="team-section" className="section-padding bg-[#F8F9FA]">
+      <section data-testid="team-section" className="section-padding bg-[#F5F7F8]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#0B1F3B] font-['Montserrat'] mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#0F2D3C] font-['Montserrat'] mb-4">
               Leadership Team
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
@@ -205,10 +196,10 @@ const AboutPage = () => {
                     alt={member.name}
                     className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B1F3B]/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0F2D3C]/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-lg font-bold text-[#0B1F3B] font-['Montserrat']">
+                  <h3 className="text-lg font-bold text-[#0F2D3C] font-['Montserrat']">
                     {member.name}
                   </h3>
                   <p className="text-[#C9A227] text-sm font-medium mb-2">

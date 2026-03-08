@@ -3,7 +3,7 @@ import React from "react";
 const LogoIcon = ({ size = 40, variant = "light" }) => {
   // Light variant: beige/sand color (for dark backgrounds)
   // Dark variant: navy color (for light backgrounds)
-  const strokeColor = variant === "light" ? "#D4B896" : "#0B1F3B";
+  const strokeColor = variant === "light" ? "#E6D3B3" : "#0F2D3C";
 
   return (
     <svg

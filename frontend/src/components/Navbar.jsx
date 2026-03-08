@@ -57,9 +57,9 @@ const Navbar = () => {
   };
   
   // Text color based on scroll and page
-  const textColor = isScrolled ? "text-[#2E2E2E]" : (isDarkHero ? "text-white" : "text-[#2E2E2E]");
+  const textColor = isScrolled ? "text-[#1A1F24]" : (isDarkHero ? "text-white" : "text-[#1A1F24]");
   const activeColor = "text-[#C9A227]";
-  const logoTextColor = isScrolled ? "text-[#0B1F3B]" : (isDarkHero ? "text-white" : "text-[#0B1F3B]");
+  const logoTextColor = isScrolled ? "text-[#0F2D3C]" : (isDarkHero ? "text-white" : "text-[#0F2D3C]");
 
   return (
     <nav
@@ -84,10 +84,10 @@ const Navbar = () => {
                 adiser
               </span>
               <svg viewBox="0 0 20 24" width="14" height="18" className="mx-[1px] mt-[1px]">
-                <circle cx="10" cy="5" r="2.5" fill="#5CE0C2" />
-                <circle cx="5" cy="13" r="2.5" fill="#5CE0C2" />
-                <circle cx="15" cy="13" r="2.5" fill="#5CE0C2" />
-                <circle cx="10" cy="21" r="2.5" fill="#5CE0C2" />
+                <circle cx="10" cy="5" r="2.5" fill="#5FE3CF" />
+                <circle cx="5" cy="13" r="2.5" fill="#5FE3CF" />
+                <circle cx="15" cy="13" r="2.5" fill="#5FE3CF" />
+                <circle cx="10" cy="21" r="2.5" fill="#5FE3CF" />
               </svg>
               <span className={`text-[17px] font-light tracking-[0.02em] ${logoTextColor}`} style={{ fontFamily: "'Inter', sans-serif" }}>
                 e.
@@ -118,7 +118,7 @@ const Navbar = () => {
                       <DropdownMenuItem key={item.name} asChild>
                         <Link
                           to={item.path}
-                          className="px-4 py-2 text-sm text-[#2E2E2E] hover:text-[#0B1F3B] hover:bg-gray-50"
+                          className="px-4 py-2 text-sm text-[#1A1F24] hover:text-[#0F2D3C] hover:bg-gray-50"
                         >
                           {item.name}
                         </Link>
@@ -163,7 +163,7 @@ const Navbar = () => {
                   variant="ghost"
                   size="icon"
                   data-testid="mobile-menu-toggle"
-                  className={isScrolled ? "text-[#0B1F3B]" : (isDarkHero ? "text-white" : "text-[#0B1F3B]")}
+                  className={isScrolled ? "text-[#0F2D3C]" : (isDarkHero ? "text-white" : "text-[#0F2D3C]")}
                 >
                   {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
                 </Button>
@@ -178,16 +178,16 @@ const Navbar = () => {
                     >
                       <LogoIcon size={36} variant="dark" />
                       <div className="flex items-center">
-                        <span className="text-[17px] font-light tracking-[0.02em] text-[#0B1F3B]" style={{ fontFamily: "'Inter', sans-serif" }}>
+                        <span className="text-[17px] font-light tracking-[0.02em] text-[#0F2D3C]" style={{ fontFamily: "'Inter', sans-serif" }}>
                           adiser
                         </span>
                         <svg viewBox="0 0 20 24" width="14" height="18" className="mx-[1px] mt-[1px]">
-                          <circle cx="10" cy="5" r="2.5" fill="#5CE0C2" />
-                          <circle cx="5" cy="13" r="2.5" fill="#5CE0C2" />
-                          <circle cx="15" cy="13" r="2.5" fill="#5CE0C2" />
-                          <circle cx="10" cy="21" r="2.5" fill="#5CE0C2" />
+                          <circle cx="10" cy="5" r="2.5" fill="#5FE3CF" />
+                          <circle cx="5" cy="13" r="2.5" fill="#5FE3CF" />
+                          <circle cx="15" cy="13" r="2.5" fill="#5FE3CF" />
+                          <circle cx="10" cy="21" r="2.5" fill="#5FE3CF" />
                         </svg>
-                        <span className="text-[17px] font-light tracking-[0.02em] text-[#0B1F3B]" style={{ fontFamily: "'Inter', sans-serif" }}>
+                        <span className="text-[17px] font-light tracking-[0.02em] text-[#0F2D3C]" style={{ fontFamily: "'Inter', sans-serif" }}>
                           e.
                         </span>
                       </div>
@@ -204,7 +204,7 @@ const Navbar = () => {
                             className={`block py-2 text-base font-medium transition-colors ${
                               isActive(link.path)
                                 ? "text-[#C9A227]"
-                                : "text-[#2E2E2E] hover:text-[#0B1F3B]"
+                                : "text-[#1A1F24] hover:text-[#0F2D3C]"
                             }`}
                           >
                             {link.name}
@@ -216,7 +216,7 @@ const Navbar = () => {
                                   <Link
                                     to={item.path}
                                     onClick={() => setIsOpen(false)}
-                                    className="block py-1 text-sm text-gray-500 hover:text-[#0B1F3B]"
+                                    className="block py-1 text-sm text-gray-500 hover:text-[#0F2D3C]"
                                   >
                                     {item.name}
                                   </Link>

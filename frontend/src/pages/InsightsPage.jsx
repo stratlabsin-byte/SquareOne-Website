@@ -135,7 +135,7 @@ const InsightsPage = () => {
       </section>
 
       {/* Blog Posts Grid + Sidebar */}
-      <section className="section-padding bg-[#F8F9FA]">
+      <section className="section-padding bg-[#F5F7F8]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-[1fr_320px] gap-12">
             {/* Main Content */}
@@ -188,7 +188,7 @@ const InsightsPage = () => {
                                 {post.author}
                               </span>
                             </div>
-                            <h3 className="text-xl font-bold text-[#0B1F3B] font-['Montserrat'] mb-3 line-clamp-2 group-hover:text-[#C9A227] transition-colors">
+                            <h3 className="text-xl font-bold text-[#0F2D3C] font-['Montserrat'] mb-3 line-clamp-2 group-hover:text-[#C9A227] transition-colors">
                               {post.title}
                             </h3>
                             <p className="text-gray-600 text-sm line-clamp-3 mb-4">
@@ -227,7 +227,7 @@ const InsightsPage = () => {
             <aside className="space-y-8 lg:sticky lg:top-[140px] lg:self-start">
               {/* Categories Widget */}
               <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                <h3 className="text-lg font-bold text-[#0B1F3B] font-['Montserrat'] mb-4">Categories</h3>
+                <h3 className="text-lg font-bold text-[#0F2D3C] font-['Montserrat'] mb-4">Categories</h3>
                 <ul className="space-y-1">
                   {categories.map((category) => (
                     <li key={category}>
@@ -248,7 +248,7 @@ const InsightsPage = () => {
 
               {/* Recent Posts Widget */}
               <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                <h3 className="text-lg font-bold text-[#0B1F3B] font-['Montserrat'] mb-4">Recent Posts</h3>
+                <h3 className="text-lg font-bold text-[#0F2D3C] font-['Montserrat'] mb-4">Recent Posts</h3>
                 <ul className="space-y-4">
                   {displayPosts.slice(0, 5).map((post) => (
                     <li key={post.id}>
@@ -264,7 +264,7 @@ const InsightsPage = () => {
               </div>
 
               {/* Newsletter Widget */}
-              <div className="bg-[#0B1F3B] p-6 rounded-xl text-white">
+              <div className="bg-[#0F2D3C] p-6 rounded-xl text-white">
                 <h3 className="text-lg font-bold font-['Montserrat'] mb-2">Stay Updated</h3>
                 <p className="text-gray-400 text-sm mb-4">Subscribe for the latest insights.</p>
                 <form onSubmit={handleNewsletterSubscribe} className="space-y-3">

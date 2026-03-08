@@ -62,13 +62,13 @@ const LoginPage = () => {
   };
 
   return (
-    <div data-testid="login-page" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0B1F3B] to-[#1a3b66] py-12 px-4">
+    <div data-testid="login-page" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0F2D3C] to-[#1a3b66] py-12 px-4">
       <div className="max-w-md w-full">
         {/* Logo */}
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center space-x-2">
             <div className="w-12 h-12 bg-[#C9A227] rounded flex items-center justify-center">
-              <span className="text-[#0B1F3B] font-bold text-2xl font-['Montserrat']">A</span>
+              <span className="text-[#0F2D3C] font-bold text-2xl font-['Montserrat']">A</span>
             </div>
             <span className="text-white font-bold text-xl font-['Montserrat']">ADVISERVE</span>
           </Link>
@@ -97,7 +97,7 @@ const LoginPage = () => {
                       onChange={(e) => setLoginForm({ ...loginForm, email: e.target.value })}
                       required
                       data-testid="login-email"
-                      placeholder="admin@adviserve.in"
+                      placeholder="admin@adviserve.org.in"
                       className="pl-10 border-gray-200"
                     />
                   </div>
@@ -169,7 +169,7 @@ const LoginPage = () => {
                       onChange={(e) => setRegisterForm({ ...registerForm, email: e.target.value })}
                       required
                       data-testid="register-email"
-                      placeholder="admin@adviserve.in"
+                      placeholder="admin@adviserve.org.in"
                       className="pl-10 border-gray-200"
                     />
                   </div>

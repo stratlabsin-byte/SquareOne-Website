@@ -21,23 +21,46 @@ const PrivacyPage = () => {
 
   const defaultPrivacy = `
     <h2>Privacy Policy</h2>
-    <p><strong>Last Updated:</strong> February 2025</p>
+    <p><strong>Effective Date:</strong> March 2026</p>
+    <p>Adviserve Talent and Consulting Private Limited ("Adviserve", "we", "our", or "us") respects your privacy and is committed to protecting the personal information you share with us. This Privacy Policy explains how we collect, use, and safeguard your data when you visit our website or use our services.</p>
+
     <h3>1. Information We Collect</h3>
-    <p>We collect information you provide directly to us, such as when you fill out a contact form, apply for a job, or subscribe to our newsletter.</p>
+    <p>We may collect the following types of information:</p>
+    <ul>
+      <li><strong>Personal Information:</strong> Name, email address, phone number, company name, and job title when you fill out a contact form, apply for a job, or subscribe to our newsletter.</li>
+      <li><strong>Usage Data:</strong> Information about how you interact with our website, including pages visited, time spent, browser type, and device information.</li>
+      <li><strong>Cookies:</strong> We use cookies and similar tracking technologies to enhance your browsing experience.</li>
+    </ul>
+
     <h3>2. How We Use Your Information</h3>
-    <p>We use the information we collect to provide, maintain, and improve our services, to communicate with you, and to send you promotional communications.</p>
+    <p>We use the information we collect to:</p>
+    <ul>
+      <li>Respond to inquiries and provide requested services</li>
+      <li>Improve our website and services</li>
+      <li>Send relevant updates, newsletters, and promotional communications (with your consent)</li>
+      <li>Comply with legal obligations</li>
+    </ul>
+
     <h3>3. Information Sharing</h3>
-    <p>We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except as described in this policy.</p>
+    <p>We do not sell, trade, or rent your personal information to third parties. We may share your data with trusted service providers who assist us in operating our website and conducting our business, provided they agree to keep your information confidential.</p>
+
     <h3>4. Data Security</h3>
-    <p>We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.</p>
-    <h3>5. Contact Us</h3>
-    <p>If you have any questions about this Privacy Policy, please contact us at info@adviserve.in</p>
+    <p>We implement appropriate technical and organizational security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the internet is 100% secure.</p>
+
+    <h3>5. Your Rights</h3>
+    <p>You have the right to access, correct, or delete your personal data. You may also opt out of marketing communications at any time by contacting us.</p>
+
+    <h3>6. Changes to This Policy</h3>
+    <p>We may update this Privacy Policy periodically. Any changes will be posted on this page with an updated effective date.</p>
+
+    <h3>7. Contact Us</h3>
+    <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:info@adviserve.org.in">info@adviserve.org.in</a></p>
   `;
 
   return (
     <div data-testid="privacy-page" className="pt-24 pb-16">
       {/* Hero */}
-      <section className="py-16 bg-[#0B1F3B]">
+      <section className="py-16 bg-[#0F2D3C]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl sm:text-4xl font-bold text-white font-['Montserrat']">
             Privacy Policy
@@ -60,7 +83,7 @@ const PrivacyPage = () => {
             </div>
           ) : (
             <div
-              className="prose prose-lg max-w-none prose-headings:font-['Montserrat'] prose-headings:text-[#0B1F3B] prose-h2:text-2xl prose-h3:text-xl prose-p:text-gray-600"
+              className="prose prose-lg max-w-none prose-headings:font-['Montserrat'] prose-headings:text-[#0F2D3C] prose-h2:text-2xl prose-h3:text-xl prose-p:text-gray-600"
               dangerouslySetInnerHTML={{ 
                 __html: settings?.privacy_policy || defaultPrivacy 
               }}
