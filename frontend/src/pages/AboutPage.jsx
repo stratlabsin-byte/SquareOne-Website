@@ -2,8 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Target, Eye, Award, Users, Briefcase, Heart, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import useInView from "@/hooks/useInView";
 
 const AboutPage = () => {
+  const { isInView: storyInView, ref: storyRef } = useInView();
+  const { isInView: valuesInView, ref: valuesRef } = useInView();
+  const { isInView: teamInView, ref: teamRef } = useInView();
   const values = [
     {
       icon: Award,
@@ -62,8 +66,9 @@ const AboutPage = () => {
   return (
     <div data-testid="about-page">
       {/* Hero Section */}
-      <section className="pt-32 pb-20 gradient-navy">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative pt-32 pb-20 gradient-navy overflow-hidden">
+        <div className="absolute inset-0 dot-grid-pattern-light pointer-events-none" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <span className="inline-block px-4 py-2 bg-[#C9A227]/20 text-[#C9A227] text-sm font-medium rounded-full mb-6">
               About Us
@@ -80,10 +85,11 @@ const AboutPage = () => {
       </section>
 
       {/* Our Story Section */}
-      <section className="section-padding bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section ref={storyRef} className="relative section-padding bg-white">
+        <div className="wave-divider-top" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
+            <div className={`transition-all duration-700 ${storyInView ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"}`}>
               <h2 className="text-3xl sm:text-4xl font-bold text-[#0F2D3C] font-['Montserrat'] mb-6">
                 Our Story
               </h2>
@@ -94,13 +100,14 @@ const AboutPage = () => {
                 We combine talent expertise, strategic consulting, legal advisory and technology solutions to help businesses operate efficiently and grow sustainably.
               </p>
             </div>
-            <div className="relative">
+            <div className={`relative transition-all duration-700 delay-200 ${storyInView ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"}`}>
+              <div className="absolute -bottom-4 -right-4 w-full h-full rounded-xl border-2 border-[#C9A227]/20 pointer-events-none" />
               <img
                 src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=500&fit=crop"
                 alt="Team Meeting"
-                className="rounded-lg shadow-xl"
+                className="relative rounded-xl shadow-xl"
               />
-              <div className="absolute -bottom-8 -left-8 bg-[#0F2D3C] p-8 rounded-lg text-white">
+              <div className="absolute -bottom-8 -left-8 bg-[#0F2D3C] p-8 rounded-xl text-white shadow-lg animate-float">
                 <p className="text-4xl font-bold font-['Montserrat']">2014</p>
                 <p className="text-gray-300">Founded</p>
               </div>
@@ -113,7 +120,7 @@ const AboutPage = () => {
       <section className="section-padding bg-[#F5F7F8]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12">
-            <div className="bg-white p-10 rounded-lg shadow-sm border-l-4 border-[#C9A227]">
+            <div className="gradient-border-card bg-white p-10 rounded-xl shadow-sm">
               <div className="w-14 h-14 bg-[#C9A227]/10 rounded-lg flex items-center justify-center mb-6">
                 <Target className="w-7 h-7 text-[#C9A227]" />
               </div>
@@ -124,7 +131,7 @@ const AboutPage = () => {
                 To empower organizations with expert consulting, talent solutions and innovative technology services.
               </p>
             </div>
-            <div className="bg-white p-10 rounded-lg shadow-sm border-l-4 border-[#0F2D3C]">
+            <div className="gradient-border-card bg-white p-10 rounded-xl shadow-sm">
               <div className="w-14 h-14 bg-[#0F2D3C]/10 rounded-lg flex items-center justify-center mb-6">
                 <Eye className="w-7 h-7 text-[#0F2D3C]" />
               </div>
@@ -140,7 +147,7 @@ const AboutPage = () => {
       </section>
 
       {/* Values Section */}
-      <section className="section-padding bg-white">
+      <section ref={valuesRef} className="section-padding bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-[#0F2D3C] font-['Montserrat'] mb-4">
@@ -155,7 +162,10 @@ const AboutPage = () => {
               <div
                 key={value.title}
                 data-testid={`value-card-${index}`}
-                className="text-center p-8 rounded-lg bg-[#F5F7F8] hover:bg-white hover:shadow-xl transition-all duration-300"
+                className={`text-center p-8 rounded-xl bg-[#F5F7F8] border border-slate-200 card-3d-hover ${
+                  valuesInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                }`}
+                style={{ transition: "opacity 0.5s, transform 0.5s", transitionDelay: `${index * 100}ms` }}
               >
                 <div className="w-16 h-16 bg-[#C9A227]/10 rounded-full flex items-center justify-center mx-auto mb-6">
                   <value.icon className="w-8 h-8 text-[#C9A227]" />
@@ -173,7 +183,7 @@ const AboutPage = () => {
       </section>
 
       {/* Leadership Team Section */}
-      <section data-testid="team-section" className="section-padding bg-[#F5F7F8]">
+      <section ref={teamRef} data-testid="team-section" className="section-padding bg-[#F5F7F8]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-[#0F2D3C] font-['Montserrat'] mb-4">
@@ -188,7 +198,10 @@ const AboutPage = () => {
               <div
                 key={member.name}
                 data-testid={`team-member-${index}`}
-                className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group"
+                className={`bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group ${
+                  teamInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                }`}
+                style={{ transitionDelay: `${index * 120}ms` }}
               >
                 <div className="relative overflow-hidden">
                   <img
@@ -216,8 +229,9 @@ const AboutPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding gradient-navy">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="relative section-padding gradient-navy overflow-hidden">
+        <div className="absolute inset-0 dot-grid-pattern-light pointer-events-none" />
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-white font-['Montserrat'] mb-6">
             Ready to Work With Us?
           </h2>
@@ -227,7 +241,7 @@ const AboutPage = () => {
           <Link to="/contact">
             <Button
               data-testid="about-cta-btn"
-              className="bg-[#C9A227] hover:bg-[#b08d1f] text-white font-semibold px-10 py-6 text-lg rounded transition-all hover:shadow-xl"
+              className="bg-[#C9A227] hover:bg-[#b08d1f] text-white font-semibold px-10 py-6 text-lg rounded transition-all shadow-[0_0_30px_rgba(201,162,39,0.3)] hover:shadow-[0_0_40px_rgba(201,162,39,0.4)]"
             >
               Get in Touch
               <ArrowRight className="ml-2 w-5 h-5" />

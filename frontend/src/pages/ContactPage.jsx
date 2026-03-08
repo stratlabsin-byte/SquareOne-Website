@@ -11,6 +11,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { createContact, getSiteSettings } from "@/services/api";
 import { toast } from "sonner";
 
@@ -32,8 +38,8 @@ const ContactPage = () => {
       try {
         const data = await getSiteSettings();
         setSiteSettings(data);
-      } catch (error) {
-        console.error("Failed to fetch settings:", error);
+      } catch {
+        // Backend not available — use defaults
       }
     };
     fetchSettings();
@@ -136,8 +142,9 @@ const ContactPage = () => {
   return (
     <div data-testid="contact-page">
       {/* Hero Section */}
-      <section className="pt-32 pb-20 gradient-navy">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative pt-32 pb-20 gradient-navy overflow-hidden">
+        <div className="absolute inset-0 dot-grid-pattern-light pointer-events-none" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <span className="inline-block px-4 py-2 bg-[#C9A227]/20 text-[#C9A227] text-sm font-medium rounded-full mb-6">
               Get in Touch
@@ -146,7 +153,7 @@ const ContactPage = () => {
               Let's Start a Conversation
             </h1>
             <p className="text-xl text-gray-300">
-              Ready to transform your business? Our team is here to help you navigate 
+              Ready to transform your business? Our team is here to help you navigate
               your growth journey. Reach out and let's discuss how we can work together.
             </p>
           </div>
@@ -167,7 +174,7 @@ const ContactPage = () => {
                   <div
                     key={item.title}
                     data-testid={`contact-info-${index}`}
-                    className="flex items-start"
+                    className="flex items-start p-4 rounded-lg hover:bg-white hover:shadow-md transition-all duration-300 gold-left-border"
                   >
                     <div className="w-12 h-12 bg-[#C9A227]/10 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
                       <item.icon className="w-5 h-5 text-[#C9A227]" />
@@ -194,7 +201,7 @@ const ContactPage = () => {
 
             {/* Contact Form */}
             <div>
-              <div className="bg-white p-8 md:p-10 rounded-xl shadow-lg">
+              <div className="bg-white p-8 md:p-10 rounded-xl shadow-lg border-t-4 border-[#C9A227]">
                 <h2 className="text-2xl font-bold text-[#0F2D3C] font-['Montserrat'] mb-2">
                   Send Us a Message
                 </h2>
@@ -311,7 +318,7 @@ const ContactPage = () => {
       {/* Google Map - Full Width */}
       <section className="bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
-          <div className="rounded-xl overflow-hidden shadow-md h-72">
+          <div className="rounded-2xl overflow-hidden shadow-xl h-72">
             <iframe
               src={siteSettings.map_embed_url || defaultMapUrl}
               width="100%"
@@ -334,35 +341,35 @@ const ContactPage = () => {
               Frequently Asked Questions
             </h2>
           </div>
-          <div className="space-y-6">
-            <div className="bg-[#F5F7F8] p-6 rounded-lg">
-              <h3 className="font-semibold text-[#0F2D3C] font-['Montserrat'] mb-2">
+          <Accordion type="single" collapsible className="space-y-4">
+            <AccordionItem value="faq-1" className="bg-[#F5F7F8] border border-slate-200 rounded-xl overflow-hidden px-6">
+              <AccordionTrigger className="py-5 hover:no-underline font-semibold text-[#0F2D3C] font-['Montserrat']">
                 How quickly can you start working with us?
-              </h3>
-              <p className="text-gray-600">
-                We can typically begin engagement within 1-2 weeks of the initial consultation, 
+              </AccordionTrigger>
+              <AccordionContent className="pb-5 text-gray-600">
+                We can typically begin engagement within 1-2 weeks of the initial consultation,
                 depending on the scope of services required.
-              </p>
-            </div>
-            <div className="bg-[#F5F7F8] p-6 rounded-lg">
-              <h3 className="font-semibold text-[#0F2D3C] font-['Montserrat'] mb-2">
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="faq-2" className="bg-[#F5F7F8] border border-slate-200 rounded-xl overflow-hidden px-6">
+              <AccordionTrigger className="py-5 hover:no-underline font-semibold text-[#0F2D3C] font-['Montserrat']">
                 Do you work with startups or only established companies?
-              </h3>
-              <p className="text-gray-600">
-                We work with businesses at all stages - from early-stage startups to established 
+              </AccordionTrigger>
+              <AccordionContent className="pb-5 text-gray-600">
+                We work with businesses at all stages - from early-stage startups to established
                 SMEs. Our solutions are tailored to match your current stage and growth objectives.
-              </p>
-            </div>
-            <div className="bg-[#F5F7F8] p-6 rounded-lg">
-              <h3 className="font-semibold text-[#0F2D3C] font-['Montserrat'] mb-2">
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="faq-3" className="bg-[#F5F7F8] border border-slate-200 rounded-xl overflow-hidden px-6">
+              <AccordionTrigger className="py-5 hover:no-underline font-semibold text-[#0F2D3C] font-['Montserrat']">
                 What is your pricing model?
-              </h3>
-              <p className="text-gray-600">
-                We offer flexible pricing models including project-based, retainer, and 
+              </AccordionTrigger>
+              <AccordionContent className="pb-5 text-gray-600">
+                We offer flexible pricing models including project-based, retainer, and
                 subscription options. Contact us for a customized proposal based on your needs.
-              </p>
-            </div>
-          </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
       </section>
     </div>

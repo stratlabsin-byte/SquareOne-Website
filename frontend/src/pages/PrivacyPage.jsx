@@ -10,8 +10,8 @@ const PrivacyPage = () => {
       try {
         const data = await getSiteSettings();
         setSettings(data);
-      } catch (error) {
-        console.error("Failed to fetch settings:", error);
+      } catch {
+        // Backend not available — use defaults
       } finally {
         setLoading(false);
       }

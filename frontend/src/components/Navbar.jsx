@@ -66,7 +66,7 @@ const Navbar = () => {
       data-testid="navbar"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "glass shadow-lg py-3"
+          ? "glass shadow-lg py-3 border-b border-[#C9A227]/10"
           : "bg-transparent py-5"
       }`}
     >
@@ -113,7 +113,7 @@ const Navbar = () => {
                       <ChevronDown className="ml-1 h-4 w-4" />
                     </button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent className="bg-white border-gray-100 shadow-lg">
+                  <DropdownMenuContent className="bg-white border-gray-100 shadow-lg animate-in fade-in-0 zoom-in-95 duration-200">
                     {link.dropdown.map((item) => (
                       <DropdownMenuItem key={item.name} asChild>
                         <Link
@@ -131,13 +131,16 @@ const Navbar = () => {
                   key={link.name}
                   to={link.path}
                   data-testid={`nav-${link.name.toLowerCase().replace(/\s+/g, '-')}`}
-                  className={`px-4 py-2 text-sm font-medium transition-colors underline-animation ${
+                  className={`relative px-4 py-2 text-sm font-medium transition-colors underline-animation ${
                     isActive(link.path)
                       ? activeColor
                       : `${textColor} hover:text-[#C9A227]`
                   }`}
                 >
                   {link.name}
+                  {isActive(link.path) && (
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-[#C9A227] rounded-full" />
+                  )}
                 </Link>
               )
             )}
@@ -148,7 +151,7 @@ const Navbar = () => {
             <Link to="/contact">
               <Button
                 data-testid="nav-contact-btn"
-                className="bg-[#C9A227] hover:bg-[#b08d1f] text-white font-semibold px-6 py-2 rounded transition-all hover:shadow-lg"
+                className="bg-[#C9A227] hover:bg-[#b08d1f] text-white font-semibold px-6 py-2 rounded transition-all shadow-[0_0_15px_rgba(201,162,39,0.25)] hover:shadow-[0_0_25px_rgba(201,162,39,0.4)]"
               >
                 Book Consultation
               </Button>

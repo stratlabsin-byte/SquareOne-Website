@@ -20,8 +20,8 @@ const InsightsPage = () => {
       try {
         const data = await getBlogPosts(true);
         setPosts(data);
-      } catch (error) {
-        console.error("Failed to fetch posts:", error);
+      } catch {
+        // Backend not available — page shows empty state
       } finally {
         setLoading(false);
       }
@@ -100,8 +100,9 @@ const InsightsPage = () => {
   return (
     <div data-testid="insights-page">
       {/* Hero Section */}
-      <section className="pt-32 pb-20 gradient-navy">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative pt-32 pb-20 gradient-navy overflow-hidden">
+        <div className="absolute inset-0 dot-grid-pattern-light pointer-events-none" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <span className="inline-block px-4 py-2 bg-[#C9A227]/20 text-[#C9A227] text-sm font-medium rounded-full mb-6">
               Insights & Articles
@@ -169,8 +170,9 @@ const InsightsPage = () => {
                               src={post.image_url || "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=400&fit=crop"}
                               alt={post.title}
                               loading="lazy"
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                             />
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#0F2D3C]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                             <div className="absolute top-4 left-4">
                               <span className="px-3 py-1 bg-[#C9A227] text-white text-xs font-medium rounded-full">
                                 {post.category}
@@ -264,7 +266,7 @@ const InsightsPage = () => {
               </div>
 
               {/* Newsletter Widget */}
-              <div className="bg-[#0F2D3C] p-6 rounded-xl text-white">
+              <div className="bg-[#0F2D3C] p-6 rounded-xl text-white border border-[#C9A227]/20 shadow-[0_0_20px_rgba(201,162,39,0.1)]">
                 <h3 className="text-lg font-bold font-['Montserrat'] mb-2">Stay Updated</h3>
                 <p className="text-gray-400 text-sm mb-4">Subscribe for the latest insights.</p>
                 <form onSubmit={handleNewsletterSubscribe} className="space-y-3">

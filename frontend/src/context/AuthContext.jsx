@@ -29,8 +29,8 @@ export const AuthProvider = ({ children }) => {
           });
           setUser(response.data);
           setToken(storedToken);
-        } catch (error) {
-          console.error('Token verification failed:', error);
+        } catch {
+          // Token invalid or backend not available
           localStorage.removeItem('admin_token');
           setToken(null);
           setUser(null);

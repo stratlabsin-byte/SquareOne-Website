@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { MapPin, Clock, Briefcase, ArrowRight, Send, X } from "lucide-react";
+import { MapPin, Clock, Briefcase, ArrowRight, Send, X, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dialog";
 import { getJobs, createJobApplication } from "@/services/api";
 import { toast } from "sonner";
+import useInView from "@/hooks/useInView";
 
 const CareersPage = () => {
   const [jobs, setJobs] = useState([]);
@@ -30,14 +31,15 @@ const CareersPage = () => {
   });
   const [submitting, setSubmitting] = useState(false);
   const applyFormRef = useRef(null);
+  const { isInView: benefitsInView, ref: benefitsRef } = useInView();
 
   useEffect(() => {
     const fetchJobs = async () => {
       try {
         const data = await getJobs(true);
         setJobs(data);
-      } catch (error) {
-        console.error("Failed to fetch jobs:", error);
+      } catch {
+        // Backend not available — page shows empty state
       } finally {
         setLoading(false);
       }
@@ -120,8 +122,9 @@ const CareersPage = () => {
   return (
     <div data-testid="careers-page">
       {/* Hero Section */}
-      <section className="pt-32 pb-20 gradient-navy">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative pt-32 pb-20 gradient-navy overflow-hidden">
+        <div className="absolute inset-0 dot-grid-pattern-light pointer-events-none" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <span className="inline-block px-4 py-2 bg-[#C9A227]/20 text-[#C9A227] text-sm font-medium rounded-full mb-6">
@@ -131,24 +134,25 @@ const CareersPage = () => {
                 Build Your Career With Us
               </h1>
               <p className="text-xl text-gray-300 mb-8">
-                Join a team of passionate professionals dedicated to helping businesses grow. 
+                Join a team of passionate professionals dedicated to helping businesses grow.
                 Discover opportunities that challenge and inspire.
               </p>
               <a href="#openings">
                 <Button
                   data-testid="view-openings-btn"
-                  className="bg-[#C9A227] hover:bg-[#b08d1f] text-white font-semibold px-8 py-3"
+                  className="bg-[#C9A227] hover:bg-[#b08d1f] text-white font-semibold px-8 py-3 shadow-[0_0_25px_rgba(201,162,39,0.3)]"
                 >
                   View Open Positions
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </a>
             </div>
-            <div className="hidden lg:block">
+            <div className="hidden lg:block relative">
+              <div className="absolute -bottom-4 -right-4 w-full h-full rounded-xl border-2 border-[#C9A227]/20 pointer-events-none" />
               <img
                 src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop"
                 alt="Team Collaboration"
-                className="rounded-lg shadow-xl"
+                className="relative rounded-xl shadow-xl"
               />
             </div>
           </div>
@@ -156,7 +160,7 @@ const CareersPage = () => {
       </section>
 
       {/* Why Join Us */}
-      <section className="section-padding bg-white">
+      <section ref={benefitsRef} className="section-padding bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
@@ -170,20 +174,25 @@ const CareersPage = () => {
               </p>
               <ul className="space-y-4">
                 {benefits.map((benefit, index) => (
-                  <li key={index} className="flex items-center">
-                    <div className="w-6 h-6 rounded-full bg-[#C9A227]/20 flex items-center justify-center mr-3">
-                      <span className="w-2 h-2 bg-[#C9A227] rounded-full" />
-                    </div>
+                  <li
+                    key={index}
+                    className={`flex items-center transition-all duration-500 ${
+                      benefitsInView ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-6"
+                    }`}
+                    style={{ transitionDelay: `${index * 100}ms` }}
+                  >
+                    <CheckCircle className="w-5 h-5 text-[#C9A227] mr-3 flex-shrink-0" />
                     <span className="text-gray-700">{benefit}</span>
                   </li>
                 ))}
               </ul>
             </div>
             <div className="relative">
+              <div className="absolute -bottom-4 -right-4 w-full h-full rounded-xl border-2 border-[#C9A227]/20 pointer-events-none" />
               <img
                 src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=600&h=500&fit=crop"
                 alt="Office Culture"
-                className="rounded-lg shadow-xl"
+                className="relative rounded-xl shadow-xl"
               />
             </div>
           </div>
@@ -220,7 +229,7 @@ const CareersPage = () => {
                 <Card
                   key={job.id}
                   data-testid={`job-card-${index}`}
-                  className="bg-white border-none shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden"
+                  className="bg-white border-none shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden gold-left-border"
                 >
                   <CardContent className="p-8">
                     <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
@@ -458,19 +467,20 @@ const CareersPage = () => {
       )}
 
       {/* CTA Section */}
-      <section className="section-padding gradient-navy">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="relative section-padding gradient-navy overflow-hidden">
+        <div className="absolute inset-0 dot-grid-pattern-light pointer-events-none" />
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-white font-['Montserrat'] mb-6">
             Don't See the Right Role?
           </h2>
           <p className="text-xl text-gray-300 mb-10">
-            We're always looking for talented individuals. Send us your resume and we'll 
+            We're always looking for talented individuals. Send us your resume and we'll
             keep you in mind for future opportunities.
           </p>
           <a href="mailto:careers@adviserve.org.in">
             <Button
               data-testid="careers-email-btn"
-              className="bg-[#C9A227] hover:bg-[#b08d1f] text-white font-semibold px-10 py-6 text-lg rounded transition-all hover:shadow-xl"
+              className="bg-[#C9A227] hover:bg-[#b08d1f] text-white font-semibold px-10 py-6 text-lg rounded transition-all shadow-[0_0_30px_rgba(201,162,39,0.3)] hover:shadow-[0_0_40px_rgba(201,162,39,0.4)]"
             >
               Email Your Resume
               <Send className="ml-2 w-5 h-5" />

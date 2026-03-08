@@ -14,9 +14,8 @@ const BlogPostPage = () => {
       try {
         const data = await getBlogPostBySlug(slug);
         setPost(data);
-      } catch (error) {
-        console.error("Failed to fetch post:", error);
-        // Set placeholder post for demo
+      } catch {
+        // Backend not available — show placeholder
         setPost({
           title: "Article Not Found",
           content: "<p>The requested article could not be found. Please check the URL or browse our other articles.</p>",

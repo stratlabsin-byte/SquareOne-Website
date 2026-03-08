@@ -326,3 +326,222 @@ input:focus, textarea:focus, select:focus {
     background-size: 200% 100%;
     animation: shimmer 1.5s infinite;
 }
+
+/* =============================================
+   UI OVERHAUL — Premium Animations & Effects
+   ============================================= */
+
+/* Typewriter cursor blink */
+@keyframes typewriter-blink {
+    0%, 100% { border-color: transparent; }
+    50% { border-color: #C9A227; }
+}
+.typewriter-cursor {
+    border-right: 3px solid #C9A227;
+    padding-right: 4px;
+    animation: typewriter-blink 0.8s step-end infinite;
+}
+
+/* Marquee (continuous horizontal scroll) */
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+    animation: marquee 30s linear infinite;
+}
+.animate-marquee:hover {
+    animation-play-state: paused;
+}
+
+/* Timeline draw animation */
+@keyframes draw-line {
+    from { width: 0; }
+    to { width: 100%; }
+}
+.animate-draw-line {
+    animation: draw-line 1.5s ease-out forwards;
+}
+
+/* Gradient shift for animated borders */
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Pulse ring for floating action button */
+@keyframes pulse-ring {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* Progress bar fill */
+@keyframes progress-fill {
+    from { width: 0%; }
+    to { width: 100%; }
+}
+
+/* 3D Hover Card — premium lift effect */
+.card-3d-hover {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+    transform-style: preserve-3d;
+}
+.card-3d-hover:hover {
+    transform: translateY(-12px) rotateX(2deg);
+    box-shadow:
+        0 25px 50px -12px rgba(15, 45, 60, 0.15),
+        0 12px 24px -8px rgba(201, 162, 39, 0.1);
+}
+
+/* Gradient border card */
+.gradient-border-card {
+    position: relative;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+}
+.gradient-border-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 2px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #C9A227, #5FE3CF, #0F2D3C);
+    background-size: 200% 200%;
+    animation: gradient-shift 4s ease infinite;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+
+/* Glass card variants */
+.glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.glass-card-dark {
+    background: rgba(15, 45, 60, 0.6);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Dot-grid decorative patterns */
+.dot-grid-pattern {
+    background-image: radial-gradient(circle, rgba(15, 45, 60, 0.06) 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+.dot-grid-pattern-light {
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+/* Wave section dividers */
+.wave-divider-top {
+    position: relative;
+}
+.wave-divider-top::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60'%3E%3Cpath fill='%23ffffff' d='M0,40 C360,80 720,0 1440,40 L1440,0 L0,0 Z'/%3E%3C/svg%3E") no-repeat;
+    background-size: 100% 100%;
+    z-index: 1;
+}
+.wave-divider-bottom {
+    position: relative;
+}
+.wave-divider-bottom::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60'%3E%3Cpath fill='%23ffffff' d='M0,20 C360,-20 720,60 1440,20 L1440,60 L0,60 Z'/%3E%3C/svg%3E") no-repeat;
+    background-size: 100% 100%;
+    z-index: 1;
+}
+
+/* Wave divider variants for different fill colors */
+.wave-divider-top-grey::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60'%3E%3Cpath fill='%23F5F7F8' d='M0,40 C360,80 720,0 1440,40 L1440,0 L0,0 Z'/%3E%3C/svg%3E") no-repeat;
+    background-size: 100% 100%;
+    z-index: 1;
+}
+.wave-divider-top-navy::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60'%3E%3Cpath fill='%230F2D3C' d='M0,40 C360,80 720,0 1440,40 L1440,0 L0,0 Z'/%3E%3C/svg%3E") no-repeat;
+    background-size: 100% 100%;
+    z-index: 1;
+}
+
+/* Section label with gold accent line */
+.section-label {
+    position: relative;
+    display: inline-block;
+    padding-left: 28px;
+}
+.section-label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 2px;
+    background: #C9A227;
+}
+
+/* Gold left-border reveal on hover */
+.gold-left-border {
+    position: relative;
+    overflow: hidden;
+}
+.gold-left-border::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 0;
+    background: #C9A227;
+    transition: height 0.3s ease;
+}
+.gold-left-border:hover::before {
+    height: 100%;
+}
+
+/* Counter number styling */
+.counter-animate {
+    font-feature-settings: "tnum";
+    font-variant-numeric: tabular-nums;
+    display: inline-block;
+    min-width: 2ch;
+}
+
+/* Scrollbar hide utility */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}

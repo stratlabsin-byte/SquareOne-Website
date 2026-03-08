@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "@/App.css";
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Phone } from "lucide-react";
 import { Toaster } from "@/components/ui/sonner";
 import { AuthProvider, useAuth } from "@/context/AuthContext";
 
@@ -63,10 +64,38 @@ const Layout = ({ children }) => {
   );
 };
 
+// Floating Action Button - Phone/WhatsApp
+const FloatingActionButton = () => {
+  const location = useLocation();
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setVisible(true), 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Hide on admin/login pages
+  if (["/login", "/admin"].includes(location.pathname)) return null;
+
+  return (
+    <a
+      href="tel:+911234567890"
+      className={`fixed bottom-20 right-6 z-40 flex items-center justify-center w-14 h-14 rounded-full bg-[#C9A227] text-white shadow-lg transition-all duration-500 hover:bg-[#b08d1f] hover:scale-110 group ${
+        visible ? "opacity-100 scale-100" : "opacity-0 scale-75"
+      }`}
+      aria-label="Call us"
+    >
+      <Phone className="w-6 h-6" />
+      {/* Pulsing ring */}
+      <span className="absolute inset-0 rounded-full border-2 border-[#C9A227] animate-ping opacity-20 pointer-events-none" />
+    </a>
+  );
+};
+
 function AppContent() {
   useEffect(() => {
-    // Seed initial data on first load
-    seedData().catch(console.error);
+    // Seed initial data on first load (silently ignore if backend is not running)
+    seedData().catch(() => {});
   }, []);
 
   return (
@@ -95,6 +124,7 @@ function AppContent() {
           />
         </Routes>
       </Layout>
+      <FloatingActionButton />
       <Toaster position="top-right" richColors />
     </div>
   );
