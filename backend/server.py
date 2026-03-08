@@ -1,11 +1,13 @@
 from fastapi import FastAPI, APIRouter, HTTPException, UploadFile, File, Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from contextlib import asynccontextmanager
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
 import asyncio
+import html
 from pathlib import Path
 from pydantic import BaseModel, Field, EmailStr, ConfigDict
 from typing import List, Optional
@@ -29,7 +31,9 @@ SENDER_EMAIL = os.environ.get('SENDER_EMAIL', 'onboarding@resend.dev')
 NOTIFICATION_EMAIL = os.environ.get('NOTIFICATION_EMAIL', 'onboarding@resend.dev')
 
 # JWT Configuration
-JWT_SECRET = os.environ.get('JWT_SECRET', 'squareone-secret-key-change-in-production-2024')
+JWT_SECRET = os.environ.get('JWT_SECRET')
+if not JWT_SECRET:
+    raise RuntimeError("JWT_SECRET environment variable is not set. Refusing to start with an insecure default.")
 JWT_ALGORITHM = "HS256"
 JWT_EXPIRATION_HOURS = 24
 
@@ -39,8 +43,13 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 # Security
 security = HTTPBearer()
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    yield
+    client.close()
+
 # Create the main app without a prefix
-app = FastAPI()
+app = FastAPI(lifespan=lifespan)
 
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
@@ -442,16 +451,16 @@ async def create_contact(input: ContactCreate):
     
     await db.contacts.insert_one(doc)
     
-    # Send email notification
+    # Send email notification (all user-supplied values are HTML-escaped)
     html_content = f"""
     <h2>New Contact Form Submission</h2>
-    <p><strong>Name:</strong> {contact.name}</p>
-    <p><strong>Email:</strong> {contact.email}</p>
-    <p><strong>Phone:</strong> {contact.phone}</p>
-    <p><strong>Company:</strong> {contact.company}</p>
-    <p><strong>Service Interest:</strong> {contact.service_interest}</p>
+    <p><strong>Name:</strong> {html.escape(contact.name)}</p>
+    <p><strong>Email:</strong> {html.escape(contact.email)}</p>
+    <p><strong>Phone:</strong> {html.escape(contact.phone)}</p>
+    <p><strong>Company:</strong> {html.escape(contact.company)}</p>
+    <p><strong>Service Interest:</strong> {html.escape(contact.service_interest)}</p>
     <p><strong>Message:</strong></p>
-    <p>{contact.message}</p>
+    <p>{html.escape(contact.message)}</p>
     """
     await send_notification_email(
         f"New Lead: {contact.name} - {contact.service_interest}",
@@ -461,7 +470,7 @@ async def create_contact(input: ContactCreate):
     return contact
 
 @api_router.get("/contacts", response_model=List[Contact])
-async def get_contacts():
+async def get_contacts(current_user: dict = Depends(get_current_user)):
     contacts = await db.contacts.find({}, {"_id": 0}).to_list(1000)
     for c in contacts:
         if isinstance(c.get('created_at'), str):
@@ -471,7 +480,7 @@ async def get_contacts():
 # ==================== BLOG ROUTES ====================
 
 @api_router.post("/blog", response_model=BlogPost)
-async def create_blog_post(input: BlogPostCreate):
+async def create_blog_post(input: BlogPostCreate, current_user: dict = Depends(get_current_user)):
     post = BlogPost(**input.model_dump())
     doc = post.model_dump()
     doc['created_at'] = doc['created_at'].isoformat()
@@ -514,7 +523,7 @@ async def get_blog_post_by_slug(slug: str):
     return post
 
 @api_router.put("/blog/{post_id}", response_model=BlogPost)
-async def update_blog_post(post_id: str, input: BlogPostUpdate):
+async def update_blog_post(post_id: str, input: BlogPostUpdate, current_user: dict = Depends(get_current_user)):
     update_data = {k: v for k, v in input.model_dump().items() if v is not None}
     update_data['updated_at'] = datetime.now(timezone.utc).isoformat()
     
@@ -528,7 +537,7 @@ async def update_blog_post(post_id: str, input: BlogPostUpdate):
     return await get_blog_post(post_id)
 
 @api_router.delete("/blog/{post_id}")
-async def delete_blog_post(post_id: str):
+async def delete_blog_post(post_id: str, current_user: dict = Depends(get_current_user)):
     result = await db.blog_posts.delete_one({"id": post_id})
     if result.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Blog post not found")
@@ -537,7 +546,7 @@ async def delete_blog_post(post_id: str):
 # ==================== JOB ROUTES ====================
 
 @api_router.post("/jobs", response_model=Job)
-async def create_job(input: JobCreate):
+async def create_job(input: JobCreate, current_user: dict = Depends(get_current_user)):
     job = Job(**input.model_dump())
     doc = job.model_dump()
     doc['created_at'] = doc['created_at'].isoformat()
@@ -564,7 +573,7 @@ async def get_job(job_id: str):
     return job
 
 @api_router.put("/jobs/{job_id}", response_model=Job)
-async def update_job(job_id: str, input: JobUpdate):
+async def update_job(job_id: str, input: JobUpdate, current_user: dict = Depends(get_current_user)):
     update_data = {k: v for k, v in input.model_dump().items() if v is not None}
     
     result = await db.jobs.update_one(
@@ -577,7 +586,7 @@ async def update_job(job_id: str, input: JobUpdate):
     return await get_job(job_id)
 
 @api_router.delete("/jobs/{job_id}")
-async def delete_job(job_id: str):
+async def delete_job(job_id: str, current_user: dict = Depends(get_current_user)):
     result = await db.jobs.delete_one({"id": job_id})
     if result.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Job not found")
@@ -597,16 +606,16 @@ async def create_job_application(input: JobApplicationCreate):
     
     await db.job_applications.insert_one(doc)
     
-    # Send email notification
+    # Send email notification (all user-supplied values are HTML-escaped)
     html_content = f"""
     <h2>New Job Application</h2>
-    <p><strong>Position:</strong> {job_title}</p>
-    <p><strong>Name:</strong> {application.name}</p>
-    <p><strong>Email:</strong> {application.email}</p>
-    <p><strong>Phone:</strong> {application.phone}</p>
-    <p><strong>LinkedIn:</strong> {application.linkedin_url}</p>
+    <p><strong>Position:</strong> {html.escape(job_title)}</p>
+    <p><strong>Name:</strong> {html.escape(application.name)}</p>
+    <p><strong>Email:</strong> {html.escape(application.email)}</p>
+    <p><strong>Phone:</strong> {html.escape(application.phone)}</p>
+    <p><strong>LinkedIn:</strong> {html.escape(application.linkedin_url)}</p>
     <p><strong>Cover Letter:</strong></p>
-    <p>{application.cover_letter}</p>
+    <p>{html.escape(application.cover_letter)}</p>
     """
     await send_notification_email(
         f"New Application: {application.name} for {job_title}",
@@ -616,7 +625,7 @@ async def create_job_application(input: JobApplicationCreate):
     return application
 
 @api_router.get("/applications", response_model=List[JobApplication])
-async def get_applications(job_id: Optional[str] = None):
+async def get_applications(job_id: Optional[str] = None, current_user: dict = Depends(get_current_user)):
     query = {"job_id": job_id} if job_id else {}
     applications = await db.job_applications.find(query, {"_id": 0}).sort("created_at", -1).to_list(1000)
     for a in applications:
@@ -627,7 +636,7 @@ async def get_applications(job_id: Optional[str] = None):
 # ==================== TESTIMONIAL ROUTES ====================
 
 @api_router.post("/testimonials", response_model=Testimonial)
-async def create_testimonial(input: TestimonialCreate):
+async def create_testimonial(input: TestimonialCreate, current_user: dict = Depends(get_current_user)):
     testimonial = Testimonial(**input.model_dump())
     doc = testimonial.model_dump()
     doc['created_at'] = doc['created_at'].isoformat()
@@ -645,7 +654,7 @@ async def get_testimonials(active_only: bool = True):
     return testimonials
 
 @api_router.delete("/testimonials/{testimonial_id}")
-async def delete_testimonial(testimonial_id: str):
+async def delete_testimonial(testimonial_id: str, current_user: dict = Depends(get_current_user)):
     result = await db.testimonials.delete_one({"id": testimonial_id})
     if result.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Testimonial not found")
@@ -662,7 +671,7 @@ async def get_stats():
     return stats
 
 @api_router.put("/stats", response_model=Stats)
-async def update_stats(input: StatsUpdate):
+async def update_stats(input: StatsUpdate, current_user: dict = Depends(get_current_user)):
     stats = Stats(**input.model_dump())
     doc = stats.model_dump()
     
@@ -690,7 +699,7 @@ async def subscribe_newsletter(input: NewsletterSubscribe):
     return subscription
 
 @api_router.get("/newsletter/subscribers")
-async def get_newsletter_subscribers():
+async def get_newsletter_subscribers(current_user: dict = Depends(get_current_user)):
     subscribers = await db.newsletter.find({}, {"_id": 0}).sort("subscribed_at", -1).to_list(1000)
     for s in subscribers:
         if isinstance(s.get('subscribed_at'), str):
@@ -698,7 +707,7 @@ async def get_newsletter_subscribers():
     return subscribers
 
 @api_router.delete("/newsletter/{subscriber_id}")
-async def unsubscribe_newsletter(subscriber_id: str):
+async def unsubscribe_newsletter(subscriber_id: str, current_user: dict = Depends(get_current_user)):
     result = await db.newsletter.delete_one({"id": subscriber_id})
     if result.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Subscriber not found")
@@ -714,7 +723,7 @@ async def get_site_settings():
     return settings
 
 @api_router.put("/settings", response_model=SiteSettings)
-async def update_site_settings(input: SiteSettingsUpdate):
+async def update_site_settings(input: SiteSettingsUpdate, current_user: dict = Depends(get_current_user)):
     current = await db.site_settings.find_one({"id": "main_settings"}, {"_id": 0})
     if not current:
         current = SiteSettings().model_dump()
@@ -733,7 +742,7 @@ async def update_site_settings(input: SiteSettingsUpdate):
 # ==================== SEED DATA ====================
 
 @api_router.post("/seed")
-async def seed_data():
+async def seed_data(current_user: dict = Depends(get_current_user)):
     """Seed initial data for the website"""
     
     # Seed site settings
@@ -916,14 +925,17 @@ async def seed_data():
 # Include the router in the main app
 app.include_router(api_router)
 
+_cors_origins_env = os.environ.get('CORS_ORIGINS', '')
+_cors_origins = [o.strip() for o in _cors_origins_env.split(',') if o.strip()]
+if not _cors_origins:
+    logger.warning("CORS_ORIGINS is not set — defaulting to localhost:3000 only. Set CORS_ORIGINS in production.")
+    _cors_origins = ["http://localhost:3000"]
+
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
-    allow_origins=os.environ.get('CORS_ORIGINS', '*').split(','),
+    allow_origins=_cors_origins,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-@app.on_event("shutdown")
-async def shutdown_db_client():
-    client.close()
